@@ -1,0 +1,86 @@
+html {
+height: 100%;
+}
+body {
+background: linear-gradient(#F2F6EB,#E5FFB1);
+background-size: 100% 100%;
+min-width: 100%;
+min-height: 100%;
+align-items: center;
+justify-content: center;
+display: flex;
+}
+.main {
+display: flex;
+place-content: center;
+height: 100%;
+width: 100%;
+}
+.login {
+display: flex;
+flex-direction: column;
+width: 80%;
+text-align: center;
+}
+
+
+/*Mobile first Vista Registro */
+.containerRegister {
+    flex-direction: column;
+    width: 80%;
+    display: grid;
+    place-items: center;
+    text-align: center;
+}
+.Inputcontainer {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  place-items: center;
+}
+
+.input {
+width: 100%;
+height: 7%;
+border-radius: 1em;
+}
+
+.buttonRegister {
+box-shadow: 3px 3px 4px black;
+width: 50%;
+height: 8%;
+border-radius: 2em;
+padding-left: 10px;
+padding-right: 10px;
+background-color: #D09080;
+font-size: 100%;
+color: white;
+font-weight: bolder;
+border-color: transparent;
+}
+#continue {
+margin-top: 5%;
+}
+ 
+#or {
+margin-top: 0%;
+margin-bottom: 0%;
+}
+/* Estilos para pantallas de escritorio */
+@media only screen and (min-width: 768px) {
+.containerRegister {
+    flex-direction: row;
+    display: flex;
+ }
+ .input {
+    width: 70%;
+    height: 2em;
+}
+.buttonRegister {
+    width: auto;
+    height: 3em;
+    margin: 10px;
+    }
+}
+  
