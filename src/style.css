@@ -82,5 +82,142 @@ margin-bottom: 0%;
     height: 3em;
     margin: 10px;
     }
+    
+    
+    
+
+
 }
-  
+
+
+/*Mobile first Vista inicio */
+/*homepege*/
+body{ 
+    background-image: url(img/pared.jpg);
+    background-repeat: repeat;
+    margin: 0;
+    padding: 0;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #000000;}
+
+    
+
+   .containerimg{
+    display: flex;
+    justify-content:center ;
+
+   }
+   #homeplant{
+    border-radius: 100px;
+    max-width: 40%;
+    
+    
+   }
+  .homewelcome{
+    text-align: center;
+  }
+  .hometittle{
+    text-align: center;
+  }
+
+  .registrationButton, .loginButton {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #D09080;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    margin-right: 10px; /* Espacio entre los botones */
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
+    justify-content:space-around;
+    margin-top: 40px;
+    height: 35px;
+    width: 355px;
+  }
+
+  .registrationButton:hover, .loginButton:hover {
+    background-color: #faa66a;
+  }
+  .words{
+    margin-top: 30px;
+  }
+  .wordsHome{
+    text-align: center;
+    
+  }
+
+  .homepage{
+    background-color: rgba(188, 232, 188, 0.5); 
+    padding: 20px; 
+    border-radius: 10px; 
+    margin-top: 30px;
+  }
+  .orderbuttons{
+    margin-top: 70px;
+}
+  /*ESCRITORIO*/
+            @media(min-width :768px) and (max-width:2328px){
+                body{
+                    background-image: url(img/pared.jpg);
+                    background-repeat: repeat;
+                    background-attachment: fixed;
+                    margin: 0;
+                    padding: 0;
+                }
+                .homepage{
+                    background-color: rgba(188, 232, 188, 0.5); 
+                    padding: 90px; 
+                    margin: 20px;
+                    border-radius: 10px;
+                    box-shadow: 0 0 10px rgba(156, 158, 156, 0.346), 0 0 20px rgba(135, 136, 135, 0.5), 0 0 30px rgba(0, 255, 0, 0.203); 
+                }
+                .containerimg #homeplant {
+                    margin-right: 20px;
+                    transition: transform 0.3s; 
+                }
+                
+                
+                .containerimg #homeplant:hover {
+                    transform: rotate(30deg); 
+                }
+                .orderbuttons{
+                    margin-top: 30px;
+                }
+                .homepage {
+                    display: flex; 
+                    background-color: rgba(188, 232, 188, 0.5);
+                    padding: 10px; 
+                    border-radius: 10px;
+                }
+                
+                /* Estilos para la imagen a la izquierda */
+                .containerimg {
+                    max-width: 100%;
+                    max-height: 100px;
+                    margin-right: 0px; /* Espacio entre la imagen y el contenido a la derecha */
+                    margin-top: 150px;
+                   
+                }
+                
+                /* Estilos para el contenido a la derecha */
+                .content {
+                    flex: 2; 
+                    margin-top: 100px;
+                    margin-right: 50px;
+                }
+                #homeplant{
+                    height: 300px;
+                    width: 700px;
+                    border-radius: 600px;
+                }
+                
+            
+            }
