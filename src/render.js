@@ -1,9 +1,13 @@
-import { getFirestore, collection, getDocs  } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-analytics.js";
-import { getAuth,signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged} from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
-  
-import { createrUser, loginUser } from "./lib/firebase.js";
+import { getFirestore, collection, getDocs  } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-analytics.js";
+import { getAuth, GoogleAuthProvider , signInWithPopup ,signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
+
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 
 const firebaseConfig = {
     apiKey: "AIzaSyA_nNPVRwXqmgLlxdYL4NmJwiItX9t2D5E",
@@ -11,16 +15,46 @@ const firebaseConfig = {
     projectId: "social-network-c61c9",
     storageBucket: "social-network-c61c9.appspot.com",
     messagingSenderId: "496904934051",
-    appId: "1:496904934051:web:4cc5210ca6b1e3661c2516",
-    measurementId: "G-ZBR0EJZW08"
+    appId: "1:496904934051:web:349b4f181faf09491c2516",
+    measurementId: "G-9MSK8FV9VP"
   };
 
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-  const auth = getAuth(app)
-  const firestore = getFirestore(app);
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+const auth = getAuth(app)
+const firestore = getFirestore(app);
+const googleProvider = new GoogleAuthProvider();
 
+// Para crear o registrar usuarios
+function createUser(auth, singUpEmail, singPassword){
+createUserWithEmailAndPassword(auth, singUpEmail, singPassword)
+  .then(userCredential => {
+    console.log('Registro exitoso', userCredential);
+  })
+  .catch(error => {
+    console.error('Error al registrarse:', error.code, error.message);
+  })
+}
+
+
+/*
+// Para iniciar sesion o ingresar 
+const buttonLogin =  document.querySelector('#buttonLogin');
+buttonLogin.addEventListener('click', (e) => {
+e.preventDefault();
+const loginEmail = document.querySelector('#emailLog').value;
+const loginPassword = document.querySelector('#passwordLog').value;
+//console.log(loginEmail, loginPassword);
+signInWithEmailAndPassword(auth, loginEmail, loginPassword)
+.then(userCredential => {
+console.log('Inicio de sesión exitoso', userCredential);
+})
+.catch(error => {
+console.error('Error al iniciar sesión:', error.code, error.message);
+});
+})
+*/
 export function renderCreateAccount(){
     const main = document.querySelector('.main')
     main.innerHTML= ""
@@ -103,13 +137,26 @@ export function renderCreateAccount(){
     container.appendChild(buttonGoogle)
     container.appendChild(buttonBack)
 
+   
     // continuar para registrar
-buttonContinue.addEventListener("click", (e)=> {
-    e.preventDefault();
-    const singUpEmail = document.querySelector('#emailRegister').value;
-    const singPassword = document.querySelector('#passwordRegister').value;
-    //console.log(singUpEmail , singPassword);
-    createrUser(auth, singUpEmail, singPassword);
-})
+ buttonContinue.addEventListener("click", (e)=> {
+  e.preventDefault();
+  const singUpEmail = document.querySelector('#emailRegister').value;
+  const singPassword = document.querySelector('#passwordRegister').value;
+  //console.log(singUpEmail , singPassword);
+  createUser(auth, singUpEmail, singPassword);
+ })
 
-  }
+// Con Google
+
+buttonGoogle.addEventListener("click", (e) => {
+  signInWithPopup(auth, googleProvider)
+    .then((result) => {
+      const user = result.user;
+      console.log("Usuario autenticado con Google:", user);
+    })
+    .catch((error) => {
+      console.error("Error al autenticar con Google:", error.message);
+    });
+});
+}
