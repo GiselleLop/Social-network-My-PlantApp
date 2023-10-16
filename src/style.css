@@ -43,24 +43,14 @@ body {
 .headerRegister {
     font-size: 0.8em;
     font-family: 'Font2';
+    width: 80%;
+    text-align: center;
 
 }
 
 
 /*MOBILE FIRST VISTA REGISTRO */
-.containerRegister {
-    font-family: 'Font1';
-    flex-direction: column;
-    width: 80%;
-    height: 100%;
-    display: flex;
-    place-items: center;
-    text-align: center;
-    place-content: center;
-    box-shadow: 0 0 10px rgba(156, 158, 156, 0.346), 0 0 20px rgba(135, 136, 135, 0.5), 0 0 30px rgba(0, 255, 0, 0.203);
-    
-    border-radius: 10px;
-}
+
 
 .h4Register {
     width: 100%;
@@ -70,11 +60,13 @@ body {
 }
 
 .Inputcontainer {
+    
     text-align: left;
     display: flex;
     flex-direction: column;
     width: 80%;
     place-items: center;
+    margin-top: 2%;
 }
 
 .input {
@@ -124,7 +116,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 30%;
+    width: 50%;
 }
 
 #homeplant {
@@ -191,9 +183,11 @@ body {
     align-items: center;
     flex-direction: column;
     width: 90%;
-    height: 90%;
+    height: auto;
     border-radius: 10px;
     gap: 2em;
+    padding-top: 6em;
+    padding-bottom: 6em
     
 }
 .content {
@@ -201,6 +195,7 @@ display: flex;
 text-align: center;
 flex-direction: column;
 place-content: center;
+width: 90%;
 }
 
 
@@ -211,7 +206,11 @@ place-content: center;
     flex-direction: row;
     padding-left: 0%;
     padding-right: 0%;
-}
+    width: 90%;
+    height: 90%;
+    padding-top: 0%;
+    padding-bottom: 0%;
+    }
 
 .homewelcome, .hometittle, .words{
 font-size: 25px;
@@ -233,27 +232,32 @@ font-size: 50px;
 margin-top: 30px;
 }
 /*ESTILO DE LA VISTA DE REGISTO*/
-   
+.containerimg {
+    width: 30%;}
+.content {
+width: auto;
+}
     .headerRegister {
-        margin-bottom: 0px;
-    }
-
-    .containerRegister {
-        width: 90%;
-        height: 90%;
-        flex-direction: row;
-        display: flex;
+       padding-left: 5em;
+       justify-content: center;
+       align-items: center;
+       width: 50%;
+       padding-left: 5em;
+       display: flex;
+       flex-direction: column;
+       text-align: center;    
     }
 
     .input {
-        width: 70%;
+        width: 80%;
         height: 2em;
+        margin-bottom: 1em;
     }
 
     .h4Register {
-        font-size: 1.3em;
+        font-size: 1.6em;
         margin: 5px;
-        width: 70%;
+        width: 80%;
     }
 
     .buttonRegister {
@@ -265,7 +269,11 @@ margin-top: 30px;
         padding-top: 0px;
         padding-bottom: 0px;
     }
+    
 
+.Inputcontainer{
+padding-right: 4em;
+margin-top: 0%;
 }
-
-
+ 
+}
