@@ -1,23 +1,39 @@
-html {
-height: 100%;
+@font-face {
+    font-family: 'Font1';
+    src: url("/fonts/Letters\ for\ Learners.ttf");
 }
-body {
-background: linear-gradient(#F2F6EB,#E5FFB1);
-background-size: 100% 100%;
-min-width: 100%;
-min-height: 100%;
-align-items: center;
-justify-content: center;
-display: flex;
-}
-.main {
-display: flex;
-place-content: center;
-height: 100%;
-width: 100%;
-}
-.login {
 
+@font-face {
+    font-family: 'Font2';
+    src: url("/fonts/KGBlankSpaceSolid.ttf");
+}
+
+html {
+    background-size: 100% 100%;
+    min-width: 100%;
+    min-height: 100%;
+    display: flex;
+}
+
+body {
+    background: linear-gradient(#F2F6EB, #E5FFB1);
+    background-size: 100% 100%;
+    min-width: 100%;
+    min-height: 100%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.main {
+    display: flex;
+    place-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.login {
     display: flex;
     flex-direction: column;
     width: 80%;
@@ -44,117 +60,121 @@ width: 100%;
 }
 
 .Inputcontainer {
+    
     text-align: left;
     display: flex;
     flex-direction: column;
     width: 80%;
     place-items: center;
     margin-top: 2%;
-
 }
 
 .input {
-width: 100%;
-height: 7%;
-border-radius: 1em;
-}
-
-.buttonRegister {
-box-shadow: 3px 3px 4px black;
-width: 50%;
-height: 8%;
-border-radius: 2em;
-padding-left: 10px;
-padding-right: 10px;
-background-color: #D09080;
-font-size: 100%;
-color: white;
-font-weight: bolder;
-border-color: transparent;
-}
-#continue {
-margin-top: 5%;
-}
- 
-#or {
-margin-top: 0%;
-margin-bottom: 0%;
-}
-/* Estilos para pantallas de escritorio */
-@media only screen and (min-width: 768px) {
-.containerRegister {
-    flex-direction: row;
-    display: flex;
- }
- .input {
-    width: 70%;
+    width: 100%;
     height: 2em;
+    border-radius: 0.7em;
+    box-shadow: 3px 3px 2px rgb(32, 32, 32);
 }
+
 .buttonRegister {
+    box-shadow: 3px 3px 4px black;
     width: auto;
-    height: 3em;
+    height: auto;
+    border-radius: 5px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    transition: background-color 0.3s;
+    background-color: #D09080;
+    color: #57403A;
+    font-size: 85%;
+    border-color: transparent;
     margin: 10px;
-    }
-    
-    
-    
+    font-family: 'Font2';
+    letter-spacing: 2px;
+}
 
+.buttonRegister:hover {
+    background-color: #57403A;
+    color: #D09080;
+}
 
+#continue {
+    margin-top: 5%;
+}
+
+#or {
+    margin-top: 0%;
+    margin-bottom: 0%;
 }
 
 
-/*Mobile first Vista inicio */
-/*homepege*/
-body{ 
-    background-image: url(img/pared.jpg);
-    background-repeat: repeat;
-    margin: 0;
-    padding: 0;
-    background-size: cover;
-    background-position: center;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
 
+/*MOBILE FIRST VISTA PRINCIPAL*/
+.containerimg {
+    display: flex;
+    justify-content: center;
     align-items: center;
     width: 50%;
 }
 
+#homeplant {
+    width: 80%;
+}
 
-    
-
-   .containerimg{
-    display: flex;
-    justify-content:center ;
-
-   }
-   #homeplant{
-    border-radius: 100px;
-    max-width: 40%;
-    
-    
-   }
-  .homewelcome{
+.homewelcome, .hometittle, .words{
+    font-family: 'Font1';
+    font-size: 25px;
     text-align: center;
-  }
-  .hometittle{
-    text-align: center;
-  }
+    margin: 10px;
+    font-weight: bolder;
+}
 
-  .registrationButton, .loginButton {
+.hometittle {
+    font-size: 40px;
+    font-family: 'Font2';
+}
+
+.registrationButton,
+.loginButton {
+    letter-spacing: 2px;
     display: inline-block;
     padding: 10px 20px;
     background-color: #D09080;
-    color: #fff;
+    color: #57403A;
     text-decoration: none;
     border: none;
     border-radius: 5px;
-    margin-right: 10px; /* Espacio entre los botones */
+    /* Espacio entre los botones */
     cursor: pointer;
     transition: background-color 0.3s;
-    display: flex;
+    justify-content: space-around;
+    height: auto;
+    width: auto;
+    font-family: 'Font2';
+}
+.registrationButton:hover,
+.loginButton:hover {
+    background-color: #57403A;
+    color: #D09080;
+}
+.words {
+    font-size: 25px;
+   
+}
+.wordsHome {
+    text-align: center;
 
+}
+
+.orderbuttons {
+    font-family: 'Font1';
+    font-size: 25px;
+    place-content: center;
+    align-items: center;
+    flex-direction: column;
+    display: flex;
 }
 .homepage {
     box-shadow: 0 0 10px rgba(156, 158, 156, 0.346), 0 0 20px rgba(135, 136, 135, 0.5), 0 0 30px rgba(0, 255, 0, 0.203);

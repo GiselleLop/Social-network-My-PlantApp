@@ -26,7 +26,7 @@
   const analytics = getAnalytics(app);
   const auth = getAuth(app)
   const firestore = getFirestore(app);
-  
+  /*
 // Para crear o registrar usuarios
 const buttonSignin = document.querySelector('#buttonSignin');
 buttonSignin.addEventListener('click', (e) => {
@@ -106,7 +106,7 @@ onAuthStateChanged(auth, (user) => {
 //import { myFunction } from './lib/index.js';
 
 //myFunction();
-
+*/
 
 
 const register = document.querySelector('#registerButton') 
