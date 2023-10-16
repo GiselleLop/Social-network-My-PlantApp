@@ -65,6 +65,7 @@ console.error('Error al iniciar sesión:', error.code, error.message);
 })
 */
 const main = document.querySelector('.homepage')
+
 export function renderCreateAccount(){
     main.innerHTML= ""
   //header
