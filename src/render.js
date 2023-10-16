@@ -1,60 +1,24 @@
-import { getFirestore, collection, getDocs  } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-analytics.js";
-import { getAuth, GoogleAuthProvider , signInWithPopup ,signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js";
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
-
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-
+import { getFirestore, collection, getDocs  } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-analytics.js";
+import { getAuth,signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged} from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
+  
 const firebaseConfig = {
     apiKey: "AIzaSyA_nNPVRwXqmgLlxdYL4NmJwiItX9t2D5E",
     authDomain: "social-network-c61c9.firebaseapp.com",
     projectId: "social-network-c61c9",
     storageBucket: "social-network-c61c9.appspot.com",
     messagingSenderId: "496904934051",
-    appId: "1:496904934051:web:349b4f181faf09491c2516",
-    measurementId: "G-9MSK8FV9VP"
+    appId: "1:496904934051:web:4cc5210ca6b1e3661c2516",
+    measurementId: "G-ZBR0EJZW08"
   };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-const auth = getAuth(app)
-const firestore = getFirestore(app);
-const googleProvider = new GoogleAuthProvider();
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  const auth = getAuth(app)
+  const firestore = getFirestore(app);
 
-// Para crear o registrar usuarios
-function createUser(auth, singUpEmail, singPassword){
-createUserWithEmailAndPassword(auth, singUpEmail, singPassword)
-  .then(userCredential => {
-    console.log('Registro exitoso', userCredential);
-  })
-  .catch(error => {
-    console.error('Error al registrarse:', error.code, error.message);
-  })
-}
-
-
-/*
-// Para iniciar sesion o ingresar 
-const buttonLogin =  document.querySelector('#buttonLogin');
-buttonLogin.addEventListener('click', (e) => {
-e.preventDefault();
-const loginEmail = document.querySelector('#emailLog').value;
-const loginPassword = document.querySelector('#passwordLog').value;
-//console.log(loginEmail, loginPassword);
-signInWithEmailAndPassword(auth, loginEmail, loginPassword)
-.then(userCredential => {
-console.log('Inicio de sesión exitoso', userCredential);
-})
-.catch(error => {
-console.error('Error al iniciar sesión:', error.code, error.message);
-});
-})
-*/
 export function renderCreateAccount(){
     const main = document.querySelector('.main')
     main.innerHTML= ""
@@ -63,7 +27,6 @@ export function renderCreateAccount(){
     containerMain.setAttribute("class", "containerRegister")
   //header
   const header = document.createElement("header");
-  header.setAttribute("class", "headerRegister")
   
   //Titulo de registro
     const title = document.createElement("h2");
@@ -71,7 +34,7 @@ export function renderCreateAccount(){
   // Imagen
     const image = document.createElement("img")
     image.src = '/src/evolucion.png'
-    image.style.width = '50%';
+    image.style.width = '40%';
     image.style.height = 'auto';
   
   //Contenedor de los inputs
@@ -79,23 +42,20 @@ export function renderCreateAccount(){
     container.setAttribute("class", "Inputcontainer")
   //input Username
     const username = document.createElement("h4")
-    username.textContent = "Nombres completos:";
-    username.setAttribute("class", "h4Register");
+    username.textContent = "Nombres completos:"
     const inputName = document.createElement("input")
     inputName.setAttribute("type", "text");
     inputName.setAttribute("class", "input")
   // input correo
     const email = document.createElement("h4")
     email.textContent = "Correo Electrónico:"
-    email.setAttribute("class", "h4Register");
     const inputEmail = document.createElement("input")
     inputEmail.setAttribute("type", "email");
     inputEmail.setAttribute("class", "input")
     inputEmail.setAttribute("id", "emailRegister")
   //input contrasena
     const password = document.createElement("h4")
-    password.textContent = "Contraseña:";
-    password.setAttribute("class", "h4Register");
+    password.textContent = "Contraseña:"
     const inputPassword = document.createElement("input")
     inputPassword.setAttribute("type", "password");
     inputPassword.setAttribute("class", "input")
@@ -111,15 +71,15 @@ export function renderCreateAccount(){
   or.setAttribute("id", "or")
 
   const buttonGoogle = document.createElement("button");
-  buttonGoogle.textContent= "Registrarse con Google"
+  buttonGoogle.textContent= "Continuar con Google"
   buttonGoogle.setAttribute("class", "buttonRegister")
 //boton volver
-  const buttonBack = document.createElement("button");
-  buttonBack.textContent = "Volver"
-  buttonBack.setAttribute("class", "buttonRegister");
-  buttonBack.addEventListener("click", () => {
-    location.href="index.html";
-  })
+  const buttonBack = document.createElement("input");
+  buttonBack.setAttribute("type", "button");
+  buttonBack.setAttribute("value", "Volver")
+  buttonBack.setAttribute("onclick", "history.back()")
+  buttonBack.setAttribute("class", "buttonRegister")
+  
 
     main.appendChild(containerMain);
     containerMain.appendChild(header)
@@ -137,26 +97,20 @@ export function renderCreateAccount(){
     container.appendChild(buttonGoogle)
     container.appendChild(buttonBack)
 
-   
     // continuar para registrar
- buttonContinue.addEventListener("click", (e)=> {
-  e.preventDefault();
-  const singUpEmail = document.querySelector('#emailRegister').value;
-  const singPassword = document.querySelector('#passwordRegister').value;
-  //console.log(singUpEmail , singPassword);
-  createUser(auth, singUpEmail, singPassword);
- })
+buttonContinue.addEventListener("click", (e)=> {
+    e.preventDefault();
+    const singUpEmail = document.querySelector('#emailRegister').value;
+    const singPassword = document.querySelector('#passwordRegister').value;
+    //console.log(singUpEmail , singPassword);
+   
+    createUserWithEmailAndPassword(auth, singUpEmail, singPassword)
+       .then(userCredential => {
+         console.log('signup');
+       })
+       .catch(error => {
+         console.error('Error al registrarse:', error.message);
+       });
+})
 
-// Con Google
-
-buttonGoogle.addEventListener("click", (e) => {
-  signInWithPopup(auth, googleProvider)
-    .then((result) => {
-      const user = result.user;
-      console.log("Usuario autenticado con Google:", user);
-    })
-    .catch((error) => {
-      console.error("Error al autenticar con Google:", error.message);
-    });
-});
-}
+  }
