@@ -17,27 +17,40 @@ height: 100%;
 width: 100%;
 }
 .login {
-display: flex;
-flex-direction: column;
-width: 80%;
-text-align: center;
-}
 
-
-/*Mobile first Vista Registro */
-.containerRegister {
+    display: flex;
     flex-direction: column;
     width: 80%;
-    display: grid;
-    place-items: center;
     text-align: center;
 }
+
+.headerRegister {
+    font-size: 0.8em;
+    font-family: 'Font2';
+    width: 80%;
+    text-align: center;
+
+}
+
+
+/*MOBILE FIRST VISTA REGISTRO */
+
+
+.h4Register {
+    width: 100%;
+    margin: 2%;
+    font-family: 'Font1';
+    font-size: 20px;
+}
+
 .Inputcontainer {
-  text-align: left;
-  display: flex;
-  flex-direction: column;
-  width: 80%;
-  place-items: center;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    place-items: center;
+    margin-top: 2%;
+
 }
 
 .input {
@@ -103,7 +116,11 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    color: #000000;}
+
+    align-items: center;
+    width: 50%;
+}
+
 
     
 
@@ -137,87 +154,106 @@ body{
     cursor: pointer;
     transition: background-color 0.3s;
     display: flex;
-    justify-content:space-around;
-    margin-top: 40px;
-    height: 35px;
-    width: 355px;
-  }
 
-  .registrationButton:hover, .loginButton:hover {
-    background-color: #faa66a;
-  }
-  .words{
-    margin-top: 30px;
-  }
-  .wordsHome{
-    text-align: center;
-    
-  }
-
-  .homepage{
-    background-color: rgba(188, 232, 188, 0.5); 
-    padding: 20px; 
-    border-radius: 10px; 
-    margin-top: 30px;
-  }
-  .orderbuttons{
-    margin-top: 70px;
 }
-  /*ESCRITORIO*/
-            @media(min-width :768px) and (max-width:2328px){
-                body{
-                    background-image: url(img/pared.jpg);
-                    background-repeat: repeat;
-                    background-attachment: fixed;
-                    margin: 0;
-                    padding: 0;
-                }
-                .homepage{
-                    background-color: rgba(188, 232, 188, 0.5); 
-                    padding: 90px; 
-                    margin: 20px;
-                    border-radius: 10px;
-                    box-shadow: 0 0 10px rgba(156, 158, 156, 0.346), 0 0 20px rgba(135, 136, 135, 0.5), 0 0 30px rgba(0, 255, 0, 0.203); 
-                }
-                .containerimg #homeplant {
-                    margin-right: 20px;
-                    transition: transform 0.3s; 
-                }
-                
-                
-                .containerimg #homeplant:hover {
-                    transform: rotate(30deg); 
-                }
-                .orderbuttons{
-                    margin-top: 30px;
-                }
-                .homepage {
-                    display: flex; 
-                    background-color: rgba(188, 232, 188, 0.5);
-                    padding: 10px; 
-                    border-radius: 10px;
-                }
-                
-                /* Estilos para la imagen a la izquierda */
-                .containerimg {
-                    max-width: 100%;
-                    max-height: 100px;
-                    margin-right: 0px; /* Espacio entre la imagen y el contenido a la derecha */
-                    margin-top: 150px;
-                   
-                }
-                
-                /* Estilos para el contenido a la derecha */
-                .content {
-                    flex: 2; 
-                    margin-top: 100px;
-                    margin-right: 50px;
-                }
-                #homeplant{
-                    height: 300px;
-                    width: 700px;
-                    border-radius: 600px;
-                }
-                
-            
-            }
+.homepage {
+    box-shadow: 0 0 10px rgba(156, 158, 156, 0.346), 0 0 20px rgba(135, 136, 135, 0.5), 0 0 30px rgba(0, 255, 0, 0.203);
+    display: flex;
+    place-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 90%;
+    height: auto;
+    border-radius: 10px;
+    gap: 2em;
+    padding-top: 6em;
+    padding-bottom: 6em
+    
+}
+.content {
+display: flex;
+text-align: center;
+flex-direction: column;
+place-content: center;
+width: 90%;
+}
+
+
+/* Estilos para pantallas de escritorio */
+@media only screen and (min-width: 920px) {
+   /*VISTA PRINCIPAL*/
+   .homepage {
+    flex-direction: row;
+    padding-left: 0%;
+    padding-right: 0%;
+    width: 90%;
+    height: 90%;
+    padding-top: 0%;
+    padding-bottom: 0%;
+    }
+
+.homewelcome, .hometittle, .words{
+font-size: 25px;
+margin: 10px;
+}
+
+.hometittle {
+font-size: 50px;
+}
+.containerimg #homeplant {
+    display: flex;
+    transition: transform 0.3s;
+}
+
+.containerimg #homeplant:hover {
+    transform: rotate(10deg);
+}
+.orderbuttons {
+margin-top: 30px;
+}
+/*ESTILO DE LA VISTA DE REGISTO*/
+.containerimg {
+    width: 30%;}
+.content {
+width: auto;
+}
+    .headerRegister {
+       padding-left: 5em;
+       justify-content: center;
+       align-items: center;
+       width: 50%;
+       padding-left: 5em;
+       display: flex;
+       flex-direction: column;
+       text-align: center;    
+    }
+
+    .input {
+        width: 80%;
+        height: 2em;
+        margin-bottom: 1em;
+    }
+
+    .h4Register {
+        font-size: 1.6em;
+        margin: 5px;
+        width: 80%;
+    }
+
+    .buttonRegister {
+        width: auto;
+        height: 1.8em;
+        margin: 7px;
+        border-radius: 0.6em;
+        font-size: 0.9em;
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
+    
+
+.Inputcontainer{
+padding-right: 4em;
+margin-top: 0%;
+}
+ 
+}

@@ -108,5 +108,7 @@ onAuthStateChanged(auth, (user) => {
 //myFunction();
 
 
-const borrar = document.querySelector('#borrar') 
-borrar.addEventListener('click', renderCreateAccount)
+
+const register = document.querySelector('#registerButton') 
+register.addEventListener('click', renderCreateAccount)
+
