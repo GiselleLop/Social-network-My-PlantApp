@@ -95,9 +95,11 @@ export function renderLogin(){
   or.textContent = "o";
   or.setAttribute("id", "or")
 
-  const googleLoginBtn = document.createElement("button");
-  googleLoginBtn.textContent= "Iniciar sesión con Google"
-  googleLoginBtn.setAttribute("class", "buttonRegister")
+  const googleLoginBtn = document.createElement("input");
+  googleLoginBtn.textContent= "Iniciar sesión con Google"  
+  googleLoginBtn.setAttribute("type","image")
+  googleLoginBtn.setAttribute("src", 'LoginGoogle.png')
+  googleLoginBtn.setAttribute("class", "googleLoginBtn")
 
   googleLoginBtn.addEventListener("click", (e) => {
   signInWithPopup(auth, googleProvider)
