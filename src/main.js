@@ -4,7 +4,7 @@
   import { getAuth,signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged} from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
   
   
-  import { renderCreateAccount } from "./render.js";
+  import { renderCreateAccount, renderLogin } from "./render.js";
   // TODO: Add SDKs for Firebase products that you want to use
   // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -46,8 +46,8 @@ buttonSignin.addEventListener('click', (e) => {
 
 
 // Para iniciar sesion o ingresar 
-const buttonLogin =  document.querySelector('#buttonLogin');
-buttonLogin.addEventListener('click', (e) => {
+const loginButton =  document.querySelector('#loginBtn');
+loginButton.addEventListener('click', (e) => {
   e.preventDefault();
   const loginEmail = document.querySelector('#emailLog').value;
   const loginPassword = document.querySelector('#passwordLog').value;
@@ -107,6 +107,9 @@ onAuthStateChanged(auth, (user) => {
 
 //myFunction();
 */
+const loginBtn = document.querySelector('#loginButton')
+loginBtn.addEventListener('click',renderLogin)
+
 
 
 const register = document.querySelector('#registerButton') 

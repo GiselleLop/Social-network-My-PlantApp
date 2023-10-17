@@ -33,6 +33,7 @@ body {
     width: 100%;
 }
 
+
 .login {
     display: flex;
     flex-direction: column;
@@ -98,6 +99,12 @@ body {
 .buttonRegister:hover {
     background-color: #57403A;
     color: #D09080;
+}
+.googleLoginBtn {
+    border-radius: 2em;
+    box-shadow: 3px 3px 4px black;
+    width: 30%;
+    margin-bottom: 10%;
 }
 
 #continue {
