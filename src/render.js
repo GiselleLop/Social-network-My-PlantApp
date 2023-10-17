@@ -1,4 +1,3 @@
-
 import { getFirestore, collection, getDocs  } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-analytics.js";
 import { 
@@ -23,8 +22,8 @@ const firebaseConfig = {
     projectId: "social-network-c61c9",
     storageBucket: "social-network-c61c9.appspot.com",
     messagingSenderId: "496904934051",
-    appId: "1:496904934051:web:4cc5210ca6b1e3661c2516",
-    measurementId: "G-ZBR0EJZW08"
+    appId: "1:496904934051:web:349b4f181faf09491c2516",
+    measurementId: "G-9MSK8FV9VP"
   };
 
 // Initialize Firebase
@@ -48,6 +47,99 @@ createUserWithEmailAndPassword(auth, singUpEmail, singPassword)
     console.error('Error al registrarse:', error.code, error.message);
   })
 }
+
+export function renderLogin(){
+  main.innerHTML= "";
+  const header = document.createElement("header");
+  header.setAttribute("class", "headerRegister")
+  //Titulo 1
+  const title1 = document.createElement("h1");
+  title1.textContent = "¡Nos alegra verte de nuevo!"
+  //Titulo 2
+  const title2 = document.createElement("h2");
+  title2.textContent = "Ingresa tus datos"
+
+  //Imagen
+    const imageLogin = document.createElement("img")
+    imageLogin.src= 'regadera.png'
+    imageLogin.style.width = '50%';
+    imageLogin.style.height = 'auto';
+
+  //Contenedor de los inputs
+  const containerLogin = document.createElement("div")
+  containerLogin.setAttribute("class", "Inputcontainer")
+
+// input correo
+  const emailLabel = document.createElement("h3")
+  emailLabel.textContent = "Correo Electrónico:"
+  emailLabel.setAttribute("class", "h4Register");
+  const email = document.createElement("input")
+  email.setAttribute("type", "email");
+  email.setAttribute("class", "input")
+  email.setAttribute("id", "emailLog")
+//input contrasena
+  const passwordLabel = document.createElement("h3")
+  passwordLabel.textContent = "Contraseña:";
+  passwordLabel.setAttribute("class", "h4Register");
+  const password = document.createElement("input")
+  password.setAttribute("type", "password");
+  password.setAttribute("class", "input")
+  password.setAttribute("id", "passwordLogin")
+// input start session
+  const sessionBtn = document.createElement("button");
+  sessionBtn.textContent = "Iniciar sesión"
+  sessionBtn.setAttribute("class", "buttonRegister")
+  sessionBtn.setAttribute("id", "sessionBtn")
+//input start session with GOOGLE
+  const or = document.createElement("h4")
+  or.textContent = "o";
+  or.setAttribute("id", "or")
+
+  const googleLoginBtn = document.createElement("input");
+  googleLoginBtn.textContent= "Iniciar sesión con Google"  
+  googleLoginBtn.setAttribute("type","image")
+  googleLoginBtn.setAttribute("src", 'LoginGoogle.png')
+  googleLoginBtn.setAttribute("class", "googleLoginBtn")
+
+  googleLoginBtn.addEventListener("click", (e) => {
+  signInWithPopup(auth, googleProvider)
+  .then((result) => {
+    const user = result.user;
+    console.log("Usuario autenticado con Google:", user);
+  })
+  .catch((error) => {
+    console.error("Error al autenticar con Google:", error.message);
+  });
+});
+
+//boton volver
+  const buttonBack = document.createElement("button");
+  buttonBack.textContent = "Volver"
+  buttonBack.setAttribute("class", "buttonRegister");
+  buttonBack.addEventListener("click", () => {
+    location.href="index.html";
+  })
+
+  main.appendChild(header)
+    header.appendChild(title1);
+    header.appendChild(title2);
+    header.appendChild(imageLogin);
+    main.appendChild(containerLogin)
+    containerLogin.appendChild(emailLabel);
+    containerLogin.appendChild(email);
+    containerLogin.appendChild(passwordLabel);
+    containerLogin.appendChild(password);
+    containerLogin.appendChild(sessionBtn);
+    containerLogin.appendChild(or);
+    containerLogin.appendChild(googleLoginBtn);
+    containerLogin.appendChild(buttonBack);
+  
+
+
+
+
+
+}
 /*
 // Para iniciar sesion o ingresar 
 const buttonLogin =  document.querySelector('#buttonLogin');
@@ -66,21 +158,19 @@ console.error('Error al iniciar sesión:', error.code, error.message);
 })
 */
 const main = document.querySelector('.homepage')
-
 export function renderCreateAccount(){
     main.innerHTML= ""
   //header
   const header = document.createElement("header");
+  header.setAttribute("class", "headerRegister")
   
   //Titulo de registro
     const title = document.createElement("h2");
     title.textContent = "Para crear una nueva cuenta, ingresa tus datos."
   // Imagen
     const image = document.createElement("img")
-    image.src = '/src/evolucion.png'
-
+    image.src = 'evolucion.png'
     image.style.width = '60%';
-
     image.style.height = 'auto';
   
   //Contenedor de los inputs
@@ -88,20 +178,23 @@ export function renderCreateAccount(){
     container.setAttribute("class", "Inputcontainer")
   //input Username
     const username = document.createElement("h4")
-    username.textContent = "Nombres completos:"
+    username.textContent = "Nombres completos:";
+    username.setAttribute("class", "h4Register");
     const inputName = document.createElement("input")
     inputName.setAttribute("type", "text");
     inputName.setAttribute("class", "input")
   // input correo
     const email = document.createElement("h4")
     email.textContent = "Correo Electrónico:"
+    email.setAttribute("class", "h4Register");
     const inputEmail = document.createElement("input")
     inputEmail.setAttribute("type", "email");
     inputEmail.setAttribute("class", "input")
     inputEmail.setAttribute("id", "emailRegister")
   //input contrasena
     const password = document.createElement("h4")
-    password.textContent = "Contraseña:"
+    password.textContent = "Contraseña:";
+    password.setAttribute("class", "h4Register");
     const inputPassword = document.createElement("input")
     inputPassword.setAttribute("type", "password");
     inputPassword.setAttribute("class", "input")
@@ -117,10 +210,9 @@ export function renderCreateAccount(){
   or.setAttribute("id", "or")
 
   const buttonGoogle = document.createElement("button");
-  buttonGoogle.textContent= "Continuar con Google"
+  buttonGoogle.textContent= "Registrarse con Google"
   buttonGoogle.setAttribute("class", "buttonRegister")
 //boton volver
-
   const buttonBack = document.createElement("button");
   buttonBack.textContent = "Volver"
   buttonBack.setAttribute("class", "buttonRegister");
@@ -135,7 +227,6 @@ export function renderCreateAccount(){
   
     renderPosts()
   })
-
 
    
     main.appendChild(header)
@@ -154,21 +245,17 @@ export function renderCreateAccount(){
     container.appendChild(buttonBack)
     container.appendChild(postx)
 
-    // continuar para registrar
-buttonContinue.addEventListener("click", (e)=> {
-    e.preventDefault();
-    const singUpEmail = document.querySelector('#emailRegister').value;
-    const singPassword = document.querySelector('#passwordRegister').value;
-    //console.log(singUpEmail , singPassword);
    
-    createUserWithEmailAndPassword(auth, singUpEmail, singPassword)
-       .then(userCredential => {
-         console.log('signup');
-       })
-       .catch(error => {
-         console.error('Error al registrarse:', error.message);
-       });
-})
+    // continuar para registrar
+ buttonContinue.addEventListener("click", (e)=> {
+  e.preventDefault();
+  const singUpEmail = document.querySelector('#emailRegister').value;
+  const singPassword = document.querySelector('#passwordRegister').value;
+  //console.log(singUpEmail , singPassword);
+  createUser(auth, singUpEmail, singPassword);
+ })
+
+// Con Google
 
 buttonGoogle.addEventListener("click", (e) => {
     signInWithPopup(auth, googleProvider)
