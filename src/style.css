@@ -1,11 +1,11 @@
 @font-face {
     font-family: 'Font1';
-    src: url("/fonts/Letters\ for\ Learners.ttf");
+    src: url("/fonts/letter1.ttf") format('truetype');;
 }
 
 @font-face {
     font-family: 'Font2';
-    src: url("/fonts/KGBlankSpaceSolid.ttf");
+    src: url("/fonts/KGBlankSpaceSolid.ttf") format('truetype');;
 }
 
 html {
@@ -112,11 +112,18 @@ body {
 }
 
 #or {
+    font-family: 'Font1';
     margin-top: 0%;
     margin-bottom: 0%;
 }
 
+.googleLoginBtn{
+border-radius: 5px;
+box-shadow: 3px 3px 4px black;
+border: 1px solid #000;
+margin-top: 1em;
 
+}
 
 /*MOBILE FIRST VISTA PRINCIPAL*/
 .containerimg {
@@ -282,5 +289,10 @@ width: auto;
 padding-right: 4em;
 margin-top: 0%;
 }
+.googleLoginBtn{
+    border-radius: 0.6em;
+    }
+    
+
  
 }
