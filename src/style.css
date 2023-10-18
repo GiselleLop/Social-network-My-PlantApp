@@ -105,11 +105,18 @@ body {
 }
 
 #or {
+    font-family: 'Font1';
     margin-top: 0%;
     margin-bottom: 0%;
 }
 
+.googleLoginBtn{
+border-radius: 5px;
+box-shadow: 3px 3px 4px black;
+border: 1px solid #000;
+margin-top: 1em;
 
+}
 
 /*MOBILE FIRST VISTA PRINCIPAL*/
 .containerimg {
@@ -275,5 +282,10 @@ width: auto;
 padding-right: 4em;
 margin-top: 0%;
 }
+.googleLoginBtn{
+    border-radius: 0.6em;
+    }
+    
+
  
 }

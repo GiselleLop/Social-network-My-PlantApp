@@ -20,7 +20,7 @@ export function renderCreateAccount(){
     title.textContent = "Para crear una nueva cuenta, ingresa tus datos."
   // Imagen
     const image = document.createElement("img")
-    image.setAttribute("src","evolucion.png");
+    image.setAttribute("src","img/evolucion.png");
     image.style.width = '60%';
     image.style.height = 'auto';
   
@@ -59,6 +59,7 @@ export function renderCreateAccount(){
   const or = document.createElement("h4")
   or.textContent = "o";
   or.setAttribute("id", "or")
+
 
   const buttonGoogle = document.createElement("button");
   buttonGoogle.textContent= "Registrarse con Google"

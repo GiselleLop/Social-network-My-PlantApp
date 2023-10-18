@@ -16,7 +16,7 @@ export function renderLogin(){
   
     //Imagen
       const imageLogin = document.createElement("img")
-      imageLogin.src= 'regadera.png'
+      imageLogin.src= 'img/regadera.png'
       imageLogin.style.width = '50%';
       imageLogin.style.height = 'auto';
   
@@ -56,12 +56,16 @@ export function renderLogin(){
     const or = document.createElement("h4")
     or.textContent = "o";
     or.setAttribute("id", "or")
+    
   
     const googleLoginBtn = document.createElement("input");
     googleLoginBtn.textContent= "Iniciar sesión con Google"  
     googleLoginBtn.setAttribute("type","image")
-    googleLoginBtn.setAttribute("src", 'LoginGoogle.png')
+    googleLoginBtn.setAttribute("src", 'img/LoginGoogle.png')
     googleLoginBtn.setAttribute("class", "googleLoginBtn")
+    googleLoginBtn.style.width = '40%';
+    googleLoginBtn.style.height = 'auto';
+  
   
     googleLoginBtn.addEventListener("click", (e) => {
     GoogleRegister()
