@@ -85,7 +85,8 @@ export function renderLogin(){
   password.setAttribute("type", "password");
   password.setAttribute("class", "input")
   password.setAttribute("id", "passwordLogin")
-// input start session
+
+// Boton iniciar session
   const sessionBtn = document.createElement("button");
   sessionBtn.textContent = "Iniciar sesión"
   sessionBtn.setAttribute("class", "buttonRegister")
