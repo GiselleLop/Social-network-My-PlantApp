@@ -6,11 +6,9 @@ import { renderCreateAccount } from "./register";
 import { main } from "./register";
 import { saveTask } from "./firebase";
 
-
-
 window.addEventListener('DOMContentLoaded', () => {
+  });
 
-    })
 export function post() {
     main.innerHTML = "";
     const containerPost = document.createElement("form");
