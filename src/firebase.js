@@ -1,4 +1,4 @@
-import { getFirestore, collection, getDocs  } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore.js";
+import { getFirestore, collection, getDocs, addDoc  } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-analytics.js";
 import { 
   getAuth,
@@ -27,7 +27,7 @@ const analytics = getAnalytics(app);
 const auth = getAuth(app)
 export{auth};
 const firestore = getFirestore(app);
-
+export {firestore}
 const googleProvider = new GoogleAuthProvider();
 googleProvider.setCustomParameters({
   prompt: "select_account"
@@ -44,7 +44,7 @@ createUserWithEmailAndPassword(auth, singUpEmail, singPassword)
   .catch(error => {
     console.error('Error al registrarse:', error.code, error.message);
   })
-  
+
 }
 /*
 // Para iniciar sesion o ingresar 
@@ -65,6 +65,11 @@ console.error('Error al iniciar sesión:', error.code, error.message);
 
 */
 
+//funcion save
+export function saveTask(title, description) {
+ addDoc(collection(firestore, 'post'), {title, description}) 
+//console.log(title, description)
+}
 
 
 //funcion para crear los posts

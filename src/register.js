@@ -2,11 +2,14 @@ import { auth } from "./firebase";
 import { renderPosts } from "./firebase";
 import { createUser } from "./firebase";
 import { GoogleRegister } from "./firebase";
+import { post } from "./post";
 
 
+const main = document.querySelector('.homepage')
+export {main}
 //para crear la vista de registro 
 export function renderCreateAccount(){
-    const main = document.querySelector('.homepage')
+   
     main.innerHTML= ""
   //header
   const header = document.createElement("header");
@@ -17,7 +20,7 @@ export function renderCreateAccount(){
     title.textContent = "Para crear una nueva cuenta, ingresa tus datos."
   // Imagen
     const image = document.createElement("img")
-    image.src = '/src/evolucion.png'
+    image.setAttribute("src","evolucion.png");
     image.style.width = '60%';
     image.style.height = 'auto';
   
@@ -67,31 +70,22 @@ export function renderCreateAccount(){
   buttonBack.addEventListener("click", () => {
     location.href="index.html";
   })
-  //boton x
-  const postx = document.createElement("button");
-  postx.setAttribute("class", "buttonRegister");
-  postx.textContent = "posts"
-  postx.addEventListener("click", ()=>{
-    main.innerHTML= "";
- 
-    //contenerdor de posts
-    const postContainer = document.createElement("div");
-    postContainer.setAttribute("class", "postContainer");
-    
-    const buttonback = document.createElement("button");
-    buttonback.textContent= "back";
-    buttonback.addEventListener("click", ()=> {
-      renderCreateAccount()
-    })
-  main.appendChild(postContainer)
-  main.appendChild(buttonback)
   
-    renderPosts()
-  })
 
+
+
+  //prueba posts
+  const post2 = document.createElement("button");
+  post2.textContent = "prueba post"
+  post2.addEventListener("click", ()=> {
+  post();
+ 
+     
+  })
+///
     main.append(header, container)
     header.append(title, image);
-    container.append(username, inputName, email, inputEmail, password, inputPassword, buttonContinue, or, buttonGoogle, buttonBack, postx)
+    container.append(username, inputName, email, inputEmail, password, inputPassword, buttonContinue, or, buttonGoogle, buttonBack, post2)
    
     // continuar para registrar
  buttonContinue.addEventListener("click", (e)=> {

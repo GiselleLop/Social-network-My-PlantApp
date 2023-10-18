@@ -1,6 +1,13 @@
-  
-  import { renderCreateAccount } from "./register.js";
-  /*const index = 'index.html'
+
+
+import { renderCreateAccount } from "./register.js";
+  const register = document.querySelector('#registerButton') 
+  register.addEventListener('click', () => {
+    console.log("render");
+  renderCreateAccount();
+})
+
+/*const index = 'index.html'
 
   const routes = [
   { path: '/', component: index},
@@ -39,12 +46,11 @@ navigateTo(window.location.pathname || defaultRoute);
 */
 
 
-  const register = document.querySelector('#registerButton') 
-register.addEventListener('click', () => {
-  renderCreateAccount();
-  console.log("render");
 
-})
+
+
+
+
 
 
   /*

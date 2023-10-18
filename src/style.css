@@ -1,11 +1,11 @@
 @font-face {
     font-family: 'Font1';
-    src: url("/fonts/Letters\ for\ Learners.ttf");
+    src: url("/fonts/letter1.ttf") format('truetype');;
 }
 
 @font-face {
     font-family: 'Font2';
-    src: url("/fonts/KGBlankSpaceSolid.ttf");
+    src: url("/fonts/KGBlankSpaceSolid.ttf") format('truetype');;
 }
 
 html {
