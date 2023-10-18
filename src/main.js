@@ -1,11 +1,12 @@
 
-
+import { renderLogin } from "./login.js";
 import { renderCreateAccount } from "./register.js";
-  const register = document.querySelector('#registerButton') 
-  register.addEventListener('click', () => {
-    console.log("render");
-  renderCreateAccount();
-})
+
+const register = document.querySelector('#registerButton') 
+  register.addEventListener('click', renderCreateAccount) 
+
+const login = document.querySelector('#loginButton');
+  login.addEventListener('click', renderLogin)
 
 /*const index = 'index.html'
 
