@@ -46,14 +46,9 @@ createUserWithEmailAndPassword(auth, singUpEmail, singPassword)
   })
 
 }
-/*
+
 // Para iniciar sesion o ingresar 
-const buttonLogin =  document.querySelector('#buttonLogin');
-buttonLogin.addEventListener('click', (e) => {
-e.preventDefault();
-const loginEmail = document.querySelector('#emailLog').value;
-const loginPassword = document.querySelector('#passwordLog').value;
-//console.log(loginEmail, loginPassword);
+export function login(auth, loginEmail, loginPassword){
 signInWithEmailAndPassword(auth, loginEmail, loginPassword)
 .then(userCredential => {
 console.log('Inicio de sesión exitoso', userCredential);
@@ -61,9 +56,9 @@ console.log('Inicio de sesión exitoso', userCredential);
 .catch(error => {
 console.error('Error al iniciar sesión:', error.code, error.message);
 });
-})
+}
 
-*/
+
 
 //funcion save
 export function saveTask(title, description) {

@@ -1,5 +1,5 @@
 import { auth } from "./firebase";
-import { renderPosts } from "./firebase";
+
 import { createUser } from "./firebase";
 import { GoogleRegister } from "./firebase";
 import { post } from "./post";
