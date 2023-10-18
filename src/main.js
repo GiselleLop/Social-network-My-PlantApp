@@ -57,8 +57,8 @@ navigateTo(window.location.pathname || defaultRoute);
   /*
 
 // Para iniciar sesion o ingresar 
-const buttonLogin =  document.querySelector('#buttonLogin');
-buttonLogin.addEventListener('click', (e) => {
+const loginButton =  document.querySelector('#loginBtn');
+loginButton.addEventListener('click', (e) => {
   e.preventDefault();
   const loginEmail = document.querySelector('#emailLog').value;
   const loginPassword = document.querySelector('#passwordLog').value;
@@ -73,4 +73,3 @@ signInWithEmailAndPassword(auth, loginEmail, loginPassword)
 });
 })
 */
-
