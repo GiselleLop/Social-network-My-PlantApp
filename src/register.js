@@ -8,7 +8,7 @@ import { post } from "./post";
 const main = document.querySelector('.homepage')
 export {main}
 //para crear la vista de registro 
-export function renderCreateAccount(){
+ function renderCreateAccount(navigateTo){
    
     main.innerHTML= ""
   //header
@@ -104,3 +104,4 @@ buttonGoogle.addEventListener("click", (e) => {
 return main
 
 }
+export default renderCreateAccount;
