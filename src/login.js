@@ -3,7 +3,7 @@ import { login } from "./firebase";
 import { auth} from "./firebase";
 import { GoogleRegister } from "./firebase";
 
-export function renderLogin(){
+ function renderLogin(navigateTo){
     main.innerHTML= "";
     const header = document.createElement("header");
     header.setAttribute("class", "headerRegister")
@@ -94,3 +94,4 @@ export function renderLogin(){
       containerLogin.appendChild(buttonBack);
   
   }
+ export default renderLogin;

@@ -1,7 +1,7 @@
 import { collection, getDocs  } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore.js";
 import { auth, firestore } from "./firebase";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js";
-import { renderCreateAccount } from "./register";
+import  renderCreateAccount  from "./register";
 
 import { main } from "./register";
 import { saveTask } from "./firebase";

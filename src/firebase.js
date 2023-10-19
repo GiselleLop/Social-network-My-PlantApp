@@ -9,7 +9,7 @@ import {
   createUserWithEmailAndPassword,
   onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
-import { renderCreateAccount } from "./register";
+import  renderCreateAccount  from "./register";
 
 const firebaseConfig = {
     apiKey: "AIzaSyA_nNPVRwXqmgLlxdYL4NmJwiItX9t2D5E",

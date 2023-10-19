@@ -1,75 +1,46 @@
+import home from "./home.js";
+import renderLogin from "./login.js";
+import  renderCreateAccount  from "./register.js";
 
-import { renderLogin } from "./login.js";
-import { renderCreateAccount } from "./register.js";
+home(navigateTo);
+// renderLogin(navigateTo)
+// renderCreateAccount(navigateTo)
 
-const register = document.querySelector('#registerButton') 
-  register.addEventListener('click', renderCreateAccount) 
+ const defaultRoute = '/home';
+ const root = document.querySelector(".homepage");
 
-const login = document.querySelector('#loginButton');
-  login.addEventListener('click', renderLogin)
+ const routes = [
+  { path: '/home', component: home },
+   { path: '/login', component: renderLogin },
+   { path: '/register', component: renderCreateAccount },
+ ];
 
-/*const index = 'index.html'
+ function navigateTo(hash) {
+  const currentPath = window.location.pathname;
 
-  const routes = [
-  { path: '/', component: index},
-    {path: '/register', component: renderCreateAccount()}
-  ]
-  const defaultRoute = '/';
-  const root = document.querySelector('.homepage')
-
-
-  function navigateTo(hash) {
+  // Verifica si la ruta actual es diferente de la nueva ruta
+  if (currentPath !== hash) {
     const route = routes.find((routeFound) => routeFound.path === hash);
-    
 
     if (route && route.component) {
       window.history.pushState(
-        {},
+        { path: route.path },
         route.path,
-        window.location.origin + route.path,
+        window.location.origin + route.path
       );
-  
+
       if (root.firstChild) {
         root.removeChild(root.firstChild);
       }
+
       root.appendChild(route.component());
-     }
-     else {
+    } else {
       navigateTo('/error');
     }
   }
-  
+}
+
 window.onpopstate = () => {
   navigateTo(window.location.pathname);
 };
-
 navigateTo(window.location.pathname || defaultRoute);
-*/
-
-
-
-
-
-
-
-
-
-  /*
-
-// Para iniciar sesion o ingresar 
-const loginButton =  document.querySelector('#loginBtn');
-loginButton.addEventListener('click', (e) => {
-  e.preventDefault();
-  const loginEmail = document.querySelector('#emailLog').value;
-  const loginPassword = document.querySelector('#passwordLog').value;
-//console.log(loginEmail, loginPassword);
-signInWithEmailAndPassword(auth, loginEmail, loginPassword)
-.then(userCredential => {
-  
-  console.log('login');
-})
-.catch(error => {
-  console.error('Error al registrarse:', error.message);
-});
-})
-*/
