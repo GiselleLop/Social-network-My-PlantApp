@@ -1,6 +1,10 @@
+import{home}from "./home.js"
+home();
 
 import { renderLogin } from "./login.js";
 import { renderCreateAccount } from "./register.js";
+
+
 
 const register = document.querySelector('#registerButton') 
   register.addEventListener('click', renderCreateAccount) 
