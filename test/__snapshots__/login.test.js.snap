@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renderLogin Snapshot of login 1`] = `
+<div>
+  <div
+    class="homepage1"
+  >
+    <header
+      class="headerRegister"
+    >
+      <h1>
+        ¡Nos alegra verte de nuevo!
+      </h1>
+      <h2>
+        Ingresa tus datos
+      </h2>
+      <img
+        src="img/regadera.png"
+        style="width: 50%; height: auto;"
+      />
+    </header>
+    <div
+      class="Inputcontainer"
+    >
+      <h3
+        class="h4Register"
+      >
+        Correo Electrónico:
+      </h3>
+      <input
+        class="input"
+        id="emailLog"
+        type="email"
+      />
+      <h3
+        class="h4Register"
+      >
+        Contraseña:
+      </h3>
+      <input
+        class="input"
+        id="passwordLogin"
+        type="password"
+      />
+      <button
+        class="buttonRegister"
+        id="sessionBtn"
+      >
+        Iniciar sesión
+      </button>
+      <h4
+        id="or"
+      >
+        o
+      </h4>
+      <input
+        class="googleLoginBtn"
+        src="img/LoginGoogle.png"
+        style="width: 40%; height: auto;"
+        type="image"
+      >
+        Iniciar sesión con Google
+      </input>
+      <button
+        class="buttonRegister"
+        id="return"
+      >
+        Volver
+      </button>
+    </div>
+  </div>
+</div>
+`;

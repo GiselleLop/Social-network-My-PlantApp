@@ -1,20 +1,14 @@
 import {
   collection,
   getDocs,
-} from 'https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore.js';
+} from 'firebase/firestore';
+import { onAuthStateChanged } from 'firebase/auth';
 import { auth, firestore, saveTask } from './firebase.js';
-import { onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js';
-import renderCreateAccount from './register.js';
 
-import { main } from './register.js';
-
-window.addEventListener('DOMContentLoaded', () => {});
-
-export function posts() {
-  main.innerHTML = '';
+export function posts(mainPage) {
+  mainPage.innerHTML = '';
   const containerPost = document.createElement('form');
   containerPost.setAttribute('id', 'task-form');
-
 
   const labelTitle = document.createElement('label');
   labelTitle.setAttribute('for', 'title');
@@ -51,8 +45,9 @@ export function posts() {
   const buttonback = document.createElement('button');
   buttonback.textContent = 'back';
   buttonback.addEventListener('click', () => {
-    renderCreateAccount();
+    window.location = '/';
   });
+
   function setupPost(data) {
     if (data.length) {
       let html = '';
@@ -87,7 +82,9 @@ export function posts() {
       console.log('Sing out');
     }
   });
-  main.append(containerPost, ViewPost, buttonback);
+
+  mainPage.append(containerPost, ViewPost, buttonback);
 
   containerPost.append(labelTitle, postTitle, labelPost, post, buttonSave);
+  return mainPage;
 }

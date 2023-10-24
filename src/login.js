@@ -1,10 +1,10 @@
-import { main } from './register.js';
-import { login } from './firebase.js';
-import { auth } from './firebase.js';
-import { GoogleRegister } from './firebase.js';
+import { login, GoogleRegister } from './firebase.js';
+// import { mainPage } from './main.js';
 
 function renderLogin(navigateTo) {
-  main.innerHTML = '';
+  const mainPage = document.createElement('div');
+  mainPage.setAttribute('class', 'homepage1');
+
   const header = document.createElement('header');
   header.setAttribute('class', 'headerRegister');
   // Titulo 1
@@ -49,9 +49,8 @@ function renderLogin(navigateTo) {
   sessionBtn.setAttribute('class', 'buttonRegister');
   sessionBtn.setAttribute('id', 'sessionBtn');
   sessionBtn.addEventListener('click', () => {
-    login(auth, email, password);
+    login(email, password);
   });
-
   // input start session with GOOGLE
   const or = document.createElement('h4');
   or.textContent = 'o';
@@ -73,15 +72,16 @@ function renderLogin(navigateTo) {
   const buttonBack = document.createElement('button');
   buttonBack.textContent = 'Volver';
   buttonBack.setAttribute('class', 'buttonRegister');
+  buttonBack.setAttribute('id', 'return');
   buttonBack.addEventListener('click', () => {
-   window.location = '/';
+    navigateTo('/');
   });
 
-  main.appendChild(header);
+  mainPage.appendChild(header);
   header.appendChild(title1);
   header.appendChild(title2);
   header.appendChild(imageLogin);
-  main.appendChild(containerLogin);
+  mainPage.appendChild(containerLogin);
   containerLogin.appendChild(emailLabel);
   containerLogin.appendChild(email);
   containerLogin.appendChild(passwordLabel);
@@ -90,5 +90,7 @@ function renderLogin(navigateTo) {
   containerLogin.appendChild(or);
   containerLogin.appendChild(googleLoginBtn);
   containerLogin.appendChild(buttonBack);
+
+  return mainPage;
 }
 export default renderLogin;

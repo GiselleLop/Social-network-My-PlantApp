@@ -1,11 +1,12 @@
-import { auth, createUser, GoogleRegister } from './firebase.js';
+import { createUser, GoogleRegister } from './firebase.js';
 import { posts } from './post.js';
 
-const main = document.querySelector('.homepage');
-export { main };
 // para crear la vista de registro
-function renderCreateAccount() {
-  main.innerHTML = '';
+function renderCreateAccount(navigateTo) {
+  console.log('register router');
+  const mainPage = document.createElement('div');
+  mainPage.setAttribute('class', 'homepage1');
+
   // header
   const header = document.createElement('header');
   header.setAttribute('class', 'headerRegister');
@@ -62,17 +63,19 @@ function renderCreateAccount() {
   const buttonBack = document.createElement('button');
   buttonBack.textContent = 'Volver';
   buttonBack.setAttribute('class', 'buttonRegister');
+  buttonBack.setAttribute('id', 'return');
   buttonBack.addEventListener('click', () => {
-    window.location = '/';
+    navigateTo('/');
   });
 
   // Prueba posts
   const post2 = document.createElement('button');
   post2.textContent = 'prueba post';
   post2.addEventListener('click', () => {
-    posts();
+    posts(mainPage);
   });
-  main.append(header, container);
+
+  mainPage.append(header, container);
   header.append(title, image);
   container.append(
     username,
@@ -91,14 +94,15 @@ function renderCreateAccount() {
   // continuar para registrar
   buttonContinue.addEventListener('click', (e) => {
     e.preventDefault();
-    const singUpEmail = document.querySelector('#emailRegister').value;
-    const singPassword = document.querySelector('#passwordRegister').value;
-    // console.log(singUpEmail , singPassword);
-    createUser(auth, singUpEmail, singPassword);
+    const signUpEmail = document.querySelector('#emailRegister').value;
+    const signPassword = document.querySelector('#passwordRegister').value;
+    console.log(signUpEmail, signPassword);
+    createUser(signUpEmail, signPassword);
   });
   // Con Google
   buttonGoogle.addEventListener('click', () => {
     GoogleRegister();
   });
+  return mainPage;
 }
 export default renderCreateAccount;

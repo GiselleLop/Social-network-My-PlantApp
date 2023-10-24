@@ -2,45 +2,54 @@ import home from './home.js';
 import renderLogin from './login.js';
 import renderCreateAccount from './register.js';
 
-// renderLogin(navigateTo)
-// renderCreateAccount(navigateTo)
-
-const defaultRoute = '/';
-const root = document.querySelector('.homepage');
-
 const routes = [
   { path: '/', component: home },
   { path: '/login', component: renderLogin },
   { path: '/register', component: renderCreateAccount },
 ];
 
+let mainPage = document.querySelector('.homepage');
+if (!mainPage) {
+  const mainChild = document.createElement('div');
+  mainChild.id = 'content';
+  document.body.appendChild(mainChild);
+  mainPage = mainChild;
+}
+const defaultRoute = '/';
+
 function navigateTo(hash) {
-  const currentPath = window.location.pathname;
+  // Find the matching route
+  const route = routes.find((r) => r.path === hash);
 
-  // Verifica si la ruta actual es diferente de la nueva ruta
-  if (currentPath !== hash) {
-    const route = routes.find((routeFound) => routeFound.path === hash);
+  // If the route exists, execute its component function
+  if (route && route.component) {
+    window.history.pushState(
+      {},
+      route.path,
+      window.location.origin + route.path,
+    );
 
-    if (route && route.component) {
-      window.history.pushState(
-        { path: route.path },
-        route.path,
-        window.location.origin + route.path
-      );
+    if (mainPage.firstChild) mainPage.removeChild(mainPage.firstChild);
 
-      if (root.firstChild) {
-        root.removeChild(root.firstChild);
-      }
-
-      root.appendChild(route.component());
-    } else {
-      navigateTo('/error');
-    }
+    mainPage.append(route.component(navigateTo));
+  } else {
+    // Otherwise, redirect to the default route
+    navigateTo('/error');
   }
 }
-home(navigateTo);
+// home(mainPage, navigateTo);
+// renderLogin(navigateTo);
+// renderCreateAccount(navigateTo);
 
-window.onpopstate = () => {
+window.addEventListener('popstate', () => {
+  console.log('change');
   navigateTo(window.location.pathname);
-};
-navigateTo(window.location.pathname || defaultRoute);
+});
+
+function initRouter() {
+  console.log('Initializing router...');
+  navigateTo(window.location.pathname || defaultRoute);
+}
+
+// export default navigateTo;
+initRouter();
