@@ -1,11 +1,11 @@
 @font-face {
     font-family: 'Font1';
-    src: url("/fonts/letter1.ttf") format('truetype');;
+    src: url("/fonts/letter1.ttf") format('truetype');
 }
 
 @font-face {
     font-family: 'Font2';
-    src: url("/fonts/KGBlankSpaceSolid.ttf") format('truetype');;
+    src: url("/fonts/KGBlankSpaceSolid.ttf") format('truetype');
 }
 
 html {
@@ -43,7 +43,7 @@ body {
 
 .headerRegister {
     font-size: 0.8em;
-    font-family: 'Font2';
+    font-family: 'Font2', sans-serif;
     width: 80%;
     text-align: center;
 
@@ -56,7 +56,7 @@ body {
 .h4Register {
     width: 100%;
     margin: 2%;
-    font-family: 'Font1';
+    font-family: 'Font1', sans-serif;
     font-size: 20px;
 }
 
@@ -92,7 +92,7 @@ body {
     font-size: 85%;
     border-color: transparent;
     margin: 10px;
-    font-family: 'Font2';
+    font-family: 'Font2', sans-serif;
     letter-spacing: 2px;
 }
 
@@ -100,19 +100,13 @@ body {
     background-color: #57403A;
     color: #D09080;
 }
-.googleLoginBtn {
-    border-radius: 2em;
-    box-shadow: 3px 3px 4px black;
-    width: 30%;
-    margin-bottom: 10%;
-}
 
 #continue {
     margin-top: 5%;
 }
 
 #or {
-    font-family: 'Font1';
+    font-family: 'Font1', sans-serif;
     margin-top: 0%;
     margin-bottom: 0%;
 }
@@ -138,7 +132,7 @@ margin-top: 1em;
 }
 
 .homewelcome, .hometittle, .words{
-    font-family: 'Font1';
+    font-family: 'Font1', sans-serif;
     font-size: 25px;
     text-align: center;
     margin: 10px;
@@ -147,7 +141,7 @@ margin-top: 1em;
 
 .hometittle {
     font-size: 40px;
-    font-family: 'Font2';
+    font-family: 'Font2', sans-serif;
 }
 
 .registrationButton,
@@ -166,7 +160,7 @@ margin-top: 1em;
     justify-content: space-around;
     height: auto;
     width: auto;
-    font-family: 'Font2';
+    font-family: 'Font2', sans-serif;
 }
 .registrationButton:hover,
 .loginButton:hover {
@@ -183,7 +177,7 @@ margin-top: 1em;
 }
 
 .orderbuttons {
-    font-family: 'Font1';
+    font-family: 'Font1', sans-serif;
     font-size: 25px;
     place-content: center;
     align-items: center;
@@ -202,7 +196,15 @@ margin-top: 1em;
     gap: 2em;
     padding-top: 6em;
     padding-bottom: 6em
-    
+}
+.homepage1{
+    display: flex;
+    place-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    gap: 2em;
 }
 .content {
 display: flex;
@@ -224,6 +226,15 @@ width: 90%;
     height: 90%;
     padding-top: 0%;
     padding-bottom: 0%;
+    }
+    .homepage1{
+        flex-direction: row;
+        padding-left: 0%;
+        padding-right: 0%;
+        width: 100%;
+        height: 100%;
+        padding-top: 0%;
+        padding-bottom: 0%;
     }
 
 .homewelcome, .hometittle, .words{
@@ -256,7 +267,6 @@ width: auto;
        justify-content: center;
        align-items: center;
        width: 50%;
-       padding-left: 5em;
        display: flex;
        flex-direction: column;
        text-align: center;    
@@ -292,7 +302,4 @@ margin-top: 0%;
 .googleLoginBtn{
     border-radius: 0.6em;
     }
-    
-
- 
 }

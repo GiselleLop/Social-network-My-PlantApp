@@ -1,9 +1,8 @@
-import renderLogin from './login.js';
-import renderCreateAccount, { main } from './register.js';
-
 // estructura interna del contenedor
 function home(navigateTo) {
-  main.innerHTML = '';
+  const mainPage = document.createElement('div');
+  mainPage.setAttribute('class', 'homepage1');
+
   const containerimg = document.createElement('div');
   containerimg.className = 'containerimg';
   const img = document.createElement('img');
@@ -34,7 +33,8 @@ function home(navigateTo) {
 
   // evento para que se redirija a la vista de registro
   registerButton.addEventListener('click', () => {
-    renderCreateAccount();
+    // renderCreateAccount(mainPage);
+    // window.location = '/register';
     navigateTo('/register');
   });
 
@@ -47,13 +47,13 @@ function home(navigateTo) {
   loginButton.id = 'loginButton';
   loginButton.textContent = 'Iniciar Sesión';
   loginButton.addEventListener('click', () => {
-    renderLogin();
+    // renderLogin(mainPage);
     navigateTo('/login');
   });
 
-  main.appendChild(containerimg);
+  mainPage.appendChild(containerimg);
   containerimg.appendChild(img);
-  main.appendChild(content);
+  mainPage.appendChild(content);
   content.appendChild(homewelcome);
   content.appendChild(hometitle);
   content.appendChild(words);
@@ -61,5 +61,7 @@ function home(navigateTo) {
   orderbuttons.appendChild(registerButton);
   orderbuttons.appendChild(wordsHome);
   orderbuttons.appendChild(loginButton);
+  return mainPage;
 }
+
 export default home;

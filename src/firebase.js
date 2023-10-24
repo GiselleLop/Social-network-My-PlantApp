@@ -1,20 +1,17 @@
 import {
   getFirestore,
   collection,
-  getDocs,
   addDoc,
-} from 'https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore.js';
-
+} from 'firebase/firestore';
 import {
   getAuth,
   GoogleAuthProvider,
   signInWithPopup,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
-  onAuthStateChanged,
-} from 'https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js';
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js';
-import renderCreateAccount from './register.js';
+} from 'firebase/auth';
+import { initializeApp } from 'firebase/app';
+// import renderCreateAccount from './register.js';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyA_nNPVRwXqmgLlxdYL4NmJwiItX9t2D5E',
@@ -25,22 +22,22 @@ const firebaseConfig = {
   appId: '1:496904934051:web:349b4f181faf09491c2516',
   measurementId: 'G-9MSK8FV9VP',
 };
-
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-
 const auth = getAuth(app);
-export { auth };
 const firestore = getFirestore(app);
-export { firestore };
 const googleProvider = new GoogleAuthProvider();
 googleProvider.setCustomParameters({
   prompt: 'select_account',
 });
 
+export {
+  app, firestore, googleProvider, auth,
+};
+
 // Para crear o registrar usuarios
-export function createUser(auth, singUpEmail, singPassword) {
-  createUserWithEmailAndPassword(auth, singUpEmail, singPassword)
+export function createUser(signUpEmail, signPassword) {
+  createUserWithEmailAndPassword(auth, signUpEmail, signPassword)
     .then((userCredential) => {
       console.log('Registro exitoso', userCredential);
     })
@@ -50,7 +47,7 @@ export function createUser(auth, singUpEmail, singPassword) {
 }
 
 // Para iniciar sesion o ingresar
-export function login(auth, loginEmail, loginPassword) {
+export function login(loginEmail, loginPassword) {
   signInWithEmailAndPassword(auth, loginEmail, loginPassword)
     .then((userCredential) => {
       console.log('Inicio de sesión exitoso', userCredential);
@@ -62,60 +59,14 @@ export function login(auth, loginEmail, loginPassword) {
 
 // funcion save
 export function saveTask(title, description) {
-  addDoc(collection(firestore, 'post'), { title, description });
+  addDoc(collection(firestore, 'post'), { title, description })
+    .then((docRef) => {
+      console.log('Documento guardado con ID:', docRef.id);
+    })
+    .catch((error) => {
+      console.error('Error al guardar el documento:', error);
+    });
   // console.log(title, description)
-}
-
-// funcion para crear los posts
-const main = document.querySelector('.homepage');
-export function renderPosts() {
-  main.innerHTML = '';
-  // contenerdor de posts
-  const postContainer = document.createElement('div');
-  postContainer.setAttribute('class', 'postContainer');
-
-  const buttonback = document.createElement('button');
-  buttonback.textContent = 'back';
-  buttonback.addEventListener('click', () => {
-    renderCreateAccount();
-  });
-  main.appendChild(postContainer);
-  main.appendChild(buttonback);
-
-  function setupPost(data) {
-    if (data.length) {
-      let html = '';
-      data.forEach((doc) => {
-        const post = doc.data();
-        html += `
-    <li class="ListGroupItem">
-    <h5>${post.title}</h5>
-    <p>${post.description}</p>
-    </li>
-    `;
-      });
-      postContainer.innerHTML = html;
-    } else {
-      postContainer.innerHTML = `<p>Login to see posts</p>`;
-    }
-  }
-
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      // Ahora user es el objeto de usuario autenticado
-      // Puedes acceder a la colección de 'post' del usuario
-      const userPostsCollection = collection(firestore, 'post');
-
-      getDocs(userPostsCollection).then((snapshot) => {
-        // snapshot.docs contiene los documentos de la colección
-        setupPost(snapshot.docs);
-        console.log(snapshot.docs);
-      });
-    } else {
-      setupPost([]);
-      console.log('Sing out');
-    }
-  });
 }
 
 // funcion para registro con google
@@ -128,5 +79,4 @@ export function GoogleRegister() {
     .catch((error) => {
       console.error('Error al autenticar con Google:', error.message);
     });
-  return main;
 }
