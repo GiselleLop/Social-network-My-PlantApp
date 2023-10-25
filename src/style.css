@@ -119,6 +119,20 @@ margin-top: 1em;
 
 }
 
+.success {
+color: green;
+font-family: 'Font1', sans-serif;
+font-size: 20px;
+padding-top: 10px;
+}
+
+.error {
+color: red;
+font-family: 'Font1', sans-serif;
+font-size: 20px;
+padding-top: 10px;
+}
+
 /*MOBILE FIRST VISTA PRINCIPAL*/
 .containerimg {
     display: flex;
@@ -214,7 +228,6 @@ place-content: center;
 width: 90%;
 }
 
-
 /* Estilos para pantallas de escritorio */
 @media only screen and (min-width: 920px) {
    /*VISTA PRINCIPAL*/
@@ -301,5 +314,12 @@ margin-top: 0%;
 }
 .googleLoginBtn{
     border-radius: 0.6em;
+    }
+
+.success {
+    padding-top: 0px;
+    }
+.error {
+    padding-top: 0px;
     }
 }

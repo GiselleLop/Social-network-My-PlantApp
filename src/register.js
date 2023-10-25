@@ -1,5 +1,5 @@
 import { createUser, GoogleRegister } from './firebase.js';
-import { posts } from './post.js';
+// import { posts } from './post.js';
 
 // para crear la vista de registro
 function renderCreateAccount(navigateTo) {
@@ -38,6 +38,7 @@ function renderCreateAccount(navigateTo) {
   inputEmail.setAttribute('type', 'email');
   inputEmail.setAttribute('class', 'input');
   inputEmail.setAttribute('id', 'emailRegister');
+
   // input contrasena
   const password = document.createElement('h4');
   password.textContent = 'Contraseña:';
@@ -46,6 +47,10 @@ function renderCreateAccount(navigateTo) {
   inputPassword.setAttribute('type', 'password');
   inputPassword.setAttribute('class', 'input');
   inputPassword.setAttribute('id', 'passwordRegister');
+  // mensaje error contrasena
+  const spanPassword = document.createElement('span');
+  spanPassword.setAttribute('id', 'answerPass');
+
   // boton continuar
   const buttonContinue = document.createElement('button');
   buttonContinue.textContent = 'Continuar';
@@ -68,13 +73,6 @@ function renderCreateAccount(navigateTo) {
     navigateTo('/');
   });
 
-  // Prueba posts
-  const post2 = document.createElement('button');
-  post2.textContent = 'prueba post';
-  post2.addEventListener('click', () => {
-    posts(mainPage);
-  });
-
   mainPage.append(header, container);
   header.append(title, image);
   container.append(
@@ -84,11 +82,11 @@ function renderCreateAccount(navigateTo) {
     inputEmail,
     password,
     inputPassword,
+    spanPassword,
     buttonContinue,
     or,
     buttonGoogle,
     buttonBack,
-    post2,
   );
 
   // continuar para registrar
@@ -96,9 +94,19 @@ function renderCreateAccount(navigateTo) {
     e.preventDefault();
     const signUpEmail = document.querySelector('#emailRegister').value;
     const signPassword = document.querySelector('#passwordRegister').value;
-    console.log(signUpEmail, signPassword);
-    createUser(signUpEmail, signPassword);
+    // console.log(signUpEmail, signPassword);
+    createUser(signUpEmail, signPassword)
+      .then((ok) => {
+        spanPassword.classList.add(ok.message);
+        spanPassword.textContent = `${ok.message} ${ok.email} Saved`;
+        navigateTo('/posts');
+      })
+      .catch((err) => {
+        spanPassword.classList.add('error');
+        spanPassword.textContent = `${err.message} ${err.email} Not saved`;
+      });
   });
+
   // Con Google
   buttonGoogle.addEventListener('click', () => {
     GoogleRegister();

@@ -1,11 +1,13 @@
 import home from './home.js';
 import renderLogin from './login.js';
 import renderCreateAccount from './register.js';
+import { posts } from './post.js';
 
 const routes = [
   { path: '/', component: home },
   { path: '/login', component: renderLogin },
   { path: '/register', component: renderCreateAccount },
+  { path: '/posts', component: posts },
 ];
 
 let mainPage = document.querySelector('.homepage');
@@ -35,6 +37,7 @@ function navigateTo(hash) {
   } else {
     // Otherwise, redirect to the default route
     navigateTo('/error');
+
   }
 }
 // home(mainPage, navigateTo);

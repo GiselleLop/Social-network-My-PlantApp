@@ -5,8 +5,10 @@ import {
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth, firestore, saveTask } from './firebase.js';
 
-export function posts(mainPage) {
-  mainPage.innerHTML = '';
+export function posts(navigateTo) {
+  const mainPage = document.createElement('div');
+  mainPage.setAttribute('class', 'homepage1');
+
   const containerPost = document.createElement('form');
   containerPost.setAttribute('id', 'task-form');
 
@@ -45,7 +47,7 @@ export function posts(mainPage) {
   const buttonback = document.createElement('button');
   buttonback.textContent = 'back';
   buttonback.addEventListener('click', () => {
-    window.location = '/';
+    navigateTo('/');
   });
 
   function setupPost(data) {

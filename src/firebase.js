@@ -1,8 +1,4 @@
-import {
-  getFirestore,
-  collection,
-  addDoc,
-} from 'firebase/firestore';
+import { getFirestore, collection, addDoc } from 'firebase/firestore';
 import {
   getAuth,
   GoogleAuthProvider,
@@ -12,6 +8,7 @@ import {
 } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
 // import renderCreateAccount from './register.js';
+// import { posts } from './post.js';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyA_nNPVRwXqmgLlxdYL4NmJwiItX9t2D5E',
@@ -36,25 +33,37 @@ export {
 };
 
 // Para crear o registrar usuarios
-export function createUser(signUpEmail, signPassword) {
-  createUserWithEmailAndPassword(auth, signUpEmail, signPassword)
-    .then((userCredential) => {
-      console.log('Registro exitoso', userCredential);
-    })
-    .catch((error) => {
-      console.error('Error al registrarse:', error.code, error.message);
-    });
+export function createUser(email, password) {
+  return new Promise((resolve, reject) => {
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        console.log('Registro exitoso', userCredential);
+        const user = userCredential.user;
+        resolve({ message: 'success', email: user.email });
+      })
+      .catch((error) => {
+        console.error('Error al registrarse:', error.code, error.message, error.serverResponse);
+        error.email = email;
+        reject(error);
+      });
+  });
 }
 
 // Para iniciar sesion o ingresar
-export function login(loginEmail, loginPassword) {
-  signInWithEmailAndPassword(auth, loginEmail, loginPassword)
-    .then((userCredential) => {
-      console.log('Inicio de sesión exitoso', userCredential);
-    })
-    .catch((error) => {
-      console.error('Error al iniciar sesión:', error.code, error.message);
-    });
+export function login(email, password) {
+  return new Promise((resolve, reject) => {
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        console.log('Inicio sesion exitoso', userCredential);
+        const user = userCredential.user;
+        resolve({ message: 'success', email: user.email });
+      })
+      .catch((error) => {
+        console.error('Error al iniciar sesion:', error.code, error.message, error.serverResponse);
+        error.email = email;
+        reject(error);
+      });
+  });
 }
 
 // funcion save
