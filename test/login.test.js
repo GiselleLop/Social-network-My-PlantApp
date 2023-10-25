@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import renderLogin from '../src/login.js';
-// import * as auth from '../src/firebase.js';
+import * as auth from '../src/firebase.js';
 
 describe('renderLogin', () => {
   it('Should be a function', () => {
@@ -35,7 +35,18 @@ describe('renderLogin', () => {
   });
 });
 
-// describe('Button Iniciar Sesion', () => {
-//     jest.spyOn(auth, 'login').mockImplementation(()=> Promise.resolve({ }))
-//     expect('').toMatchSnapshot()
-// })
+describe('Button Iniciar Sesion', () => {
+  it('Test of click button save', () => {
+    jest.spyOn(auth, 'login').mockImplementation(() => Promise.resolve({ message: 'success', email: 'giselle@lopezcadenillas.com' }));
+    const DOM = document.createElement('div');
+    DOM.append(renderLogin());
+    const loginEmail = DOM.querySelector('#emailLog');
+    const loginPassword = DOM.querySelector('#passwordLogin');
+    loginEmail.value = 'giselle@lopezcadenillas.com';
+    loginPassword.value = 'hola12345';
+    const buttonSave = DOM.querySelector('#sessionBtn');
+    buttonSave.click();
+    expect(auth.login).toHaveBeenCalledTimes(2);
+    expect(auth.login).toHaveBeenCalledWidth('giselle@lopezcadenillas.com');
+  });
+});

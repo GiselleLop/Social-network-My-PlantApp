@@ -43,14 +43,31 @@ function renderLogin(navigateTo) {
   password.setAttribute('class', 'input');
   password.setAttribute('id', 'passwordLogin');
 
+  // mensaje error contrasena
+  const spanPassword = document.createElement('span');
+  spanPassword.setAttribute('id', 'answerPass');
+
   // Boton iniciar session
   const sessionBtn = document.createElement('button');
   sessionBtn.textContent = 'Iniciar sesión';
   sessionBtn.setAttribute('class', 'buttonRegister');
   sessionBtn.setAttribute('id', 'sessionBtn');
+
   sessionBtn.addEventListener('click', () => {
-    login(email, password);
+    const loginEmail = document.querySelector('#emailLog');
+    const loginPassword = document.querySelector('#passwordLogin');
+    login(loginEmail.value, loginPassword.value)
+      .then((ok) => {
+        spanPassword.classList.add(ok.message);
+        spanPassword.textContent = `${ok.message} ${ok.email} Saved`;
+        navigateTo('/posts');
+      })
+      .catch((err) => {
+        spanPassword.classList.add('error');
+        spanPassword.textContent = `${err.message} ${err.email} Not saved`;
+      });
   });
+
   // input start session with GOOGLE
   const or = document.createElement('h4');
   or.textContent = 'o';
@@ -86,6 +103,7 @@ function renderLogin(navigateTo) {
   containerLogin.appendChild(email);
   containerLogin.appendChild(passwordLabel);
   containerLogin.appendChild(password);
+  containerLogin.appendChild(spanPassword);
   containerLogin.appendChild(sessionBtn);
   containerLogin.appendChild(or);
   containerLogin.appendChild(googleLoginBtn);

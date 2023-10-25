@@ -1,5 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Button Iniciar Sesion Test of click button save 1`] = `""`;
+
 exports[`renderLogin Snapshot of login 1`] = `
 <div>
   <div
