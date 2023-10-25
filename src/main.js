@@ -1,79 +1,58 @@
-import{home}from "./home.js"
-home();
+import home from './home.js';
+import renderLogin from './login.js';
+import renderCreateAccount from './register.js';
+import { posts } from './post.js';
 
-import { renderLogin } from "./login.js";
-import { renderCreateAccount } from "./register.js";
+const routes = [
+  { path: '/', component: home },
+  { path: '/login', component: renderLogin },
+  { path: '/register', component: renderCreateAccount },
+  { path: '/posts', component: posts },
+];
 
+let mainPage = document.querySelector('.homepage');
+if (!mainPage) {
+  const mainChild = document.createElement('div');
+  mainChild.id = 'content';
+  document.body.appendChild(mainChild);
+  mainPage = mainChild;
+}
+const defaultRoute = '/';
 
+function navigateTo(hash) {
+  // Find the matching route
+  const route = routes.find((r) => r.path === hash);
 
-const register = document.querySelector('#registerButton') 
-  register.addEventListener('click', renderCreateAccount) 
+  // If the route exists, execute its component function
+  if (route && route.component) {
+    window.history.pushState(
+      {},
+      route.path,
+      window.location.origin + route.path,
+    );
 
-const login = document.querySelector('#loginButton');
-  login.addEventListener('click', renderLogin)
+    if (mainPage.firstChild) mainPage.removeChild(mainPage.firstChild);
 
-/*const index = 'index.html'
+    mainPage.append(route.component(navigateTo));
+  } else {
+    // Otherwise, redirect to the default route
+    navigateTo('/error');
 
-  const routes = [
-  { path: '/', component: index},
-    {path: '/register', component: renderCreateAccount()}
-  ]
-  const defaultRoute = '/';
-  const root = document.querySelector('.homepage')
-
-
-  function navigateTo(hash) {
-    const route = routes.find((routeFound) => routeFound.path === hash);
-    
-
-    if (route && route.component) {
-      window.history.pushState(
-        {},
-        route.path,
-        window.location.origin + route.path,
-      );
-  
-      if (root.firstChild) {
-        root.removeChild(root.firstChild);
-      }
-      root.appendChild(route.component());
-     }
-     else {
-      navigateTo('/error');
-    }
   }
-  
-window.onpopstate = () => {
+}
+// home(mainPage, navigateTo);
+// renderLogin(navigateTo);
+// renderCreateAccount(navigateTo);
+
+window.addEventListener('popstate', () => {
+  console.log('change');
   navigateTo(window.location.pathname);
-};
-
-navigateTo(window.location.pathname || defaultRoute);
-*/
-
-
-
-
-
-
-
-
-
-  /*
-
-// Para iniciar sesion o ingresar 
-const loginButton =  document.querySelector('#loginBtn');
-loginButton.addEventListener('click', (e) => {
-  e.preventDefault();
-  const loginEmail = document.querySelector('#emailLog').value;
-  const loginPassword = document.querySelector('#passwordLog').value;
-//console.log(loginEmail, loginPassword);
-signInWithEmailAndPassword(auth, loginEmail, loginPassword)
-.then(userCredential => {
-  
-  console.log('login');
-})
-.catch(error => {
-  console.error('Error al registrarse:', error.message);
 });
-})
-*/
+
+function initRouter() {
+  console.log('Initializing router...');
+  navigateTo(window.location.pathname || defaultRoute);
+}
+
+// export default navigateTo;
+initRouter();
