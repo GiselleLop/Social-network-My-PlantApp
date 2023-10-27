@@ -37,6 +37,7 @@ function navigateTo(hash) {
   } else {
     // Otherwise, redirect to the default route
     navigateTo('/error');
+
   }
 }
 // home(mainPage, navigateTo);
