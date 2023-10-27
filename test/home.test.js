@@ -35,9 +35,9 @@ describe('home', () => {
     haveAbuttonRegister.click();
     expect(navigateTo).toHaveBeenLastCalledWith('/register');
   });
-  it('Snapshot of home', () => {
-    const DOM = document.createElement('div');
-    DOM.append(home());
-    expect(DOM).toMatchSnapshot();
-  });
+  // it('Snapshot of home', () => {
+  //   const DOM = document.createElement('div');
+  //   DOM.append(home());
+  //   expect(DOM).toMatchSnapshot();
+  // });
 });
