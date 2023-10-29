@@ -3,7 +3,7 @@ import {
   getDocs,
 } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
-import { auth, firestore, saveTask } from './firebase.js';
+import { auth, firestore, saveTask, handleLike } from './firebase.js';
 
 export function posts(navigateTo) {
 const homepage = document.querySelector('.homepage');
@@ -100,13 +100,31 @@ backgroundLayer.classList.add('background-layer');
     <li class="ListGroupItem">
     <h5>${postdata.title}</h5>
     <p>${postdata.description}</p>
+    <button class="likeButton" data-post-id="${doc.id}">Like</button>
+    <span>${postdata.likes} Likes</span>
     </li>
     `;
       });
       viewPost.innerHTML = html;
-    } else {
+  
+       // Añade un evento de clic al botón de "Like"
+       const likeButtons = document.querySelectorAll('.likeButton');
+       likeButtons.forEach((button) => {
+         button.addEventListener('click', (e) => {
+           const postId = e.target.getAttribute('data-post-id');
+           handleLike(firestore, postId, ()=>{
+            const userPostsCollection = collection(firestore, 'post');
+            getDocs(userPostsCollection).then((snapshot) => {
+              setupPost(snapshot.docs);
+            });
+          });
+         });
+       });
+      }
+       else {
       viewPost.innerHTML = '<p>Login to see posts</p>';
     }
+
   }
 
   onAuthStateChanged(auth, (user) => {
