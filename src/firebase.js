@@ -1,4 +1,4 @@
-import { getFirestore, collection, addDoc } from 'firebase/firestore';
+import { getFirestore, collection, addDoc, doc, getDoc, updateDoc } from 'firebase/firestore';
 import {
   getAuth,
   GoogleAuthProvider,
@@ -68,7 +68,7 @@ export function login(email, password) {
 
 // funcion save
 export function saveTask(title, description) {
-  addDoc(collection(firestore, 'post'), { title, description })
+  addDoc(collection(firestore, 'post'), { title, description, likes: 0})
     .then((docRef) => {
       console.log('Documento guardado con ID:', docRef.id);
     })
@@ -87,5 +87,32 @@ export function GoogleRegister() {
     })
     .catch((error) => {
       console.error('Error al autenticar con Google:', error.message);
+    });
+}
+
+//funcion para likes
+export function handleLike(firestore, postId, callback) {
+  const postRef = doc(firestore, 'post', postId);
+
+  // Obtener el documento y actualizar el campo de likes
+  getDoc(postRef)
+    .then((docSnapshot) => {
+      if (docSnapshot.exists()) {
+        const currentLikes = docSnapshot.data().likes;
+        const updatedLikes = currentLikes + 1;
+
+        // Actualizar el campo de likes en Firestore
+        updateDoc(postRef, { likes: updatedLikes })
+          .then(() => {
+            console.log('Like registrado con éxito.');
+            callback(); // Llama a la función de devolución de llamada para actualizar las publicaciones
+          })
+          .catch((error) => {
+            console.error('Error al actualizar likes:', error);
+          });
+      }
+    })
+    .catch((error) => {
+      console.error('Error al obtener documento:', error);
     });
 }

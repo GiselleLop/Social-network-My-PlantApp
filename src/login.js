@@ -1,7 +1,9 @@
 import { login, GoogleRegister } from './firebase.js';
 // import { mainPage } from './main.js';
 
+
 function renderLogin(navigateTo) {
+ 
   const mainPage = document.createElement('div');
   mainPage.setAttribute('class', 'homepage1');
 
@@ -10,15 +12,18 @@ function renderLogin(navigateTo) {
   // Titulo 1
   const title1 = document.createElement('h1');
   title1.textContent = '¡Nos alegra verte de nuevo!';
+  title1.setAttribute('class','titleLogin')
   // Titulo 2
   const title2 = document.createElement('h2');
   title2.textContent = 'Ingresa tus datos';
+  title2.setAttribute('class','titleLogin')
 
   // Imagen
   const imageLogin = document.createElement('img');
   imageLogin.src = 'img/regadera.png';
   imageLogin.style.width = '50%';
   imageLogin.style.height = 'auto';
+  imageLogin.setAttribute('class','titleLogin')
 
   // Contenedor de los inputs
   const containerLogin = document.createElement('div');
@@ -73,15 +78,17 @@ function renderLogin(navigateTo) {
   or.textContent = 'o';
   or.setAttribute('id', 'or');
 
-  const googleLoginBtn = document.createElement('input');
-  googleLoginBtn.textContent = 'Iniciar sesión con Google';
-  googleLoginBtn.setAttribute('type', 'image');
-  googleLoginBtn.setAttribute('src', 'img/LoginGoogle.png');
-  googleLoginBtn.setAttribute('class', 'googleLoginBtn');
-  googleLoginBtn.style.width = '40%';
-  googleLoginBtn.style.height = 'auto';
+ // Boton Google
+ const buttonGoogle = document.createElement('button');
+ buttonGoogle.setAttribute('id', 'google')
+ buttonGoogle.setAttribute('class', 'buttonRegister');
+ const googleImg = document.createElement('img');
+ googleImg.setAttribute('src', 'img/googleongpng.webp');
+ googleImg.setAttribute('class', 'imgGoogle')
+ const textButton = document.createElement('h2')
+ textButton.textContent = 'Iniciar sesión con Google';
 
-  googleLoginBtn.addEventListener('click', () => {
+  buttonGoogle.addEventListener('click', () => {
     GoogleRegister();
   });
 
@@ -106,9 +113,11 @@ function renderLogin(navigateTo) {
   containerLogin.appendChild(spanPassword);
   containerLogin.appendChild(sessionBtn);
   containerLogin.appendChild(or);
-  containerLogin.appendChild(googleLoginBtn);
+  containerLogin.appendChild(buttonGoogle);
+  buttonGoogle.append(googleImg, textButton);
   containerLogin.appendChild(buttonBack);
 
   return mainPage;
 }
+
 export default renderLogin;

@@ -1,5 +1,5 @@
 import { createUser, GoogleRegister } from './firebase.js';
-// import { posts } from './post.js';
+
 
 // para crear la vista de registro
 function renderCreateAccount(navigateTo) {
@@ -60,10 +60,16 @@ function renderCreateAccount(navigateTo) {
   const or = document.createElement('h4');
   or.textContent = 'o';
   or.setAttribute('id', 'or');
-
+ // Boton Google
   const buttonGoogle = document.createElement('button');
-  buttonGoogle.textContent = 'Registrarse con Google';
+  buttonGoogle.setAttribute('id', 'google')
   buttonGoogle.setAttribute('class', 'buttonRegister');
+  const googleImg = document.createElement('img');
+  googleImg.setAttribute('src', 'img/googleongpng.webp');
+  googleImg.setAttribute('class', 'imgGoogle')
+  const textButton = document.createElement('h2')
+  textButton.textContent = 'Registrarse con Google';
+
   // Boton volver
   const buttonBack = document.createElement('button');
   buttonBack.textContent = 'Volver';
@@ -75,6 +81,7 @@ function renderCreateAccount(navigateTo) {
 
   mainPage.append(header, container);
   header.append(title, image);
+  buttonGoogle.append(googleImg, textButton);
   container.append(
     username,
     inputName,
