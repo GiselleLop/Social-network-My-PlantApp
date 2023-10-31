@@ -3,7 +3,7 @@ import {
   getDocs,
 } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
-import { auth, firestore, saveTask } from './firebase.js';
+import { auth, firestore, saveTask, handleLike } from './firebase.js';
 
 export function posts(navigateTo) {
 const homepage = document.querySelector('.homepage');
@@ -70,7 +70,7 @@ backgroundLayer.classList.add('background-layer');
     const description = post.value;
     // console.log(title, description);
     saveTask(title, description);
-
+    // console.log(auth.currentUser.uid);
     containerPost.reset();
   });
   const buttonback = document.createElement('button');
@@ -91,6 +91,27 @@ backgroundLayer.classList.add('background-layer');
     homepage.style.paddingTop = '0em'; 
   });
 
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // Usuario autenticado, puedes acceder a la colección de 'post'
+      console.log('User authenticated:', auth.currentUser.uid, "email:", user.email);
+      const userPostsCollection = collection(firestore, 'post');
+  
+      getDocs(userPostsCollection)
+        .then((snapshot) => {
+          // snapshot.docs contiene los documentos de la colección
+          setupPost(snapshot.docs);
+          console.log(snapshot.docs);
+        })
+        .catch((error) => {
+          console.error('Error al obtener documentos:', error);
+        });
+    } else {
+      console.log('Usuario no autenticado');
+      navigateTo('/login');
+    }
+  });
+  
   function setupPost(data) {
     if (data.length) {
       let html = '';
@@ -100,31 +121,40 @@ backgroundLayer.classList.add('background-layer');
     <li class="ListGroupItem">
     <h5>${postdata.title}</h5>
     <p>${postdata.description}</p>
+    <div class="containerLikes">
+    <button class="likeButton" data-post-id="${doc.id}">
+    <img src="img/like.png" class='imgLike'>
+    </button>
+    <span>${postdata.likes} Likes</span>
+    </div>
     </li>
     `;
-      });
-      viewPost.innerHTML = html;
-    } else {
-      viewPost.innerHTML = '<p>Login to see posts</p>';
-    }
-  }
+});
+viewPost.innerHTML = html;
 
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      // Ahora user es el objeto de usuario autenticado
-      // Puedes acceder a la colección de 'post' del usuario
+const likeButtons = document.querySelectorAll('.likeButton');
+likeButtons.forEach((button) => {
+  button.addEventListener('click', (e) => {
+    const postId = e.currentTarget.getAttribute('data-post-id');
+    const userId = auth.currentUser.uid; // Obtiene el uid del usuario actual
+    console.log(postId);
+    handleLike(postId, userId, () => {
+        console.log('Callback after handleLike');
+
       const userPostsCollection = collection(firestore, 'post');
-
       getDocs(userPostsCollection).then((snapshot) => {
-        // snapshot.docs contiene los documentos de la colección
         setupPost(snapshot.docs);
-        console.log(snapshot.docs);
-      });
-    } else {
-      setupPost([]);
-      console.log('Sign out');
-    }
   });
+});
+});
+});
+
+}
+else {
+  viewPost.innerHTML = '<p>Login to see posts</p>';
+}
+}
+
 
   mainPage.append(headerPost, containerPubication, viewPost, buttonback);
   headerPost.append(logoImage);
