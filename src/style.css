@@ -399,6 +399,23 @@ gap: 5px
     background-color: #f5bdaf;
     color: #57403A;
 }
+.containerLikes{
+display: flex;
+place-content: left;
+align-items: center;
+gap:10px;
+font-weight: bolder;
+font-size: 20px;
+}
+.imgLike{
+width: 100%;
+height: auto;
+}
+.likeButton{
+width: 40px;
+height: 40px;
+border-radius: 40px;
+}
 /* Estilos para pantallas de escritorio */
 @media only screen and (min-width: 920px) {
    /*VISTA PRINCIPAL*/
