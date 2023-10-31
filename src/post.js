@@ -1,11 +1,13 @@
 import {
   collection,
   getDocs,
+  onSnapshot,
 } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth, firestore, saveTask, handleLike } from './firebase.js';
 
 export function posts(navigateTo) {
+
 const homepage = document.querySelector('.homepage');
 const body1 = document.querySelector('body');
 const backgroundLayer = document.createElement('div');
@@ -97,15 +99,13 @@ backgroundLayer.classList.add('background-layer');
       console.log('User authenticated:', auth.currentUser.uid, "email:", user.email);
       const userPostsCollection = collection(firestore, 'post');
   
-      getDocs(userPostsCollection)
-        .then((snapshot) => {
-          // snapshot.docs contiene los documentos de la colección
-          setupPost(snapshot.docs);
-          console.log(snapshot.docs);
-        })
-        .catch((error) => {
-          console.error('Error al obtener documentos:', error);
+      onSnapshot(userPostsCollection, (snapshot) => {
+        const postSnap = [];
+        snapshot.forEach((doc) => {
+          postSnap.push(doc);
         });
+        setupPost(postSnap);
+      });
     } else {
       console.log('Usuario no autenticado');
       navigateTo('/login');
@@ -154,8 +154,6 @@ else {
   viewPost.innerHTML = '<p>Login to see posts</p>';
 }
 }
-
-
   mainPage.append(headerPost, containerPubication, viewPost, buttonback);
   headerPost.append(logoImage);
   body1.appendChild(backgroundLayer);

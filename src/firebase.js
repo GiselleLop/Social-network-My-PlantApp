@@ -81,7 +81,6 @@ export function saveTask(title, description) {
   .catch((error) => {
     console.error('Error al guardar el documento:', error);
   });
-   // Añade información de likes por usuario
 }
 
 // funcion para registro con google

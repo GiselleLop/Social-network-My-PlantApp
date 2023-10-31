@@ -1,9 +1,7 @@
 import { createUser, GoogleRegister } from './firebase.js';
 
-
 // para crear la vista de registro
 function renderCreateAccount(navigateTo) {
-  console.log('register router');
   const mainPage = document.createElement('div');
   mainPage.setAttribute('class', 'homepage1');
 
@@ -79,23 +77,6 @@ function renderCreateAccount(navigateTo) {
     navigateTo('/');
   });
 
-  mainPage.append(header, container);
-  header.append(title, image);
-  buttonGoogle.append(googleImg, textButton);
-  container.append(
-    username,
-    inputName,
-    email,
-    inputEmail,
-    password,
-    inputPassword,
-    spanPassword,
-    buttonContinue,
-    or,
-    buttonGoogle,
-    buttonBack,
-  );
-
   // continuar para registrar
   buttonContinue.addEventListener('click', (e) => {
     e.preventDefault();
@@ -118,6 +99,23 @@ function renderCreateAccount(navigateTo) {
   buttonGoogle.addEventListener('click', () => {
     GoogleRegister();
   });
-  return mainPage;
+
+  mainPage.append(header, container);
+  header.append(title, image);
+  buttonGoogle.append(googleImg, textButton);
+  container.append(
+    username,
+    inputName,
+    email,
+    inputEmail,
+    password,
+    inputPassword,
+    spanPassword,
+    buttonContinue,
+    or,
+    buttonGoogle,
+    buttonBack,
+  );
+return mainPage;
 }
 export default renderCreateAccount;
