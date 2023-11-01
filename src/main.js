@@ -1,5 +1,5 @@
 import home from './home.js';
-import renderLogin from './login.js';
+import { renderLogin } from './login.js'
 import renderCreateAccount from './register.js';
 import { posts } from './post.js';
 
@@ -9,8 +9,8 @@ const routes = [
   { path: '/register', component: renderCreateAccount },
   { path: '/posts', component: posts },
 ];
-
 let mainPage = document.querySelector('.homepage');
+
 if (!mainPage) {
   const mainChild = document.createElement('div');
   mainChild.id = 'content';

@@ -1,9 +1,7 @@
 import { login, GoogleRegister } from './firebase.js';
-// import { mainPage } from './main.js';
 
+export function renderLogin(navigateTo) {
 
-function renderLogin(navigateTo) {
- 
   const mainPage = document.createElement('div');
   mainPage.setAttribute('class', 'homepage1');
 
@@ -120,4 +118,3 @@ function renderLogin(navigateTo) {
   return mainPage;
 }
 
-export default renderLogin;

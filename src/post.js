@@ -1,11 +1,13 @@
 import {
   collection,
   getDocs,
+  onSnapshot,
 } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
-import { auth, firestore, saveTask, handleLike } from './firebase.js';
+import { auth, firestore, saveTask, handleLike, deletePost } from './firebase.js';
 
 export function posts(navigateTo) {
+
 const homepage = document.querySelector('.homepage');
 const body1 = document.querySelector('body');
 const backgroundLayer = document.createElement('div');
@@ -70,7 +72,7 @@ backgroundLayer.classList.add('background-layer');
     const description = post.value;
     // console.log(title, description);
     saveTask(title, description);
-
+    // console.log(auth.currentUser.uid);
     containerPost.reset();
   });
   const buttonback = document.createElement('button');
@@ -91,6 +93,25 @@ backgroundLayer.classList.add('background-layer');
     homepage.style.paddingTop = '0em'; 
   });
 
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // Usuario autenticado, puedes acceder a la colección de 'post'
+      console.log('User authenticated:', auth.currentUser.uid, "email:", user.email);
+      const userPostsCollection = collection(firestore, 'post');
+  
+      onSnapshot(userPostsCollection, (snapshot) => {
+        const postSnap = [];
+        snapshot.forEach((doc) => {
+          postSnap.push(doc);
+        });
+        setupPost(postSnap);
+      });
+    } else {
+      console.log('Usuario no autenticado');
+      navigateTo('/login');
+    }
+  });
+  
   function setupPost(data) {
     if (data.length) {
       let html = '';
@@ -98,52 +119,52 @@ backgroundLayer.classList.add('background-layer');
         const postdata = doc.data();
         html += `
     <li class="ListGroupItem">
+    <button class='deleteButton' data-post-id="${doc.id}"> Delete </button>
     <h5>${postdata.title}</h5>
     <p>${postdata.description}</p>
-    <button class="likeButton" data-post-id="${doc.id}">Like</button>
+    <div class="containerLikes">
+    <button class="likeButton" data-post-id="${doc.id}">
+    <img src="img/like.png" class='imgLike'>
+    </button>
     <span>${postdata.likes} Likes</span>
+    </div>
     </li>
     `;
-      });
-      viewPost.innerHTML = html;
-  
-       // Añade un evento de clic al botón de "Like"
-       const likeButtons = document.querySelectorAll('.likeButton');
-       likeButtons.forEach((button) => {
-         button.addEventListener('click', (e) => {
-           const postId = e.target.getAttribute('data-post-id');
-           handleLike(firestore, postId, ()=>{
-            const userPostsCollection = collection(firestore, 'post');
-            getDocs(userPostsCollection).then((snapshot) => {
-              setupPost(snapshot.docs);
-            });
-          });
-         });
-       });
-      }
-       else {
-      viewPost.innerHTML = '<p>Login to see posts</p>';
-    }
-
-  }
-
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      // Ahora user es el objeto de usuario autenticado
-      // Puedes acceder a la colección de 'post' del usuario
+});
+viewPost.innerHTML = html;
+//Evento Like
+const likeButtons = document.querySelectorAll('.likeButton');
+likeButtons.forEach((button) => {
+  button.addEventListener('click', (e) => {
+    const postId = e.currentTarget.getAttribute('data-post-id');
+    const userId = auth.currentUser.uid; // Obtiene el id del usuario actual
+    console.log(postId);
+    handleLike(postId, userId, () => {
+      //CallBack despues de un like
       const userPostsCollection = collection(firestore, 'post');
 
       getDocs(userPostsCollection).then((snapshot) => {
-        // snapshot.docs contiene los documentos de la colección
         setupPost(snapshot.docs);
-        console.log(snapshot.docs);
-      });
-    } else {
-      setupPost([]);
-      console.log('Sign out');
-    }
   });
+});
+});
+});
+//Evento Delete
+const deleteButton = document.querySelectorAll('.deleteButton')
+deleteButton.forEach((button) => {
+button.addEventListener('click', (e)=> {
+const postId = e.currentTarget.getAttribute('data-post-id')
+console.log(postId);
+deletePost(postId);
+})
+})
 
+
+}
+else {
+  viewPost.innerHTML = '<p>Login to see posts</p>';
+}
+}
   mainPage.append(headerPost, containerPubication, viewPost, buttonback);
   headerPost.append(logoImage);
   body1.appendChild(backgroundLayer);
