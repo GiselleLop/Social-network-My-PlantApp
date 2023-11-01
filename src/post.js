@@ -4,7 +4,7 @@ import {
   onSnapshot,
 } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
-import { auth, firestore, saveTask, handleLike } from './firebase.js';
+import { auth, firestore, saveTask, handleLike, deletePost } from './firebase.js';
 
 export function posts(navigateTo) {
 
@@ -119,6 +119,7 @@ backgroundLayer.classList.add('background-layer');
         const postdata = doc.data();
         html += `
     <li class="ListGroupItem">
+    <button class='deleteButton' data-post-id="${doc.id}"> Delete </button>
     <h5>${postdata.title}</h5>
     <p>${postdata.description}</p>
     <div class="containerLikes">
@@ -131,23 +132,33 @@ backgroundLayer.classList.add('background-layer');
     `;
 });
 viewPost.innerHTML = html;
-
+//Evento Like
 const likeButtons = document.querySelectorAll('.likeButton');
 likeButtons.forEach((button) => {
   button.addEventListener('click', (e) => {
     const postId = e.currentTarget.getAttribute('data-post-id');
-    const userId = auth.currentUser.uid; // Obtiene el uid del usuario actual
+    const userId = auth.currentUser.uid; // Obtiene el id del usuario actual
     console.log(postId);
     handleLike(postId, userId, () => {
-        console.log('Callback after handleLike');
-
+      //CallBack despues de un like
       const userPostsCollection = collection(firestore, 'post');
+
       getDocs(userPostsCollection).then((snapshot) => {
         setupPost(snapshot.docs);
   });
 });
 });
 });
+//Evento Delete
+const deleteButton = document.querySelectorAll('.deleteButton')
+deleteButton.forEach((button) => {
+button.addEventListener('click', (e)=> {
+const postId = e.currentTarget.getAttribute('data-post-id')
+console.log(postId);
+deletePost(postId);
+})
+})
+
 
 }
 else {

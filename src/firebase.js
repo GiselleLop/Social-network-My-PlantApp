@@ -180,3 +180,15 @@ export function handleLike(postId, userId, callback) {
     });
 }
 
+export function deletePost(postId) {
+  const postCollection = collection(firestore, 'post');
+  const postDocRef = doc(postCollection, postId);
+
+  deleteDoc(postDocRef)
+    .then(() => {
+      console.log('Post eliminado con éxito.');
+    })
+    .catch((error) => {
+      console.error('Error al borrar post:', error);
+    });
+}
