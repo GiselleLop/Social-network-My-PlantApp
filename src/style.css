@@ -415,7 +415,11 @@ height: auto;
 width: 40px;
 height: 40px;
 border-radius: 40px;
-}
+
+} 
+/* button[name='likeGreen']{
+background-color: green;
+} */
 /* Estilos para pantallas de escritorio */
 @media only screen and (min-width: 920px) {
    /*VISTA PRINCIPAL*/

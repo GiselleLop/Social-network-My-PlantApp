@@ -4,10 +4,9 @@ import {
   onSnapshot,
 } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
-import { auth, firestore, saveTask, handleLike, deletePost } from './firebase.js';
+import { auth, firestore, saveTask, handleLike, deletePost, editPost } from './firebase.js';
 
 export function posts(navigateTo) {
-
 const homepage = document.querySelector('.homepage');
 const body1 = document.querySelector('body');
 const backgroundLayer = document.createElement('div');
@@ -120,6 +119,7 @@ backgroundLayer.classList.add('background-layer');
         html += `
     <li class="ListGroupItem">
     <button class='deleteButton' data-post-id="${doc.id}"> Delete </button>
+    <button class='editButton' data-post-id="${doc.id}"> Editar </button>
     <h5>${postdata.title}</h5>
     <p>${postdata.description}</p>
     <div class="containerLikes">
@@ -128,10 +128,14 @@ backgroundLayer.classList.add('background-layer');
     </button>
     <span>${postdata.likes} Likes</span>
     </div>
+    <textarea class="editTextarea" data-post-id="${doc.id}" style="display: none;">${postdata.description}</textarea>
+    <textarea class="editContentTextarea" data-post-id="${doc.id}" style="display: none;">${postdata.description}</textarea>
+    <button class="saveEditButton" data-post-id="${doc.id}" style="display: none;">Guardar</button>
     </li>
     `;
 });
 viewPost.innerHTML = html;
+
 //Evento Like
 const likeButtons = document.querySelectorAll('.likeButton');
 likeButtons.forEach((button) => {
@@ -139,7 +143,10 @@ likeButtons.forEach((button) => {
     const postId = e.currentTarget.getAttribute('data-post-id');
     const userId = auth.currentUser.uid; // Obtiene el id del usuario actual
     console.log(postId);
-    handleLike(postId, userId, () => {
+  
+    handleLike(postId, userId, 
+      () => {
+      
       //CallBack despues de un like
       const userPostsCollection = collection(firestore, 'post');
 
@@ -153,17 +160,48 @@ likeButtons.forEach((button) => {
 const deleteButton = document.querySelectorAll('.deleteButton')
 deleteButton.forEach((button) => {
 button.addEventListener('click', (e)=> {
+let alertDelete = confirm('¿Está segur@ que desea eliminar este post?');
 const postId = e.currentTarget.getAttribute('data-post-id')
-console.log(postId);
-deletePost(postId);
+ //alert( alertDelete ); // true si se pulsa OK
+  if (alertDelete === true) {
+    deletePost(postId);
+    alert('Post eliminado con éxito');
+    } 
+  else {
+    alert('Operación cancelada') ; 
+  }
 })
 })
+ // Evento Editar
+ const editButtons = document.querySelectorAll('.editButton');
+ editButtons.forEach((button) => {
+   button.addEventListener('click', (e) => {
+     const postId = e.currentTarget.getAttribute('data-post-id');
+     const textareaTitle = document.querySelector('.editTextarea');
+     const textareaDescription = document.querySelector('.editContentTextarea');
+     const saveEditButton = document.querySelector('.saveEditButton');
 
+     textareaTitle.style.display = 'flex';
+     textareaDescription.style.display = 'flex';
+     saveEditButton.style.display = 'flex';
+     saveEditButton.addEventListener('click', () => {
+    editPost(postId, textareaTitle.value, textareaDescription.value)
+         .then(() => {
+           console.log('Post editado con éxito');
+           // Puedes recargar la lista de posts o actualizar la interfaz según sea necesario
+         })
+         .catch((error) => {
+           console.error('Error al editar el post:', error);
+         });
+     })
+   });
+ });
 
 }
 else {
   viewPost.innerHTML = '<p>Login to see posts</p>';
 }
+
 }
   mainPage.append(headerPost, containerPubication, viewPost, buttonback);
   headerPost.append(logoImage);
