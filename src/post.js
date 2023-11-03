@@ -118,16 +118,19 @@ backgroundLayer.classList.add('background-layer');
         const postdata = doc.data();
         html += `
     <li class="ListGroupItem">
+    <div class='buttonOptions'>
     <button class='deleteButton' data-post-id="${doc.id}"> Delete </button>
     <button class='editButton' data-post-id="${doc.id}"> Editar </button>
+    </div>
     <h5>${postdata.title}</h5>
     <p>${postdata.description}</p>
-    <div class="containerLikes">
+    <div class="containerLikes" data-post-id="${doc.id}">
     <button class="likeButton" data-post-id="${doc.id}">
     <img src="img/like.png" class='imgLike'>
     </button>
     <span>${postdata.likes} Likes</span>
     </div>
+    <h4 class='editPublic' data-post-id="${doc.id}" style="display: none;"> Editar publicación: </h4>
     <textarea class="editTextarea" data-post-id="${doc.id}" style="display: none;">${postdata.description}</textarea>
     <textarea class="editContentTextarea" data-post-id="${doc.id}" style="display: none;">${postdata.description}</textarea>
     <button class="saveEditButton" data-post-id="${doc.id}" style="display: none;">Guardar</button>
@@ -177,17 +180,22 @@ const postId = e.currentTarget.getAttribute('data-post-id')
  editButtons.forEach((button) => {
    button.addEventListener('click', (e) => {
      const postId = e.currentTarget.getAttribute('data-post-id');
-     const textareaTitle = document.querySelector('.editTextarea');
-     const textareaDescription = document.querySelector('.editContentTextarea');
-     const saveEditButton = document.querySelector('.saveEditButton');
-
+     const textareaTitle = document.querySelector(`.editTextarea[data-post-id="${postId}"]`);
+     const textareaDescription = document.querySelector(`.editContentTextarea[data-post-id="${postId}"]`);
+     const saveEditButton = document.querySelector(`.saveEditButton[data-post-id="${postId}"]`);
+     const likeButton = document.querySelector(`.containerLikes[data-post-id="${postId}"]`);
+     const descriptionEdit = document.querySelector(`.editPublic[data-post-id="${postId}"]`)
+    
      textareaTitle.style.display = 'flex';
      textareaDescription.style.display = 'flex';
      saveEditButton.style.display = 'flex';
+     descriptionEdit.style.display = 'flex';
+     likeButton.style.display = 'none';
+
      saveEditButton.addEventListener('click', () => {
     editPost(postId, textareaTitle.value, textareaDescription.value)
          .then(() => {
-           console.log('Post editado con éxito');
+           alert('Post editado con éxito');
            // Puedes recargar la lista de posts o actualizar la interfaz según sea necesario
          })
          .catch((error) => {
