@@ -1,9 +1,10 @@
 import {
   collection,
   getDocs,
+  onSnapshot,
 } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
-import { auth, firestore, saveTask, handleLike } from './firebase.js';
+import { auth, firestore, saveTask, handleLike, deletePost, editPost } from './firebase.js';
 
 export function posts(navigateTo) {
 const homepage = document.querySelector('.homepage');
@@ -97,15 +98,13 @@ backgroundLayer.classList.add('background-layer');
       console.log('User authenticated:', auth.currentUser.uid, "email:", user.email);
       const userPostsCollection = collection(firestore, 'post');
   
-      getDocs(userPostsCollection)
-        .then((snapshot) => {
-          // snapshot.docs contiene los documentos de la colección
-          setupPost(snapshot.docs);
-          console.log(snapshot.docs);
-        })
-        .catch((error) => {
-          console.error('Error al obtener documentos:', error);
+      onSnapshot(userPostsCollection, (snapshot) => {
+        const postSnap = [];
+        snapshot.forEach((doc) => {
+          postSnap.push(doc);
         });
+        setupPost(postSnap);
+      });
     } else {
       console.log('Usuario no autenticado');
       navigateTo('/login');
@@ -119,43 +118,99 @@ backgroundLayer.classList.add('background-layer');
         const postdata = doc.data();
         html += `
     <li class="ListGroupItem">
+    <div class='buttonOptions'>
+    <button class='deleteButton' data-post-id="${doc.id}"> Delete </button>
+    <button class='editButton' data-post-id="${doc.id}"> Editar </button>
+    </div>
     <h5>${postdata.title}</h5>
     <p>${postdata.description}</p>
-    <div class="containerLikes">
+    <div class="containerLikes" data-post-id="${doc.id}">
     <button class="likeButton" data-post-id="${doc.id}">
     <img src="img/like.png" class='imgLike'>
     </button>
     <span>${postdata.likes} Likes</span>
     </div>
+    <h4 class='editPublic' data-post-id="${doc.id}" style="display: none;"> Editar publicación: </h4>
+    <textarea class="editTextarea" data-post-id="${doc.id}" style="display: none;">${postdata.description}</textarea>
+    <textarea class="editContentTextarea" data-post-id="${doc.id}" style="display: none;">${postdata.description}</textarea>
+    <button class="saveEditButton" data-post-id="${doc.id}" style="display: none;">Guardar</button>
     </li>
     `;
 });
 viewPost.innerHTML = html;
 
+//Evento Like
 const likeButtons = document.querySelectorAll('.likeButton');
 likeButtons.forEach((button) => {
   button.addEventListener('click', (e) => {
     const postId = e.currentTarget.getAttribute('data-post-id');
-    const userId = auth.currentUser.uid; // Obtiene el uid del usuario actual
+    const userId = auth.currentUser.uid; // Obtiene el id del usuario actual
     console.log(postId);
-    handleLike(postId, userId, () => {
-        console.log('Callback after handleLike');
-
+  
+    handleLike(postId, userId, 
+      () => {
+      
+      //CallBack despues de un like
       const userPostsCollection = collection(firestore, 'post');
+
       getDocs(userPostsCollection).then((snapshot) => {
         setupPost(snapshot.docs);
   });
 });
 });
 });
+//Evento Delete
+const deleteButton = document.querySelectorAll('.deleteButton')
+deleteButton.forEach((button) => {
+button.addEventListener('click', (e)=> {
+let alertDelete = confirm('¿Está segur@ que desea eliminar este post?');
+const postId = e.currentTarget.getAttribute('data-post-id')
+ //alert( alertDelete ); // true si se pulsa OK
+  if (alertDelete === true) {
+    deletePost(postId);
+    alert('Post eliminado con éxito');
+    } 
+  else {
+    alert('Operación cancelada') ; 
+  }
+})
+})
+ // Evento Editar
+ const editButtons = document.querySelectorAll('.editButton');
+ editButtons.forEach((button) => {
+   button.addEventListener('click', (e) => {
+     const postId = e.currentTarget.getAttribute('data-post-id');
+     const textareaTitle = document.querySelector(`.editTextarea[data-post-id="${postId}"]`);
+     const textareaDescription = document.querySelector(`.editContentTextarea[data-post-id="${postId}"]`);
+     const saveEditButton = document.querySelector(`.saveEditButton[data-post-id="${postId}"]`);
+     const likeButton = document.querySelector(`.containerLikes[data-post-id="${postId}"]`);
+     const descriptionEdit = document.querySelector(`.editPublic[data-post-id="${postId}"]`)
+    
+     textareaTitle.style.display = 'flex';
+     textareaDescription.style.display = 'flex';
+     saveEditButton.style.display = 'flex';
+     descriptionEdit.style.display = 'flex';
+     likeButton.style.display = 'none';
+
+     saveEditButton.addEventListener('click', () => {
+    editPost(postId, textareaTitle.value, textareaDescription.value)
+         .then(() => {
+           alert('Post editado con éxito');
+           // Puedes recargar la lista de posts o actualizar la interfaz según sea necesario
+         })
+         .catch((error) => {
+           console.error('Error al editar el post:', error);
+         });
+     })
+   });
+ });
 
 }
 else {
   viewPost.innerHTML = '<p>Login to see posts</p>';
 }
+
 }
-
-
   mainPage.append(headerPost, containerPubication, viewPost, buttonback);
   headerPost.append(logoImage);
   body1.appendChild(backgroundLayer);

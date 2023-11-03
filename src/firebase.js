@@ -81,7 +81,6 @@ export function saveTask(title, description) {
   .catch((error) => {
     console.error('Error al guardar el documento:', error);
   });
-   // Añade información de likes por usuario
 }
 
 // funcion para registro con google
@@ -99,6 +98,7 @@ export function GoogleRegister() {
 //funcion para likes
 export function handleLike(postId, userId, callback) {
   const likesCollection = collection(firestore, 'likes');
+  // const likeButton = document.querySelector(`.likeButton[data-post-id="${postId}"]`);
   const likeQuery = query(likesCollection, where('postId', '==', postId), where('userId', '==', userId));
 
   // Ejecuta la consulta para verificar si el usuario ya ha dado like
@@ -178,6 +178,27 @@ export function handleLike(postId, userId, callback) {
     })
     .catch((error) => {
       console.error('Error al realizar la consulta de likes:', error);
+    })
+}
+
+export function deletePost(postId) {
+  const postCollection = collection(firestore, 'post');
+  const postDocRef = doc(postCollection, postId);
+  deleteDoc(postDocRef)
+    .then(() => {
+      console.log('Post eliminado con éxito.');
+    })
+    .catch((error) => {
+      console.error('Error al borrar post:', error);
     });
 }
 
+
+export function editPost(postId, updatedTitle, updatedDescription) {
+  const postRef = doc(firestore, 'post', postId);
+
+  return updateDoc(postRef, {
+    title: updatedTitle,
+    description: updatedDescription,
+  });
+}
