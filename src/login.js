@@ -57,8 +57,19 @@ export function renderLogin(navigateTo) {
         navigateTo('/posts');
       })
       .catch((err) => {
-        spanPassword.classList.add('error');
-        spanPassword.textContent = `${err.message} ${err.email} Not saved`;
+      if (err.code === 'auth/invalid-email') {
+      spanPassword.classList.add('error');
+      spanPassword.textContent = `Ingresa un email válido`
+      }
+      if (err.code === 'auth/invalid-login-credentials') {
+      spanPassword.classList.add('error');
+      spanPassword.textContent = `Contraseña incorrecta`
+      }
+      if (err.code === 'auth/invalid-login-credentials') {
+      spanPassword.classList.add('error');
+      spanPassword.textContent = `Contraseña incorrecta`
+          }
+
       });
   });
   // input start session with GOOGLE

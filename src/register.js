@@ -119,3 +119,6 @@ function renderCreateAccount(navigateTo) {
   return mainPage;
 }
 export default renderCreateAccount;
+
+
+

@@ -31,9 +31,7 @@ googleProvider.setCustomParameters({
   prompt: 'select_account',
 });
 
-export {
-  app, firestore, googleProvider, auth,
-};
+export { app, firestore, googleProvider, auth };
 
 // Para crear o registrar usuarios
 export function createUser(email, password) {
@@ -45,7 +43,12 @@ export function createUser(email, password) {
         resolve({ message: 'success', email: user.email });
       })
       .catch((error) => {
-        console.error('Error al registrarse:', error.code, error.message, error.serverResponse);
+        console.error(
+          'Error al registrarse:',
+          error.code,
+          error.message,
+          error.serverResponse
+        );
         error.email = email;
         reject(error);
       });
@@ -62,7 +65,13 @@ export function login(email, password) {
         resolve({ message: 'success', email: user.email });
       })
       .catch((error) => {
-        console.error('Error al iniciar sesion:', error.code, error.message, error.serverResponse);
+        
+        console.error(
+          'Error al iniciar sesion:',
+          error.code,
+          error.message,
+          error.serverResponse
+        );
         error.email = email;
         reject(error);
       });
