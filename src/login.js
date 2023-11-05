@@ -65,11 +65,7 @@ export function renderLogin(navigateTo) {
       spanPassword.classList.add('error');
       spanPassword.textContent = `Contraseña incorrecta`
       }
-      if (err.code === 'auth/invalid-login-credentials') {
-      spanPassword.classList.add('error');
-      spanPassword.textContent = `Contraseña incorrecta`
-          }
-
+     
       });
   });
   // input start session with GOOGLE
