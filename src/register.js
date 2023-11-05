@@ -58,14 +58,14 @@ function renderCreateAccount(navigateTo) {
   const or = document.createElement('h4');
   or.textContent = 'o';
   or.setAttribute('id', 'or');
- // Boton Google
+  // Boton Google
   const buttonGoogle = document.createElement('button');
-  buttonGoogle.setAttribute('id', 'google')
+  buttonGoogle.setAttribute('id', 'google');
   buttonGoogle.setAttribute('class', 'buttonRegister');
   const googleImg = document.createElement('img');
   googleImg.setAttribute('src', 'img/googleongpng.webp');
-  googleImg.setAttribute('class', 'imgGoogle')
-  const textButton = document.createElement('h2')
+  googleImg.setAttribute('class', 'imgGoogle');
+  const textButton = document.createElement('h2');
   textButton.textContent = 'Registrarse con Google';
 
   // Boton volver
@@ -116,6 +116,6 @@ function renderCreateAccount(navigateTo) {
     buttonGoogle,
     buttonBack,
   );
-return mainPage;
+  return mainPage;
 }
 export default renderCreateAccount;
