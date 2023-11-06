@@ -7,7 +7,7 @@ import {
   handleLike,
   deletePost,
   editPost,
-  logOut
+  logOut,
 } from './firebase.js';
 
 export function posts(navigateTo) {
@@ -39,7 +39,7 @@ export function posts(navigateTo) {
   logOutIcon.setAttribute('class', 'logOutButton');
   //icono cerrar sesion
   const iconLogOut = document.createElement('img');
-  iconLogOut.setAttribute('src', '/img/salir.png')
+  iconLogOut.setAttribute('src', '/img/salir.png');
   // Contenedor de Creacion de post
   const containerPubication = document.createElement('div');
   containerPubication.setAttribute('class', 'containerPubication');
@@ -103,16 +103,23 @@ export function posts(navigateTo) {
     `;
       });
       viewPost.innerHTML = html;
+
+      // Evento Like
       // Evento Like
       const likeButtons = document.querySelectorAll('.likeButton');
       likeButtons.forEach((button) => {
         button.addEventListener('click', (e) => {
           const postId = e.currentTarget.getAttribute('data-post-id');
           const userId = auth.currentUser.uid; // Obtiene el id del usuario actual
-          console.log(postId);
-
+          const isLiked = e.currentTarget.classList.contains('liked'); // Verifica si el botón ya ha sido "liked"
+          // Cambiar el estado del botón "like" (colorear o quitar el color rojo)
+          if (isLiked) {
+            e.currentTarget.classList.remove('liked');
+          } else {
+            e.currentTarget.classList.add('liked');
+          }
           handleLike(postId, userId, () => {
-            // CallBack despues de un like
+            // CallBack después de un like
             const userPostsCollection = collection(firestore, 'post');
             getDocs(userPostsCollection).then((snapshot) => {
               setupPost(snapshot.docs);
@@ -120,31 +127,27 @@ export function posts(navigateTo) {
           });
         });
       });
-      // Evento Delete
-      const deleteButton = document.querySelectorAll('.deleteButton');
-      deleteButton.forEach((button) => {
-        button.addEventListener('click', (e) => {
-          // eslint-disable-next-line
-          const alertDelete = confirm('¿Está segur@ que desea eliminar este post?');
-          const postId = e.currentTarget.getAttribute('data-post-id');
-          if (alertDelete === true) {
-            deletePost(postId);
-            alert('Post eliminado con éxito');
-          } else {
-            alert('Operación cancelada');
-          }
-        });
-      });
+
       // Evento Editar
       const editButtons = document.querySelectorAll('.editButton');
       editButtons.forEach((button) => {
         button.addEventListener('click', (e) => {
           const postId = e.currentTarget.getAttribute('data-post-id');
-          const textareaTitle = document.querySelector(`.editTextarea[data-post-id="${postId}"]`);
-          const textareaDescription = document.querySelector(`.editContentTextarea[data-post-id="${postId}"]`);
-          const saveEditButton = document.querySelector(`.saveEditButton[data-post-id="${postId}"]`);
-          const likeButton = document.querySelector(`.containerLikes[data-post-id="${postId}"]`);
-          const descriptionEdit = document.querySelector(`.editPublic[data-post-id="${postId}"]`);
+          const textareaTitle = document.querySelector(
+            `.editTextarea[data-post-id="${postId}"]`
+          );
+          const textareaDescription = document.querySelector(
+            `.editContentTextarea[data-post-id="${postId}"]`
+          );
+          const saveEditButton = document.querySelector(
+            `.saveEditButton[data-post-id="${postId}"]`
+          );
+          const likeButton = document.querySelector(
+            `.containerLikes[data-post-id="${postId}"]`
+          );
+          const descriptionEdit = document.querySelector(
+            `.editPublic[data-post-id="${postId}"]`
+          );
           textareaTitle.style.display = 'flex';
           textareaDescription.style.display = 'flex';
           saveEditButton.style.display = 'flex';
@@ -168,17 +171,16 @@ export function posts(navigateTo) {
     }
   }
 
-// evento cerrar sesion
-logOutIcon.addEventListener('click', ()=>{
-// eslint-disable-next-line
-const alertlogOut = confirm('¿Está segur@ que desea salir de su cuenta?');
-if (alertlogOut === true) {
-  logOut();
-} else {
-  alert('Operación cancelada');
-}
-
-})
+  // evento cerrar sesion
+  logOutIcon.addEventListener('click', () => {
+    // eslint-disable-next-line
+    const alertlogOut = confirm('¿Está segur@ que desea salir de su cuenta?');
+    if (alertlogOut === true) {
+      logOut();
+    } else {
+      alert('Operación cancelada');
+    }
+  });
 
   onAuthStateChanged(auth, (user) => {
     if (user) {
@@ -187,7 +189,7 @@ if (alertlogOut === true) {
         'User authenticated:',
         auth.currentUser.uid,
         'email:',
-        user.email,
+        user.email
       );
       const userPostsCollection = collection(firestore, 'post');
       onSnapshot(userPostsCollection, (snapshot) => {
@@ -206,7 +208,8 @@ if (alertlogOut === true) {
       backgroundLayer.style.left = '0';
       backgroundLayer.style.width = '0%';
       backgroundLayer.style.height = '0%';
-      homepage.style.boxShadow = '0 0 10px rgba(156, 158, 156, 0.346), 0 0 20px rgba(135, 136, 135, 0.5), 0 0 30px rgba(0, 255, 0, 0.203)';
+      homepage.style.boxShadow =
+        '0 0 10px rgba(156, 158, 156, 0.346), 0 0 20px rgba(135, 136, 135, 0.5), 0 0 30px rgba(0, 255, 0, 0.203)';
       homepage.style.height = '90%';
       homepage.style.width = '90%';
       homepage.style.paddingTop = '0em';
