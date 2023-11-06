@@ -97,7 +97,7 @@ function renderCreateAccount(navigateTo) {
 
   // Con Google
   buttonGoogle.addEventListener('click', () => {
-    GoogleRegister();
+    GoogleRegister(navigateTo);
   });
 
   mainPage.append(header, container);
