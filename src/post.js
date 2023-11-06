@@ -129,26 +129,40 @@ export function posts(navigateTo) {
           });
         });
       });
-
+      // Evento Delete
+      const deleteButton = document.querySelectorAll('.deleteButton');
+      deleteButton.forEach((button) => {
+        button.addEventListener('click', (e) => {
+          // eslint-disable-next-line
+           const alertDelete = confirm('¿Está segur@ que desea eliminar este post?');
+          const postId = e.currentTarget.getAttribute('data-post-id');
+          if (alertDelete === true) {
+            deletePost(postId);
+            alert('Post eliminado con éxito');
+          } else {
+            alert('Operación cancelada');
+          }
+        });
+      });
       // Evento Editar
       const editButtons = document.querySelectorAll('.editButton');
       editButtons.forEach((button) => {
         button.addEventListener('click', (e) => {
           const postId = e.currentTarget.getAttribute('data-post-id');
           const textareaTitle = document.querySelector(
-            `.editTextarea[data-post-id="${postId}"]`
+            `.editTextarea[data-post-id="${postId}"]`,
           );
           const textareaDescription = document.querySelector(
-            `.editContentTextarea[data-post-id="${postId}"]`
+            `.editContentTextarea[data-post-id="${postId}"]`,
           );
           const saveEditButton = document.querySelector(
-            `.saveEditButton[data-post-id="${postId}"]`
+            `.saveEditButton[data-post-id="${postId}"]`,
           );
           const likeButton = document.querySelector(
-            `.containerLikes[data-post-id="${postId}"]`
+            `.containerLikes[data-post-id="${postId}"]`,
           );
           const descriptionEdit = document.querySelector(
-            `.editPublic[data-post-id="${postId}"]`
+            `.editPublic[data-post-id="${postId}"]`,
           );
           textareaTitle.style.display = 'flex';
           textareaDescription.style.display = 'flex';
@@ -159,7 +173,7 @@ export function posts(navigateTo) {
           saveEditButton.addEventListener('click', () => {
             editPost(postId, textareaTitle.value, textareaDescription.value)
               .then(() => {
-                alert('Post editado con éxito');
+                alert('Publicación editada con éxito');
                 // Puedes recargar la lista de posts o actualizar la interfaz según sea necesario
               })
               .catch((error) => {
@@ -177,15 +191,12 @@ export function posts(navigateTo) {
   // evento cerrar sesion
   logOutIcon.addEventListener('click', () => {
     // eslint-disable-next-line
-
-
-  const alertlogOut = confirm('¿Está segur@ que desea salir de su cuenta?');
+    const alertlogOut = confirm('¿Está segur@ que desea salir de su cuenta?');
     if (alertlogOut === true) {
       // mainPage.removeAttribute('class', 'homepage')
       logOut(navigateTo);
     } else {
       alert('Operación cancelada');
-
     }
   });
   initializeAuth(setupPost);
