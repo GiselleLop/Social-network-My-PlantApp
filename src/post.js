@@ -78,7 +78,8 @@ export function posts(navigateTo) {
   });
 
   function setupPost(data) {
-    if (data.length) {
+    // console.log('Data inside setupPost:', data);
+    if (data) {
       let html = '';
       data.forEach((doc) => {
         const postdata = doc.data();
@@ -165,6 +166,7 @@ export function posts(navigateTo) {
         });
       });
     } else {
+      // console.error('Data is not an array:', data);
       viewPost.innerHTML = '<p> Aun no hay publicaciones </p>';
     }
   }

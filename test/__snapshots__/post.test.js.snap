@@ -50,7 +50,11 @@ exports[`posts Snapshot of posts 1`] = `
     </div>
     <div
       class="postView"
-    />
+    >
+      <p>
+         Aun no hay publicaciones 
+      </p>
+    </div>
   </div>
 </div>
 `;

@@ -102,7 +102,7 @@ export function GoogleRegister(navigateTo) {
     .then((result) => {
       const user = result.user;
       console.log('Usuario autenticado con Google:', user);
-      navigateTo('/posts')
+      navigateTo('/posts');
     })
     .catch((error) => {
       console.error('Error al autenticar con Google:', error.message);
