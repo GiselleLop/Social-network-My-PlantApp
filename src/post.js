@@ -72,9 +72,13 @@ export function posts(navigateTo) {
     const title = postTitle.value;
     const description = post.value;
     // console.log(title, description);
+    if(title === "" || description === ""){
+    alert('Campos vacios')
+    } else {
     saveTask(title, description);
     // console.log(auth.currentUser.uid);
     containerPost.reset();
+    }
   });
 
   function setupPost(data) {
@@ -105,8 +109,6 @@ export function posts(navigateTo) {
     `;
       });
       viewPost.innerHTML = html;
-
-      // Evento Like
       // Evento Like
       const likeButtons = document.querySelectorAll('.likeButton');
       likeButtons.forEach((button) => {
