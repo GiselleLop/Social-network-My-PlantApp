@@ -104,16 +104,23 @@ export function posts(navigateTo) {
     `;
       });
       viewPost.innerHTML = html;
+
+      // Evento Like
       // Evento Like
       const likeButtons = document.querySelectorAll('.likeButton');
       likeButtons.forEach((button) => {
         button.addEventListener('click', (e) => {
           const postId = e.currentTarget.getAttribute('data-post-id');
           const userId = auth.currentUser.uid; // Obtiene el id del usuario actual
-          console.log(postId);
-
+          const isLiked = e.currentTarget.classList.contains('liked'); // Verifica si el botón ya ha sido "liked"
+          // Cambiar el estado del botón "like" (colorear o quitar el color rojo)
+          if (isLiked) {
+            e.currentTarget.classList.remove('liked');
+          } else {
+            e.currentTarget.classList.add('liked');
+          }
           handleLike(postId, userId, () => {
-            // CallBack despues de un like
+            // CallBack después de un like
             const userPostsCollection = collection(firestore, 'post');
             getDocs(userPostsCollection).then((snapshot) => {
               setupPost(snapshot.docs);
@@ -121,31 +128,27 @@ export function posts(navigateTo) {
           });
         });
       });
-      // Evento Delete
-      const deleteButton = document.querySelectorAll('.deleteButton');
-      deleteButton.forEach((button) => {
-        button.addEventListener('click', (e) => {
-          // eslint-disable-next-line
-          const alertDelete = confirm('¿Está segur@ que desea eliminar este post?');
-          const postId = e.currentTarget.getAttribute('data-post-id');
-          if (alertDelete === true) {
-            deletePost(postId);
-            alert('Post eliminado con éxito');
-          } else {
-            alert('Operación cancelada');
-          }
-        });
-      });
+
       // Evento Editar
       const editButtons = document.querySelectorAll('.editButton');
       editButtons.forEach((button) => {
         button.addEventListener('click', (e) => {
           const postId = e.currentTarget.getAttribute('data-post-id');
-          const textareaTitle = document.querySelector(`.editTextarea[data-post-id="${postId}"]`);
-          const textareaDescription = document.querySelector(`.editContentTextarea[data-post-id="${postId}"]`);
-          const saveEditButton = document.querySelector(`.saveEditButton[data-post-id="${postId}"]`);
-          const likeButton = document.querySelector(`.containerLikes[data-post-id="${postId}"]`);
-          const descriptionEdit = document.querySelector(`.editPublic[data-post-id="${postId}"]`);
+          const textareaTitle = document.querySelector(
+            `.editTextarea[data-post-id="${postId}"]`
+          );
+          const textareaDescription = document.querySelector(
+            `.editContentTextarea[data-post-id="${postId}"]`
+          );
+          const saveEditButton = document.querySelector(
+            `.saveEditButton[data-post-id="${postId}"]`
+          );
+          const likeButton = document.querySelector(
+            `.containerLikes[data-post-id="${postId}"]`
+          );
+          const descriptionEdit = document.querySelector(
+            `.editPublic[data-post-id="${postId}"]`
+          );
           textareaTitle.style.display = 'flex';
           textareaDescription.style.display = 'flex';
           saveEditButton.style.display = 'flex';
@@ -172,12 +175,15 @@ export function posts(navigateTo) {
   // evento cerrar sesion
   logOutIcon.addEventListener('click', () => {
     // eslint-disable-next-line
+
+
   const alertlogOut = confirm('¿Está segur@ que desea salir de su cuenta?');
     if (alertlogOut === true) {
       // mainPage.removeAttribute('class', 'homepage')
       logOut(navigateTo);
     } else {
       alert('Operación cancelada');
+
     }
   });
   initializeAuth(setupPost);

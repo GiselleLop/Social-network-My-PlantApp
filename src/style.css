@@ -429,11 +429,7 @@ font-size: 20px;
 width: 100%;
 height: auto;
 }
-.likeButton{
-width: 40px;
-height: 40px;
-border-radius: 40px;
-} 
+
 .editTextarea, .editContentTextarea{
     border-radius: 10px;
     border-color: transparent;
@@ -731,3 +727,19 @@ margin-top: 0%;
         position: absolute;
     }
 }
+
+/* Estilo inicial del botón de "like" */
+.likeButton{
+    background-color: transparent;
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+} 
+
+/* Estilo del botón de "like" cuando se le ha dado "like" (coloreado de rojo) */
+.likeButton.liked {
+    background-color: red;
+    color: white;
+    border: 1px solid red
+}
+  
