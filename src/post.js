@@ -12,8 +12,8 @@ import {
 
 export function posts(navigateTo) {
   // const body1 = document.querySelector('body');
-  // const backgroundLayer = document.createElement('div');
-  // backgroundLayer.classList.add('background-layer');
+  const backgroundLayer = document.createElement('div');
+  backgroundLayer.classList.add('background-layer');
   // homepage.style.boxShadow = '0px 0px 0px transparent';
   // homepage.style.height = '100%';
   // homepage.style.width = '100%';
@@ -174,7 +174,6 @@ export function posts(navigateTo) {
             editPost(postId, textareaTitle.value, textareaDescription.value)
               .then(() => {
                 alert('Publicación editada con éxito');
-                // Puedes recargar la lista de posts o actualizar la interfaz según sea necesario
               })
               .catch((error) => {
                 console.error('Error al editar el post:', error);
@@ -201,7 +200,7 @@ export function posts(navigateTo) {
   });
   initializeAuth(setupPost);
 
-  mainPage.append(headerPost, containerPubication, viewPost);
+  mainPage.append(backgroundLayer, headerPost, containerPubication, viewPost);
   headerPost.append(logoImage, logOutIcon);
   logOutIcon.append(iconLogOut);
   containerPubication.append(imagePublication, containerPost);

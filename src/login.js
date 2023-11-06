@@ -17,7 +17,7 @@ function renderLogin(navigateTo) {
   // Imagen
   const imageLogin = document.createElement('img');
   imageLogin.src = 'img/regadera.png';
-  imageLogin.style.width = '50%';
+  imageLogin.style.width = '40%';
   imageLogin.style.height = 'auto';
   imageLogin.setAttribute('class', 'titleLogin');
   // Contenedor de los inputs

@@ -7,6 +7,9 @@ exports[`posts Snapshot of posts 1`] = `
     id="homepagePostes"
   >
     <div
+      class="background-layer"
+    />
+    <div
       class="headerPost"
     >
       Mi Plantapp

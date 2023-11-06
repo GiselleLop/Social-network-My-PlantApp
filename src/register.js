@@ -15,7 +15,7 @@ function renderCreateAccount(navigateTo) {
   // Imagen
   const image = document.createElement('img');
   image.setAttribute('src', 'img/evolucion.png');
-  image.style.width = '60%';
+  image.style.width = '40%';
   image.style.height = 'auto';
 
   // Contenedor de los inputs
