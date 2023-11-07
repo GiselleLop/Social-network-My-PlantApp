@@ -19,7 +19,14 @@ import {
   signOut,
   onAuthStateChanged,
 } from 'firebase/auth';
+import {
+  ref,
+  uploadBytes,
+  getDownloadURL,
+  getStorage,
+} from 'firebase/storage';
 import { initializeApp } from 'firebase/app';
+
 // import renderCreateAccount from './register.js';
 // import { posts } from './post.js';
 // import navigateTo from './main';
@@ -41,7 +48,7 @@ const googleProvider = new GoogleAuthProvider();
 googleProvider.setCustomParameters({
   prompt: 'select_account',
 });
-
+const storage = getStorage();
 export {
   app,
   firestore,
@@ -94,19 +101,64 @@ export function login(email, password) {
 }
 
 // funcion save
-export function saveTask(title, description) {
-  const postCollection = collection(firestore, 'post');
-  addDoc(postCollection, {
-    title,
-    description,
-    likes: 0,
-  })
-    .then((docRef) => {
-      console.log('Documento guardado con ID:', docRef.id);
-    })
-    .catch((error) => {
-      console.error('Error al guardar el documento:', error);
+// export function saveTask(title, description, imageInput) {
+//   const postCollection = collection(firestore, 'post');
+//   addDoc(postCollection, {
+//     title,
+//     description,
+//     likes: 0,
+//   })
+//     .then((docRef) => {
+//       console.log('Documento guardado con ID:', docRef.id);
+//     })
+//     .catch((error) => {
+//       console.error('Error al guardar el documento:', error);
+//     });
+// }
+async function uploadImageToStorage(imageFile) {
+  try {
+    // Genera un nombre único para la imagen, por ejemplo, utilizando un timestamp
+    const imageName = `${Date.now()}_${imageFile.name}`;
+
+    // Establece la referencia al lugar en el que deseas almacenar la imagen
+    const storageRef = ref(storage, `img/${imageName}`);
+
+    // Sube la imagen al almacenamiento
+    await uploadBytes(storageRef, imageFile);
+
+    // Obtiene la URL de descarga de la imagen después de cargarla con éxito
+    const imageUrl = await getDownloadURL(storageRef);
+
+    // Devuelve la URL de la imagen
+    console.log('URL de la imagen:', imageUrl);
+    return imageUrl;
+  } catch (error) {
+    console.error('Error al cargar la imagen al almacenamiento:', error);
+    throw error; // Puedes manejar el error según tus necesidades
+  }
+}
+export async function saveTask(title, description, imageFile) {
+  try {
+    const postCollection = collection(firestore, 'post');
+
+    // Verifica si se proporcionó un archivo de imagen
+    let imageUrl = null;
+    if (imageFile) {
+      // Aquí debes implementar la lógica para cargar la imagen y obtener la URL
+      imageUrl = await uploadImageToStorage(imageFile);
+    }
+    // Guarda la información del post en la base de datos
+    const docRef = await addDoc(postCollection, {
+      title,
+      description,
+      imageUrl, // Guarda la URL de la imagen en lugar del objeto de archivo
+      likes: 0,
     });
+
+    console.log('Documento guardado con ID:', docRef.id);
+  } catch (error) {
+    console.error('Error al guardar el documento:', error);
+  }
 }
 
 // funcion para registro con google

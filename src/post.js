@@ -60,6 +60,11 @@ export function posts(navigateTo) {
   const post = document.createElement('textarea');
   post.setAttribute('placeholder', 'Ingresa el contenido de la publicación.');
   post.setAttribute('id', 'postText');
+  // Nuevo campo para cargar archivos (fotos)
+  const imageInput = document.createElement('input');
+  imageInput.setAttribute('type', 'file');
+  imageInput.setAttribute('id', 'post-image');
+  imageInput.setAttribute('accept', 'image/*');
   // Boton publicar
   const buttonSave = document.createElement('button');
   buttonSave.setAttribute('class', 'buttonSave');
@@ -71,13 +76,14 @@ export function posts(navigateTo) {
     e.preventDefault();
     const title = postTitle.value;
     const description = post.value;
+    const imageFile = imageInput.files[0];
     // console.log(title, description);
-    if(title === "" || description === ""){
-    alert('Campos vacios')
+    if (title === '' || description === '') {
+      alert('Campos vacios');
     } else {
-    saveTask(title, description);
-    // console.log(auth.currentUser.uid);
-    containerPost.reset();
+      saveTask(title, description, imageFile);
+      // console.log(auth.currentUser.uid);
+      containerPost.reset();
     }
   });
 
@@ -87,7 +93,8 @@ export function posts(navigateTo) {
       let html = '';
       data.forEach((doc) => {
         const postdata = doc.data();
-        html += `
+        if (postdata.title && postdata.description) {
+          html += `
     <li class="ListGroupItem">
     <div class='buttonOptions'>
     <button class='deleteButton' data-post-id="${doc.id}"> Delete </button>
@@ -107,6 +114,9 @@ export function posts(navigateTo) {
     <button class="saveEditButton" data-post-id="${doc.id}" style="display: none;">Guardar</button>
     </li>
     `;
+        }
+        // else if (postdata.title && postdata.description && postdata.imageUrl) {
+        // }
       });
       viewPost.innerHTML = html;
       // Evento Like
@@ -200,12 +210,13 @@ export function posts(navigateTo) {
       alert('Operación cancelada');
     }
   });
+
   initializeAuth(setupPost);
 
   mainPage.append(backgroundLayer, headerPost, containerPubication, viewPost);
   headerPost.append(logoImage, logOutIcon);
   logOutIcon.append(iconLogOut);
   containerPubication.append(imagePublication, containerPost);
-  containerPost.append(postTitle, post, buttonSave);
+  containerPost.append(postTitle, post, imageInput, buttonSave);
   return mainPage;
 }

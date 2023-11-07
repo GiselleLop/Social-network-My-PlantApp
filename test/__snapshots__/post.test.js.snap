@@ -44,6 +44,11 @@ exports[`posts Snapshot of posts 1`] = `
           id="postText"
           placeholder="Ingresa el contenido de la publicación."
         />
+        <input
+          accept="image/*"
+          id="post-image"
+          type="file"
+        />
         <button
           class="buttonSave"
         >
