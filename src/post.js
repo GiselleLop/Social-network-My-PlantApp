@@ -1,5 +1,4 @@
-import { collection, getDocs, onSnapshot } from 'firebase/firestore';
-import { onAuthStateChanged } from 'firebase/auth';
+import { collection, getDocs } from 'firebase/firestore';
 import {
   auth,
   firestore,
@@ -7,27 +6,29 @@ import {
   handleLike,
   deletePost,
   editPost,
-  logOut
+  logOut,
+  initializeAuth,
 } from './firebase.js';
 
 export function posts(navigateTo) {
-  const homepage = document.querySelector('.homepage');
-  const body1 = document.querySelector('body');
+  // const body1 = document.querySelector('body');
   const backgroundLayer = document.createElement('div');
   backgroundLayer.classList.add('background-layer');
-  homepage.style.boxShadow = '0px 0px 0px transparent';
-  homepage.style.height = '100%';
-  homepage.style.width = '100%';
-  homepage.style.paddingTop = '0em';
-  backgroundLayer.style.background = "url('/img/patron2.avif')";
-  backgroundLayer.style.opacity = 0.1;
-  backgroundLayer.style.zIndex = '-1';
-  backgroundLayer.style.top = '0';
-  backgroundLayer.style.left = '0';
-  backgroundLayer.style.width = '100%';
-  backgroundLayer.style.height = '100%';
+  // homepage.style.boxShadow = '0px 0px 0px transparent';
+  // homepage.style.height = '100%';
+  // homepage.style.width = '100%';
+  // homepage.style.paddingTop = '0em';
+  // backgroundLayer.style.background = "url('/img/patron2.avif')";
+  // backgroundLayer.style.opacity = 0.1;
+  // backgroundLayer.style.zIndex = '-1';
+  // backgroundLayer.style.top = '0';
+  // backgroundLayer.style.left = '0';
+  // backgroundLayer.style.width = '100%';
+  // backgroundLayer.style.height = '100%';
+
   const mainPage = document.createElement('div');
-  mainPage.setAttribute('class', 'homepagePosts');
+  mainPage.setAttribute('class', 'homepage');
+  mainPage.setAttribute('id', 'homepagePostes');
   const headerPost = document.createElement('div');
   headerPost.textContent = 'Mi Plantapp';
   headerPost.setAttribute('class', 'headerPost');
@@ -37,9 +38,9 @@ export function posts(navigateTo) {
   // Boton cerrar sesion
   const logOutIcon = document.createElement('button');
   logOutIcon.setAttribute('class', 'logOutButton');
-  //icono cerrar sesion
+  // icono cerrar sesion
   const iconLogOut = document.createElement('img');
-  iconLogOut.setAttribute('src', '/img/salir.png')
+  iconLogOut.setAttribute('src', '/img/salir.png');
   // Contenedor de Creacion de post
   const containerPubication = document.createElement('div');
   containerPubication.setAttribute('class', 'containerPubication');
@@ -71,13 +72,18 @@ export function posts(navigateTo) {
     const title = postTitle.value;
     const description = post.value;
     // console.log(title, description);
+    if(title === "" || description === ""){
+    alert('Campos vacios')
+    } else {
     saveTask(title, description);
     // console.log(auth.currentUser.uid);
     containerPost.reset();
+    }
   });
 
   function setupPost(data) {
-    if (data.length) {
+    // console.log('Data inside setupPost:', data);
+    if (data) {
       let html = '';
       data.forEach((doc) => {
         const postdata = doc.data();
@@ -109,10 +115,15 @@ export function posts(navigateTo) {
         button.addEventListener('click', (e) => {
           const postId = e.currentTarget.getAttribute('data-post-id');
           const userId = auth.currentUser.uid; // Obtiene el id del usuario actual
-          console.log(postId);
-
+          const isLiked = e.currentTarget.classList.contains('liked'); // Verifica si el botón ya ha sido "liked"
+          // Cambiar el estado del botón "like" (colorear o quitar el color rojo)
+          if (isLiked) {
+            e.currentTarget.classList.remove('liked');
+          } else {
+            e.currentTarget.classList.add('liked');
+          }
           handleLike(postId, userId, () => {
-            // CallBack despues de un like
+            // CallBack después de un like
             const userPostsCollection = collection(firestore, 'post');
             getDocs(userPostsCollection).then((snapshot) => {
               setupPost(snapshot.docs);
@@ -125,7 +136,7 @@ export function posts(navigateTo) {
       deleteButton.forEach((button) => {
         button.addEventListener('click', (e) => {
           // eslint-disable-next-line
-          const alertDelete = confirm('¿Está segur@ que desea eliminar este post?');
+           const alertDelete = confirm('¿Está segur@ que desea eliminar este post?');
           const postId = e.currentTarget.getAttribute('data-post-id');
           if (alertDelete === true) {
             deletePost(postId);
@@ -140,11 +151,21 @@ export function posts(navigateTo) {
       editButtons.forEach((button) => {
         button.addEventListener('click', (e) => {
           const postId = e.currentTarget.getAttribute('data-post-id');
-          const textareaTitle = document.querySelector(`.editTextarea[data-post-id="${postId}"]`);
-          const textareaDescription = document.querySelector(`.editContentTextarea[data-post-id="${postId}"]`);
-          const saveEditButton = document.querySelector(`.saveEditButton[data-post-id="${postId}"]`);
-          const likeButton = document.querySelector(`.containerLikes[data-post-id="${postId}"]`);
-          const descriptionEdit = document.querySelector(`.editPublic[data-post-id="${postId}"]`);
+          const textareaTitle = document.querySelector(
+            `.editTextarea[data-post-id="${postId}"]`,
+          );
+          const textareaDescription = document.querySelector(
+            `.editContentTextarea[data-post-id="${postId}"]`,
+          );
+          const saveEditButton = document.querySelector(
+            `.saveEditButton[data-post-id="${postId}"]`,
+          );
+          const likeButton = document.querySelector(
+            `.containerLikes[data-post-id="${postId}"]`,
+          );
+          const descriptionEdit = document.querySelector(
+            `.editPublic[data-post-id="${postId}"]`,
+          );
           textareaTitle.style.display = 'flex';
           textareaDescription.style.display = 'flex';
           saveEditButton.style.display = 'flex';
@@ -154,8 +175,7 @@ export function posts(navigateTo) {
           saveEditButton.addEventListener('click', () => {
             editPost(postId, textareaTitle.value, textareaDescription.value)
               .then(() => {
-                alert('Post editado con éxito');
-                // Puedes recargar la lista de posts o actualizar la interfaz según sea necesario
+                alert('Publicación editada con éxito');
               })
               .catch((error) => {
                 console.error('Error al editar el post:', error);
@@ -164,58 +184,27 @@ export function posts(navigateTo) {
         });
       });
     } else {
+      // console.error('Data is not an array:', data);
       viewPost.innerHTML = '<p> Aun no hay publicaciones </p>';
     }
   }
 
-// evento cerrar sesion
-logOutIcon.addEventListener('click', ()=>{
-// eslint-disable-next-line
-const alertlogOut = confirm('¿Está segur@ que desea salir de su cuenta?');
-if (alertlogOut === true) {
-  logOut();
-} else {
-  alert('Operación cancelada');
-}
-
-})
-
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      // Usuario autenticado, puedes acceder a la colección de 'post'
-      console.log(
-        'User authenticated:',
-        auth.currentUser.uid,
-        'email:',
-        user.email,
-      );
-      const userPostsCollection = collection(firestore, 'post');
-      onSnapshot(userPostsCollection, (snapshot) => {
-        const postSnap = [];
-        snapshot.forEach((doc) => {
-          postSnap.push(doc);
-        });
-        setupPost(postSnap);
-      });
+  // evento cerrar sesion
+  logOutIcon.addEventListener('click', () => {
+    // eslint-disable-next-line
+    const alertlogOut = confirm('¿Está segur@ que desea salir de su cuenta?');
+    if (alertlogOut === true) {
+      // mainPage.removeAttribute('class', 'homepage')
+      logOut(navigateTo);
     } else {
-      console.log('Usuario no autenticado');
-      navigateTo('/login');
-      backgroundLayer.style.opacity = 0.0;
-      backgroundLayer.style.zIndex = '-1';
-      backgroundLayer.style.top = '0';
-      backgroundLayer.style.left = '0';
-      backgroundLayer.style.width = '0%';
-      backgroundLayer.style.height = '0%';
-      homepage.style.boxShadow = '0 0 10px rgba(156, 158, 156, 0.346), 0 0 20px rgba(135, 136, 135, 0.5), 0 0 30px rgba(0, 255, 0, 0.203)';
-      homepage.style.height = '90%';
-      homepage.style.width = '90%';
-      homepage.style.paddingTop = '0em';
+      alert('Operación cancelada');
     }
   });
-  mainPage.append(headerPost, containerPubication, viewPost);
+  initializeAuth(setupPost);
+
+  mainPage.append(backgroundLayer, headerPost, containerPubication, viewPost);
   headerPost.append(logoImage, logOutIcon);
   logOutIcon.append(iconLogOut);
-  body1.appendChild(backgroundLayer);
   containerPubication.append(imagePublication, containerPost);
   containerPost.append(postTitle, post, buttonSave);
   return mainPage;

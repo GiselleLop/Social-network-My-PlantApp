@@ -1,6 +1,6 @@
 import { login, GoogleRegister } from './firebase.js';
 
-export function renderLogin(navigateTo) {
+function renderLogin(navigateTo) {
   const mainPage = document.createElement('div');
   mainPage.setAttribute('class', 'homepage1');
 
@@ -17,7 +17,7 @@ export function renderLogin(navigateTo) {
   // Imagen
   const imageLogin = document.createElement('img');
   imageLogin.src = 'img/regadera.png';
-  imageLogin.style.width = '50%';
+  imageLogin.style.width = '40%';
   imageLogin.style.height = 'auto';
   imageLogin.setAttribute('class', 'titleLogin');
   // Contenedor de los inputs
@@ -57,8 +57,14 @@ export function renderLogin(navigateTo) {
         navigateTo('/posts');
       })
       .catch((err) => {
-        spanPassword.classList.add('error');
-        spanPassword.textContent = `${err.message} ${err.email} Not saved`;
+        if (err.code === 'auth/invalid-email') {
+          spanPassword.classList.add('error');
+          spanPassword.textContent = 'Ingresa un email válido';
+        }
+        if (err.code === 'auth/invalid-login-credentials') {
+          spanPassword.classList.add('error');
+          spanPassword.textContent = 'Contraseña incorrecta';
+        }
       });
   });
   // input start session with GOOGLE
@@ -76,7 +82,7 @@ export function renderLogin(navigateTo) {
   textButton.textContent = 'Iniciar sesión con Google';
 
   buttonGoogle.addEventListener('click', () => {
-    GoogleRegister();
+    GoogleRegister(navigateTo);
   });
 
   // boton volver
@@ -106,3 +112,4 @@ export function renderLogin(navigateTo) {
 
   return mainPage;
 }
+export default renderLogin;

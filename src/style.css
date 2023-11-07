@@ -7,7 +7,16 @@
     font-family: 'Font2';
     src: url("/fonts/KGBlankSpaceSolid.ttf") format('truetype');
 }
-
+#homepagePostes, .homepage {
+padding-top: 0em;
+box-shadow: 0 0 0px;
+display: flex;
+flex-direction: column;
+min-width: 100%;
+place-content: center;
+align-items: center;
+min-height: 100%;
+}
 html {
     background-size: 100% 100%;
     min-width: 100%;
@@ -16,7 +25,7 @@ html {
 }
 
 body {
-    background: linear-gradient(#F2F6EB, #E5FFB1);
+    background: linear-gradient(#f3f5ef, #c0df8d);
     background-size: 100% 100%;
     min-width: 100%;
     min-height: 100%;
@@ -24,18 +33,32 @@ body {
     justify-content: center;
     display: flex;
     margin: 0px;
- 
+    padding-top: 0%;
+    margin-top: 0%;
 }
-.background-layer {
+/* .background-layer {
     position: fixed;
-    pointer-events: none; /* Evita que la capa intercepte eventos del ratón, para que los elementos subyacentes puedan recibir eventos */
-  }
+    pointer-events: none; Evita que la capa intercepte eventos del ratón, para que los elementos subyacentes puedan recibir eventos 
+} */
+.background-layer{
+    position: fixed;
+    pointer-events: none;
+    background: url('/img/patron2.avif');
+    opacity: 0.4;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    }
 .main {
     display: flex;
     place-content: center;
     align-items: center;
     height: 100%;
     width: 100%;
+    margin-top: 0%;
+    padding-top: 0%;
 }
 
 
@@ -67,12 +90,14 @@ body {
 
 .Inputcontainer {
     
+    border-radius: 50px;
     text-align: left;
     display: flex;
     flex-direction: column;
     width: 80%;
     place-items: center;
     margin-top: 2%;
+   
 }
 
 .input {
@@ -123,7 +148,7 @@ body {
 }
 
 #continue {
-    margin-top: 5%;
+    margin-top: 0%;
 }
 
 #or {
@@ -226,6 +251,7 @@ padding-top: 10px;
     display: flex;
 }
 .homepage {
+    padding-top: 30px;
     box-shadow: 0 0 10px rgba(156, 158, 156, 0.346), 0 0 20px rgba(135, 136, 135, 0.5), 0 0 30px rgba(0, 255, 0, 0.203);
     display: flex;
     place-content: center;
@@ -234,9 +260,6 @@ padding-top: 10px;
     width: 90%;
     height: auto;
     border-radius: 10px;
-    padding-top: 4em;
-    padding-bottom: 4em;
-   
 }
 .homepage1{
     display: flex;
@@ -266,7 +289,7 @@ font-size: 250%;
 display: flex;
 color:white;
 -webkit-text-stroke: 2px black;
-gap: 10px;
+gap: 2px;
 }
 .logoImage{
 width: 40px;
@@ -279,7 +302,8 @@ display: flex;
 background-color: transparent;
 border-color: transparent;
 border-radius: 16px;
-padding: 6px;
+padding: 3px;
+
 }
 .logOutButton:hover{
     background-color: white;
@@ -288,15 +312,7 @@ padding: 6px;
 width: 100%;
 height: 100%;
 }
-.homepagePosts {
-display: flex;
-flex-direction: column;
-width: 100%;
-place-content: center;
-align-items: center;
-height: 100%;
 
-}
 .postView {
 width: 100%;
 list-style: none;
@@ -427,11 +443,7 @@ font-size: 20px;
 width: 100%;
 height: auto;
 }
-.likeButton{
-width: 40px;
-height: 40px;
-border-radius: 40px;
-} 
+
 .editTextarea, .editContentTextarea{
     border-radius: 10px;
     border-color: transparent;
@@ -493,9 +505,7 @@ color: #71bd6b;
 /* Estilos para pantallas de escritorio */
 @media only screen and (min-width: 920px) {
    /*VISTA PRINCIPAL*/
-   body{
-    padding-bottom: 40px;
-}
+
    .homepage {
     flex-direction: row;
     padding-left: 0%;
@@ -512,8 +522,8 @@ color: #71bd6b;
         height: 100%;
         padding-top: 0%;
         padding-bottom: 0%;
-        padding-right: 50px;
-        padding-left: 50px;   
+        padding-right: 0px;
+        padding-left: 0px;   
     }
 
 .homewelcome, .hometittle, .words{
@@ -549,15 +559,15 @@ width: auto;
 
 }
 .headerRegister {
-       padding-left: 2em;
+       padding-left: 4em;
        justify-content: center;
        align-items: center;
-       width: 50%;
+       width: 80%;
        display: flex;
        flex-direction: column;
        text-align: center;    
-       gap: 19px;
-       font-size: 1.2em;
+       gap: 10px;
+       font-size: 1.1em;
 }
 
 .input {
@@ -597,8 +607,9 @@ width: auto;
     
 
 .Inputcontainer{
-padding-right: 4em;
+margin-right: 6em;
 margin-top: 0%;
+padding: 10px;
 }
 .googleLoginBtn{
     border-radius: 0.6em;
@@ -612,10 +623,10 @@ margin-top: 0%;
     padding-top: 0px;
     font-weight: bolder;
     }
-    .titleLogin{
-    margin-top: 0%;
-    margin-bottom: 0%;
-    }
+.titleLogin{
+  margin-top: 0%;
+  margin-bottom: 0%;
+}
 /*post*/
 .headerPost {
     width: 100%;
@@ -629,14 +640,16 @@ margin-top: 0%;
     width: 60px;
     height: auto;
     }
-    .homepagePosts {
+   #homepagePostes, .homepage {
+    padding-top: 0em;
     display: flex;
     flex-direction: column;
     width: 100%;
     place-content: center;
     align-items: center;
     height: 100%;
-    
+    min-width: 100%;
+    min-height: 100%;
     }
     .postView {
     width: 100%;
@@ -645,7 +658,9 @@ margin-top: 0%;
     flex-wrap: wrap;
     place-content: center;
     padding-top: 30px;
+    margin-bottom: 40px;
     }
+    
     .ListGroupItem{
     border-radius: 1em;
     width: 35%;
@@ -654,8 +669,6 @@ margin-top: 0%;
     gap: 8px;
     display: flex;
     flex-direction: column;
-
-    
     }
     
     li h5 {
@@ -686,8 +699,8 @@ margin-top: 0%;
        gap: 15px;
     }
     .imagePublication{
-    width: 110px;
-    height: 110px;
+    width: 90px;
+    height: 90px;
     align-self: flex-start;
     border-style: solid;
     border-radius: 1em;
@@ -695,20 +708,20 @@ margin-top: 0%;
     }
     #task-form{
     width: 50%;
-    height: 300px;
+    height: 280px;
     padding: 10px;
     border-radius: 1em;
     gap: 5px
     }
     .postTitle{
         border-radius: 0.3em;
-        height: 18%;
-        font-size: 200%;
+        height: 12%;
+        font-size: 180%;
         padding: 10px;
     }
     #postText{
         border-radius: 0.3em;
-        height: 58%;
+        height: 50%;
         font-size: 200%;
         padding: 10px;
     }
@@ -716,10 +729,10 @@ margin-top: 0%;
         border-radius: 0.4em;
         width: auto;
         align-self: last baseline;
-        height: 20%;
+        height: 15%;
         font-size: 1.5em;
-        padding-left: 40px;
-        padding-right: 40px;
+        padding-left: 30px;
+        padding-right: 30px;
     }
     .logOutButton{
         width: 60px;
@@ -728,3 +741,19 @@ margin-top: 0%;
         position: absolute;
     }
 }
+
+/* Estilo inicial del botón de "like" */
+.likeButton{
+    background-color: transparent;
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+} 
+
+/* Estilo del botón de "like" cuando se le ha dado "like" (coloreado de rojo) */
+.likeButton.liked {
+    background-color: red;
+    color: white;
+    border: 1px solid red
+}
+  

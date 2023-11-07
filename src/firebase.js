@@ -1,5 +1,14 @@
 import {
-  deleteDoc, query, where, getFirestore, collection, getDocs, addDoc, doc, getDoc, updateDoc,
+  deleteDoc,
+  query,
+  where,
+  getFirestore,
+  collection, getDocs,
+  addDoc,
+  doc,
+  getDoc,
+  updateDoc,
+  onSnapshot,
 } from 'firebase/firestore';
 import {
   getAuth,
@@ -8,10 +17,12 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   signOut,
+  onAuthStateChanged,
 } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
 // import renderCreateAccount from './register.js';
 // import { posts } from './post.js';
+// import navigateTo from './main';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyA_nNPVRwXqmgLlxdYL4NmJwiItX9t2D5E',
@@ -32,7 +43,10 @@ googleProvider.setCustomParameters({
 });
 
 export {
-  app, firestore, googleProvider, auth,
+  app,
+  firestore,
+  googleProvider,
+  auth,
 };
 
 // Para crear o registrar usuarios
@@ -45,7 +59,12 @@ export function createUser(email, password) {
         resolve({ message: 'success', email: user.email });
       })
       .catch((error) => {
-        console.error('Error al registrarse:', error.code, error.message, error.serverResponse);
+        console.error(
+          'Error al registrarse:',
+          error.code,
+          error.message,
+          error.serverResponse,
+        );
         error.email = email;
         reject(error);
       });
@@ -62,7 +81,12 @@ export function login(email, password) {
         resolve({ message: 'success', email: user.email });
       })
       .catch((error) => {
-        console.error('Error al iniciar sesion:', error.code, error.message, error.serverResponse);
+        console.error(
+          'Error al iniciar sesion:',
+          error.code,
+          error.message,
+          error.serverResponse,
+        );
         error.email = email;
         reject(error);
       });
@@ -72,7 +96,6 @@ export function login(email, password) {
 // funcion save
 export function saveTask(title, description) {
   const postCollection = collection(firestore, 'post');
-
   addDoc(postCollection, {
     title,
     description,
@@ -87,11 +110,12 @@ export function saveTask(title, description) {
 }
 
 // funcion para registro con google
-export function GoogleRegister() {
+export function GoogleRegister(navigateTo) {
   signInWithPopup(auth, googleProvider)
     .then((result) => {
       const user = result.user;
       console.log('Usuario autenticado con Google:', user);
+      navigateTo('/posts');
     })
     .catch((error) => {
       console.error('Error al autenticar con Google:', error.message);
@@ -101,7 +125,7 @@ export function GoogleRegister() {
 // funcion para likes
 export function handleLike(postId, userId, callback) {
   const likesCollection = collection(firestore, 'likes');
-  // const likeButton = document.querySelector(`.likeButton[data-post-id="${postId}"]`);
+  const likeButton = document.querySelector(`.likeButton[data-post-id="${postId}"]`);
   const likeQuery = query(likesCollection, where('postId', '==', postId), where('userId', '==', userId));
 
   // Ejecuta la consulta para verificar si el usuario ya ha dado like
@@ -117,7 +141,7 @@ export function handleLike(postId, userId, callback) {
             if (docSnapshot.exists()) {
               const currentLikes = docSnapshot.data().likes;
               const updatedLikes = currentLikes + 1;
-
+              likeButton.style.background = 'green';
               // Actualiza la cantidad de likes en la publicación
               updateDoc(postRef, { likes: updatedLikes })
                 .then(() => {
@@ -208,10 +232,44 @@ export function editPost(postId, updatedTitle, updatedDescription) {
 }
 
 // funcion cerrar sesion
-export function logOut(){
-  signOut(auth).then(() => {
+export function logOut(navigateTo) {
+  signOut(auth)
+    .then(() => {
     // Sign-out successful.
-  }).catch((error) => {
+      console.error('sesion cerrada');
+      navigateTo('/login');
+    }).catch((error) => {
+      console.error('Error al cerrar sesion:', error.code, error.message);
     // An error happened.
+    });
+}
+
+export function initializeAuth(setupPost, navigateTo) {
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // Usuario autenticado, puedes acceder a la colección de 'post'
+      console.log(
+        'User authenticated:',
+        auth.currentUser.uid,
+        'email:',
+        user.email,
+      );
+      const userPostsCollection = collection(firestore, 'post');
+      onSnapshot(userPostsCollection, (snapshot) => {
+        const postSnap = [];
+        snapshot.forEach((docu) => {
+          postSnap.push(docu);
+        });
+        setupPost(postSnap);
+      });
+    } else {
+      console.log('Usuario no autenticado');
+      // logOut();
+      alert('Usuario no autenticado');
+      navigateTo('/login');
+      // navigateTo('/login');
+      // backgroundLayer.style.opacity = 0.0;
+      // Resto del código de la lógica que quieras tras un usuario no autenticado
+    }
   });
 }

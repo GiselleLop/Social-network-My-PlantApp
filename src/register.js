@@ -15,7 +15,7 @@ function renderCreateAccount(navigateTo) {
   // Imagen
   const image = document.createElement('img');
   image.setAttribute('src', 'img/evolucion.png');
-  image.style.width = '60%';
+  image.style.width = '40%';
   image.style.height = 'auto';
 
   // Contenedor de los inputs
@@ -90,14 +90,28 @@ function renderCreateAccount(navigateTo) {
         navigateTo('/posts');
       })
       .catch((err) => {
-        spanPassword.classList.add('error');
-        spanPassword.textContent = `${err.message} ${err.email} Not saved`;
+        if (err.code === 'auth/invalid-email') {
+          spanPassword.classList.add('error');
+          spanPassword.textContent = 'Ingresa un email válido';
+        }
+        if (err.code === 'auth/missing-email') {
+          spanPassword.classList.add('error');
+          spanPassword.textContent = 'Por favor ingresa un email';
+        }
+        if (err.code === 'auth/weak-password') {
+          spanPassword.classList.add('error');
+          spanPassword.textContent = 'La contraseña debe tener al menos 6 caracteres';
+        }
+        if (err.code === 'auth/email-already-in-use') {
+          spanPassword.classList.add('error');
+          spanPassword.textContent = 'El email ya se encuentra en uso';
+        }
       });
   });
 
   // Con Google
   buttonGoogle.addEventListener('click', () => {
-    GoogleRegister();
+    GoogleRegister(navigateTo);
   });
 
   mainPage.append(header, container);
