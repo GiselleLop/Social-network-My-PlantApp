@@ -122,7 +122,7 @@ export function login(email, password) {
 //       console.error('Error al guardar el documento:', error);
 //     });
 // }
-// No necesitas el async/await aquí
+
 export async function saveTask(title, description, imageFile) {
   console.log(imageFile);
   if (!imageFile) {
