@@ -42,7 +42,7 @@ function navigateTo(hash) {
 
 window.addEventListener('popstate', () => {
   console.log('change');
-  navigateTo(window.location.pathname);
+  navigateTo(defaultRoute);
 });
 
 function initRouter() {
