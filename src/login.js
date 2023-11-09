@@ -16,7 +16,8 @@ function renderLogin(navigateTo) {
   title2.setAttribute('class', 'titleLogin');
   // Imagen
   const imageLogin = document.createElement('img');
-  imageLogin.src = 'img/regadera.png';
+  imageLogin.src = 'http://localhost:5173/img/regadera.png';
+  console.log(imageLogin.src);
   imageLogin.style.width = '40%';
   imageLogin.style.height = 'auto';
   imageLogin.setAttribute('class', 'titleLogin');
@@ -76,7 +77,7 @@ function renderLogin(navigateTo) {
   buttonGoogle.setAttribute('id', 'google');
   buttonGoogle.setAttribute('class', 'buttonRegister');
   const googleImg = document.createElement('img');
-  googleImg.setAttribute('src', 'img/googleongpng.webp');
+  googleImg.setAttribute('src', 'http://localhost:5173/img/googleongpng.webp');
   googleImg.setAttribute('class', 'imgGoogle');
   const textButton = document.createElement('h2');
   textButton.textContent = 'Iniciar sesión con Google';

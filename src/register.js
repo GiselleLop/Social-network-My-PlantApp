@@ -14,7 +14,8 @@ function renderCreateAccount(navigateTo) {
   title.textContent = 'Para crear una nueva cuenta, ingresa tus datos.';
   // Imagen
   const image = document.createElement('img');
-  image.setAttribute('src', 'img/evolucion.png');
+  image.setAttribute('src', 'http://localhost:5173/img/evolucion.png');
+  console.log(image.src);
   image.style.width = '40%';
   image.style.height = 'auto';
 
@@ -63,7 +64,8 @@ function renderCreateAccount(navigateTo) {
   buttonGoogle.setAttribute('id', 'google');
   buttonGoogle.setAttribute('class', 'buttonRegister');
   const googleImg = document.createElement('img');
-  googleImg.setAttribute('src', 'img/googleongpng.webp');
+  googleImg.setAttribute('src', 'http://localhost:5173/img/googleongpng.webp');
+ console.log(googleImg.src);
   googleImg.setAttribute('class', 'imgGoogle');
   const textButton = document.createElement('h2');
   textButton.textContent = 'Registrarse con Google';
