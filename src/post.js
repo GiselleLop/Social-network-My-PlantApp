@@ -105,7 +105,7 @@ export function posts(navigateTo) {
           <p>${postdata.description}</p>
           <div class="containerLikes" data-post-id="${doc.id}">
           <button class="likeButton" data-post-id="${doc.id}">
-          <img src="http://localhost:5173/img/like.png" class='imgLike'>
+          <img src="/img/like.png" class='imgLike'>
           </button>
           <span>${postdata.likes} Likes</span>
           </div>
