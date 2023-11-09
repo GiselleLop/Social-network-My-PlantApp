@@ -6,8 +6,8 @@ function home(navigateTo) {
   containerimg.className = 'containerimg';
   
   const img = document.createElement('img');
-  img.src = 'http://localhost:5173/img/planta-arana.png';
-  
+  img.src = 'https://firebasestorage.googleapis.com/v0/b/social-network-c61c9.appspot.com/o/img%2Fplanta-arana.png?alt=media&token=836eab90-f526-44b6-b147-076dfff7cd62';
+
   console.log(img.src, "src");
   img.id = 'homeplant';
   img.alt = 'Imagen de plantas';
