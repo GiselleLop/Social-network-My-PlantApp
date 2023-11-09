@@ -14,7 +14,7 @@ function renderCreateAccount(navigateTo) {
   title.textContent = 'Para crear una nueva cuenta, ingresa tus datos.';
   // Imagen
   const image = document.createElement('img');
-  image.setAttribute('src', 'http://localhost:5173/img/evolucion.png');
+  image.setAttribute('src', 'https://firebasestorage.googleapis.com/v0/b/social-network-c61c9.appspot.com/o/img%2Fevolucion.png?alt=media&token=2169c4ff-1063-488c-818a-e86c115b9b36');
   console.log(image.src);
   image.style.width = '40%';
   image.style.height = 'auto';
@@ -64,7 +64,7 @@ function renderCreateAccount(navigateTo) {
   buttonGoogle.setAttribute('id', 'google');
   buttonGoogle.setAttribute('class', 'buttonRegister');
   const googleImg = document.createElement('img');
-  googleImg.setAttribute('src', 'http://localhost:5173/img/googleongpng.webp');
+  googleImg.setAttribute('src', 'https://firebasestorage.googleapis.com/v0/b/social-network-c61c9.appspot.com/o/img%2Fgoogleongpng.webp?alt=media&token=0bf583ce-00aa-467b-9101-654e9fe9aabd');
  console.log(googleImg.src);
   googleImg.setAttribute('class', 'imgGoogle');
   const textButton = document.createElement('h2');
