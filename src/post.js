@@ -33,21 +33,21 @@ export function posts(navigateTo) {
   headerPost.textContent = 'Mi Plantapp';
   headerPost.setAttribute('class', 'headerPost');
   const logoImage = document.createElement('img');
-  logoImage.setAttribute('src', 'http://localhost:5173/img/planta-arana.png');
+  logoImage.setAttribute('src', 'https://firebasestorage.googleapis.com/v0/b/social-network-c61c9.appspot.com/o/img%2Fplanta-arana.png?alt=media&token=836eab90-f526-44b6-b147-076dfff7cd62');
   logoImage.setAttribute('class', 'logoImage');
   // Boton cerrar sesion
   const logOutIcon = document.createElement('button');
   logOutIcon.setAttribute('class', 'logOutButton');
   // icono cerrar sesion
   const iconLogOut = document.createElement('img');
-  iconLogOut.setAttribute('src', 'http://localhost:5173/img/salir.png');
+  iconLogOut.setAttribute('src', 'https://firebasestorage.googleapis.com/v0/b/social-network-c61c9.appspot.com/o/img%2Fsalir.png?alt=media&token=88e1e584-e158-446a-bd54-6f4da6ddf03b');
   console.log(iconLogOut.src);
   // Contenedor de Creacion de post
   const containerPubication = document.createElement('div');
   containerPubication.setAttribute('class', 'containerPubication');
   // Imagen Post
   const imagePublication = document.createElement('img');
-  imagePublication.setAttribute('src', 'http://localhost:5173/img/mujer.png');
+  imagePublication.setAttribute('src', 'https://firebasestorage.googleapis.com/v0/b/social-network-c61c9.appspot.com/o/img%2Fmujer.png?alt=media&token=701d2fdc-675b-4550-b43f-162075eb0943');
   console.log(imagePublication.src);
   imagePublication.setAttribute('class', 'imagePublication');
   // Formulario para la creacion de post
@@ -105,7 +105,7 @@ export function posts(navigateTo) {
           <p>${postdata.description}</p>
           <div class="containerLikes" data-post-id="${doc.id}">
           <button class="likeButton" data-post-id="${doc.id}">
-          <img src="/img/like.png" class='imgLike'>
+          <img src="https://firebasestorage.googleapis.com/v0/b/social-network-c61c9.appspot.com/o/img%2Flike.png?alt=media&token=36cb50ad-0402-421f-ad97-ca3ba12f8a85" class='imgLike'>
           </button>
           <span>${postdata.likes} Likes</span>
           </div>
@@ -127,7 +127,7 @@ export function posts(navigateTo) {
           <img src="${postdata.imageUrl}" alt="Imagen del post" data-post-id="${doc.id}" class="imgPostPublication">
           <div class="containerLikes" data-post-id="${doc.id}">
           <button class="likeButton" data-post-id="${doc.id}">
-          <img src="img/like.png" class='imgLike'>
+          <img src="https://firebasestorage.googleapis.com/v0/b/social-network-c61c9.appspot.com/o/img%2Flike.png?alt=media&token=36cb50ad-0402-421f-ad97-ca3ba12f8a85" class='imgLike'>
           </button>
           <span>${postdata.likes} Likes</span>
           </div>

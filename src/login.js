@@ -16,7 +16,7 @@ function renderLogin(navigateTo) {
   title2.setAttribute('class', 'titleLogin');
   // Imagen
   const imageLogin = document.createElement('img');
-  imageLogin.src = 'http://localhost:5173/img/regadera.png';
+  imageLogin.src = 'https://firebasestorage.googleapis.com/v0/b/social-network-c61c9.appspot.com/o/img%2Fregadera.png?alt=media&token=b6994595-5975-4a79-a110-686525ba4d5f';
   console.log(imageLogin.src);
   imageLogin.style.width = '40%';
   imageLogin.style.height = 'auto';
@@ -77,7 +77,7 @@ function renderLogin(navigateTo) {
   buttonGoogle.setAttribute('id', 'google');
   buttonGoogle.setAttribute('class', 'buttonRegister');
   const googleImg = document.createElement('img');
-  googleImg.setAttribute('src', 'http://localhost:5173/img/googleongpng.webp');
+  googleImg.setAttribute('src', 'https://firebasestorage.googleapis.com/v0/b/social-network-c61c9.appspot.com/o/img%2Fgoogleongpng.webp?alt=media&token=0bf583ce-00aa-467b-9101-654e9fe9aabd');
   googleImg.setAttribute('class', 'imgGoogle');
   const textButton = document.createElement('h2');
   textButton.textContent = 'Iniciar sesión con Google';
