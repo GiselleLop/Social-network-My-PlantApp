@@ -4,8 +4,10 @@ function home(navigateTo) {
 
   const containerimg = document.createElement('div');
   containerimg.className = 'containerimg';
+  
   const img = document.createElement('img');
-  img.src = 'img/planta-arana.png';
+  img.src = 'http://localhost:5173/img/planta-arana.png';
+  console.log(img.src);
   img.id = 'homeplant';
   img.alt = 'Imagen de plantas';
   const content = document.createElement('div');
