@@ -33,20 +33,22 @@ export function posts(navigateTo) {
   headerPost.textContent = 'Mi Plantapp';
   headerPost.setAttribute('class', 'headerPost');
   const logoImage = document.createElement('img');
-  logoImage.setAttribute('src', '/img/planta-arana.png');
+  logoImage.setAttribute('src', 'http://localhost:5173/img/planta-arana.png');
   logoImage.setAttribute('class', 'logoImage');
   // Boton cerrar sesion
   const logOutIcon = document.createElement('button');
   logOutIcon.setAttribute('class', 'logOutButton');
   // icono cerrar sesion
   const iconLogOut = document.createElement('img');
-  iconLogOut.setAttribute('src', '/img/salir.png');
+  iconLogOut.setAttribute('src', 'http://localhost:5173/img/salir.png');
+  console.log(iconLogOut.src);
   // Contenedor de Creacion de post
   const containerPubication = document.createElement('div');
   containerPubication.setAttribute('class', 'containerPubication');
   // Imagen Post
   const imagePublication = document.createElement('img');
-  imagePublication.setAttribute('src', '/img/mujer.png');
+  imagePublication.setAttribute('src', 'http://localhost:5173/img/mujer.png');
+  console.log(imagePublication.src);
   imagePublication.setAttribute('class', 'imagePublication');
   // Formulario para la creacion de post
   const containerPost = document.createElement('form');
@@ -103,7 +105,7 @@ export function posts(navigateTo) {
           <p>${postdata.description}</p>
           <div class="containerLikes" data-post-id="${doc.id}">
           <button class="likeButton" data-post-id="${doc.id}">
-          <img src="img/like.png" class='imgLike'>
+          <img src="http://localhost:5173/img/like.png" class='imgLike'>
           </button>
           <span>${postdata.likes} Likes</span>
           </div>

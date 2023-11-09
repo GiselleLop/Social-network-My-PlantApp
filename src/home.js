@@ -7,7 +7,8 @@ function home(navigateTo) {
   
   const img = document.createElement('img');
   img.src = 'http://localhost:5173/img/planta-arana.png';
-  console.log(img.src);
+  
+  console.log(img.src, "src");
   img.id = 'homeplant';
   img.alt = 'Imagen de plantas';
   const content = document.createElement('div');
