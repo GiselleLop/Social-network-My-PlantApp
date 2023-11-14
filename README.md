@@ -34,3 +34,34 @@ La aplicación fomenta la interacción social al permitir a los usuarios conecta
 La función de publicación de fotos permite a los usuarios compartir imágenes de sus plantas, jardines y proyectos relacionados con la horticultura.
 
 ##PRUEBAS UNITARIAS: foto del porcentaje
+
+ ## TESTS DE USABILIDAD:
+Como parte del equipo de desarrollo de MiPlantapp, se realizaron pruebas para conocer la experinecia del usuario, los comentarios se recabaron a través de un cuestionario de Google: https://forms.gle/uKNvZkyeAVqLcHEBA
+
+Algunos de los resultados fueron los siguientes:
+
+![RESULTADOS P1](https://github.com/GiselleLop/DEV011-social-network/assets/142268037/4f38b04a-9acc-4041-b774-1c9bc3bae639)
+
+![RESULTADOS P2](https://github.com/GiselleLop/DEV011-social-network/assets/142268037/257c00ac-d9f6-4b68-989b-1fdc215fccb3)
+
+![RESULTADOS P3](https://github.com/GiselleLop/DEV011-social-network/assets/142268037/995d6e11-58c4-4d4b-a36c-a7ea47e5cc04)
+
+Adicionalmente se recibieron los siguientes comentarios acerca de características que sugieren se modifiquen o añaden:
+1) Es una app con mucho estilo, práctica y un lindo diseño: no le cambiaría nada, es muy fácil de entender como usuaria.
+2) Que solo el que publica pueda editar o borrar, que se quede prendido el botón de me gusta, poder seleccionar la imagen de perfil.
+3) Añadiría nombre de usuario y sección de comentarios (no de editar).
+4) Mi comentario quedó al final de todos los otros, tal vez me hubiese gustado que quedara de los primero pues es el más actual. Ningún error, todo ok :).
+5) Las felicito por su página, está realmente muy linda y las cosas a 'mejorar' son detalles, nada muy sustancial, pues personalmente considero que hicieron un trabajo de alto nivel. ¡Felicitaciones! <3
+6) Es una app con mucho estilo, práctica y un lindo diseño: no le cambiaría nada, es muy fácil de entender como usuaria.
+7) Que solo el que publica pueda editar o borrar, que se quede prendido el botón de me gusta, poder seleccionar la imagen de perfil.
+8) Si logre salir, pero antes de salir sale un alert que dice Usuario no autenticado y se sale. No se si eso este bien.
+
+
+ACCIONABLES:
+De acuerdo con los resultados obtenidos, el equipo DEV de MiPlantapp considera las siguientes acciones para mejorar la experiencia de usuario:
+1) Restringir las interacciones de editar y eliminar para que sólo los dueños del post puedan interactuar de esta manera.
+2) Personalizar la app: Añadir al muro el nombre de usuario.
+3) Organizacion de post: Los post se van publicando y mostrando del más antiguo al más reciente.
+4) Mejorar el like: Identificar con color cuando un like está en funcionamiento. 
+
+
