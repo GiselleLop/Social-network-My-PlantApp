@@ -65,7 +65,7 @@ function renderCreateAccount(navigateTo) {
   buttonGoogle.setAttribute('class', 'buttonRegister');
   const googleImg = document.createElement('img');
   googleImg.setAttribute('src', 'https://firebasestorage.googleapis.com/v0/b/social-network-c61c9.appspot.com/o/img%2Fgoogleongpng.webp?alt=media&token=0bf583ce-00aa-467b-9101-654e9fe9aabd');
- console.log(googleImg.src);
+  console.log(googleImg.src);
   googleImg.setAttribute('class', 'imgGoogle');
   const textButton = document.createElement('h2');
   textButton.textContent = 'Registrarse con Google';

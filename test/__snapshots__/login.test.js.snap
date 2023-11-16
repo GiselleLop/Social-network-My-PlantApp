@@ -20,7 +20,7 @@ exports[`renderLogin Snapshot of login 1`] = `
       </h2>
       <img
         class="titleLogin"
-        src="img/regadera.png"
+        src="https://firebasestorage.googleapis.com/v0/b/social-network-c61c9.appspot.com/o/img%2Fregadera.png?alt=media&token=b6994595-5975-4a79-a110-686525ba4d5f"
         style="width: 40%; height: auto;"
       />
     </header>
@@ -67,7 +67,7 @@ exports[`renderLogin Snapshot of login 1`] = `
       >
         <img
           class="imgGoogle"
-          src="img/googleongpng.webp"
+          src="https://firebasestorage.googleapis.com/v0/b/social-network-c61c9.appspot.com/o/img%2Fgoogleongpng.webp?alt=media&token=0bf583ce-00aa-467b-9101-654e9fe9aabd"
         />
         <h2>
           Iniciar sesión con Google
