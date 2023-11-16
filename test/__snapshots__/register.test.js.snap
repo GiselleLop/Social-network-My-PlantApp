@@ -12,7 +12,7 @@ exports[`renderCreateAccount Snapshot of register 1`] = `
         Para crear una nueva cuenta, ingresa tus datos.
       </h2>
       <img
-        src="img/evolucion.png"
+        src="https://firebasestorage.googleapis.com/v0/b/social-network-c61c9.appspot.com/o/img%2Fevolucion.png?alt=media&token=2169c4ff-1063-488c-818a-e86c115b9b36"
         style="width: 40%; height: auto;"
       />
     </header>
@@ -68,7 +68,7 @@ exports[`renderCreateAccount Snapshot of register 1`] = `
       >
         <img
           class="imgGoogle"
-          src="img/googleongpng.webp"
+          src="https://firebasestorage.googleapis.com/v0/b/social-network-c61c9.appspot.com/o/img%2Fgoogleongpng.webp?alt=media&token=0bf583ce-00aa-467b-9101-654e9fe9aabd"
         />
         <h2>
           Registrarse con Google
