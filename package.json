@@ -50,5 +50,17 @@
   "jest": {
     "testEnvironment": "jsdom",
     "testRegex": "(/index.spec.js/.*|(\\.|/)(test|spec))\\.jsx?$"
-  }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GiselleLop/Social-network-My-PlantApp.git"
+  },
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/GiselleLop/Social-network-My-PlantApp/issues"
+  },
+  "homepage": "https://github.com/GiselleLop/Social-network-My-PlantApp#readme"
 }

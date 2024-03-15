@@ -3,6 +3,12 @@ import renderLogin from './login.js';
 import renderCreateAccount from './register.js';
 import { posts } from './post.js';
 
+window.onload = a();
+
+function a() {
+alert('jholaa')
+}
+
 const routes = [
   { path: '/', component: home },
   { path: '/login', component: renderLogin },
