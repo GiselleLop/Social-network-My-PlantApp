@@ -1,23 +1,30 @@
 @font-face {
     font-family: 'Font1';
-    src: url("/fonts/letter1.ttf") format('truetype');
+    src: url("assets/fonts/letter1.ttf") format('truetype');
 }
 
 @font-face {
     font-family: 'Font2';
-    src: url("/fonts/KGBlankSpaceSolid.ttf") format('truetype');
+    src: url("assets/fonts/KGBlankSpaceSolid.ttf") format('truetype');
+}
+
+* {
+    font-family: 'Font1', sans-serif;
+    margin: 0;
+    padding: 0;
 }
 #homepagePostes, .homepage {
 padding-top: 0em;
 box-shadow: 0 0 0px;
 display: flex;
 flex-direction: column;
-min-width: 100%;
+width: 100%;
 place-content: center;
 align-items: center;
 min-height: 100%;
 }
-html {
+
+html, body {
     background-size: 100% 100%;
     min-width: 100%;
     min-height: 100%;
@@ -26,24 +33,17 @@ html {
 
 body {
     background: linear-gradient(#f3f5ef, #c0df8d);
-    background-size: 100% 100%;
-    min-width: 100%;
-    min-height: 100%;
     align-items: center;
     justify-content: center;
-    display: flex;
     margin: 0px;
     padding-top: 0%;
     margin-top: 0%;
 }
-/* .background-layer {
-    position: fixed;
-    pointer-events: none; Evita que la capa intercepte eventos del ratón, para que los elementos subyacentes puedan recibir eventos 
-} */
+
 .background-layer{
     position: fixed;
     pointer-events: none;
-    background: url('/img/patron2.avif');
+    background: url('assets/images/patron2.avif');
     opacity: 0.4;
     z-index: -1;
     top: 0;
@@ -51,16 +51,6 @@ body {
     height: 100%;
     width: 100%;
     }
-.main {
-    display: flex;
-    place-content: center;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-    margin-top: 0%;
-    padding-top: 0%;
-}
-
 
 .login {
     display: flex;
@@ -69,37 +59,36 @@ body {
     text-align: center;
 }
 
-.headerRegister {
+.imageAndTextRegister {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: flex;
     font-size: 0.8em;
     font-family: 'Font2', sans-serif;
     width: 80%;
-    text-align: center;
-
 }
 
 
 /*MOBILE FIRST VISTA REGISTRO */
 
 
-.h4Register {
-    width: 100%;
-    margin: 2%;
-    font-family: 'Font1', sans-serif;
-    font-size: 20px;
-}
 
-.Inputcontainer {
-    
+
+.input-container {
     border-radius: 50px;
     text-align: left;
     display: flex;
     flex-direction: column;
     width: 80%;
     place-items: center;
-    margin-top: 2%;
-   
 }
 
+.input-container h4 {
+    width: 100%;
+    margin: 2%;
+    font-size: 20px;
+}
 .input {
     width: 100%;
     height: 2em;
@@ -129,7 +118,6 @@ body {
     place-content: center;
     align-items: center;
     gap: 4%;
-    font-weight: bolder;
 }
 .buttonRegister#google {
     width: 90%;
@@ -152,7 +140,6 @@ body {
 }
 
 #or {
-    font-family: 'Font1', sans-serif;
     margin-top: 0%;
     margin-bottom: 0%;
     font-size: 30px;
@@ -168,39 +155,55 @@ margin-top: 1em;
 
 .success {
 color: green;
-font-family: 'Font1', sans-serif;
 font-size: 20px;
 padding-top: 10px;
 }
 
 .error {
 color: red;
-font-family: 'Font1', sans-serif;
 font-size: 20px;
 padding-top: 10px;
 }
 
 /*MOBILE FIRST VISTA PRINCIPAL*/
-.containerimg {
-    display: flex;
-    justify-content: center;
+
+.homePageWelcome, .homePageRegister{
     align-items: center;
-    width: 50%;
+    width: 100%;
+    height: 100%;
+}
+.homeWelcomeAndText, .homePageWelcome, .homePageRegister {
+display: flex;
+flex-direction: column;
+place-content: center;
+}
+.homeWelcomeAndText {
+width: 100%;
+height: auto;
+}
+.content {
+  display: flex;
+  text-align: center;
+  width: 90%;
+  font-weight: bolder;
+  flex-direction: column;
 }
 
 #homeplant {
-    width: 90%;
+    display: flex;
+    transition: transform 0.3s;
+    /* width: 25%; */
+}
+#homeplant:hover {
+    transform: rotate(10deg);
 }
 
-.homewelcome, .hometittle, .words{
-    font-family: 'Font1', sans-serif;
+.homewelcome{
     font-size: 40px;
-    text-align: center;
-    margin: 10px;
-    font-weight: bolder;
 }
 
-.hometittle {
+.hometitle {
+    text-align: center;
     font-size: 300%;
     font-family: 'Font2', sans-serif;
 }
@@ -230,58 +233,33 @@ padding-top: 10px;
     background-color: #57403A;
     color: #D09080;
 }
-.words {
-    font-size: 250%;
-   text-align: center;
-   font-weight: bolder;
-   padding-bottom: 7%;
-}
+
 .wordsHome {
     font-size: 150%;
     text-align: center;
-    font-weight: bolder;
+ 
 }
-
 .orderbuttons {
-    font-family: 'Font1', sans-serif;
     font-size: 25px;
     place-content: center;
     align-items: center;
     flex-direction: column;
     display: flex;
+    gap: 5px;
 }
 .homepage {
     padding-top: 30px;
     box-shadow: 0 0 10px rgba(156, 158, 156, 0.346), 0 0 20px rgba(135, 136, 135, 0.5), 0 0 30px rgba(0, 255, 0, 0.203);
-    display: flex;
-    place-content: center;
-    align-items: center;
-    flex-direction: column;
     width: 90%;
     height: auto;
     border-radius: 10px;
 }
-.homepage1{
-    display: flex;
-    place-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: 100%;
-    height: auto;
-}
-.content {
-display: flex;
-text-align: center;
-flex-direction: column;
-place-content: center;
-width: 90%;
-}
+
 /*MOBILEFIRST DE VISTA DE POSTS*/
 .headerPost {
 width: 100%;
 height: 100px;
 background-color:#7e957d;
-margin: 0%;
 font-family: 'Font2', sans-serif;
 place-content: center;
 align-items: center;
@@ -325,7 +303,6 @@ margin-left: 20px;
 margin-right: 20px;
 }
 .ListGroupItem{
-font-family: 'Font1', sans-serif;
 border-color: #57403A;
 border-style: solid;
 background-color: #7e957d;
@@ -341,7 +318,6 @@ box-shadow: 3px 3px 9px black;
 }
 
 li h5 {
-margin: 0%;
 font-size: 150%;
 font-weight: bolder;
 text-align: left;
@@ -414,7 +390,6 @@ gap: 5px
 }
 #postText{
     border-radius: 0.3em;
-    font-family: 'Font1', sans-serif;
     height: 58%;
     font-size: 200%;
     padding: 10px;
@@ -461,15 +436,10 @@ height: auto;
 }
 
 .editContentTextarea{
-    font-family: 'Font1', sans-serif;
     font-size: 190%;
     font-weight: bolder;
 }
 .editPublic{
-padding-top: 0%;
-padding-bottom: 0%;
-margin-top: 0%;
-margin-bottom: 0%;
 font-size: 180%;
 background-color: #d7ffd5;
 width: 60%;
@@ -513,79 +483,40 @@ color: #71bd6b;
 
    .homepage {
     flex-direction: row;
-    padding-left: 0%;
-    padding-right: 0%;
     width: 90%;
     height: 90%;
-    padding-top: 0%;
-    padding-bottom: 0%;
-   
     }
-    .homepage1{
+    
+    .homePageWelcome, .homePageRegister{
         flex-direction: row;
-        width: 100%;
-        height: 100%;
-        padding-top: 0%;
-        padding-bottom: 0%;
-        padding-right: 0px;
-        padding-left: 0px;   
+        gap: 1%;
     }
 
-.homewelcome, .hometittle, .words{
-font-size: 230%;
-margin: 5px;
-padding-bottom: 0%;
-}
-.wordsHome{
-margin-top: 2%;
-margin-bottom: 2%;
-}
-
-.hometittle {
+.hometitle {
 font-size: 50px;
 }
-.containerimg #homeplant {
-    display: flex;
-    transition: transform 0.3s;
-}
 
-.containerimg #homeplant:hover {
-    transform: rotate(10deg);
-}
-.orderbuttons {
-margin-top: 20px;
-}
 /*ESTILO DE LA VISTA DE REGISTO*/
-.containerimg {
-    width: 30%;
+#homeplant {
+    width: 25%;
+}
+.content, .input-container {
+width: 60%;
+
 }
 .content {
-width: auto;
-
+  gap: 15px;
 }
-.headerRegister {
-       padding-left: 4em;
-       justify-content: center;
-       align-items: center;
-       width: 80%;
-       display: flex;
+
+.imageAndTextRegister {
+       width: 40%;
        flex-direction: column;
-       text-align: center;    
        gap: 10px;
-       font-size: 1.1em;
-}
+       font-size: 30px;
+} 
 
-.input {
-    width: 80%;
-    height: 2em;
-    margin-bottom: 1em;
-}
-
-.h4Register {
+.input-container h4  {
     font-size: 1.9em;
-    margin: 5px;
-    width: 80%;
-    font-weight: bolder;
 }
 
     .buttonRegister {
@@ -610,28 +541,22 @@ width: auto;
     width: 2.3em;
     }
     
-
-.Inputcontainer{
-margin-right: 6em;
-margin-top: 0%;
-padding: 10px;
-}
 .googleLoginBtn{
     border-radius: 0.6em;
     }
 
 .success {
-    padding-top: 0px;
+    /* padding-top: 0px; */
     font-weight: bolder;
     }
 .error {
-    padding-top: 0px;
+    /* padding-top: 0px; */
     font-weight: bolder;
     }
-.titleLogin{
+/* .titleLogin{
   margin-top: 0%;
   margin-bottom: 0%;
-}
+} */
 /*post*/
 .headerPost {
     width: 100%;
@@ -688,7 +613,6 @@ padding: 10px;
     li p {
         height: auto;
         font-size: 170%;
-        margin: 0%;
         padding: 12px;
         border: 2px;
         border-radius: 0.2em;

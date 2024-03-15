@@ -3,12 +3,6 @@ import renderLogin from './login.js';
 import renderCreateAccount from './register.js';
 import { posts } from './post.js';
 
-window.onload = a();
-
-function a() {
-alert('jholaa')
-}
-
 const routes = [
   { path: '/', component: home },
   { path: '/login', component: renderLogin },
@@ -47,12 +41,10 @@ function navigateTo(hash) {
 }
 
 window.addEventListener('popstate', () => {
-  console.log('change');
   navigateTo(defaultRoute);
 });
 
 function initRouter() {
-  console.log('Initializing router...');
   navigateTo(window.location.pathname || defaultRoute);
 }
 
