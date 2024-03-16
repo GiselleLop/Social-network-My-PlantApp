@@ -11,24 +11,11 @@ import {
 } from './firebase.js';
 
 export function posts(navigateTo) {
-  // const body1 = document.querySelector('body');
   const backgroundLayer = document.createElement('div');
   backgroundLayer.classList.add('background-layer');
-  // homepage.style.boxShadow = '0px 0px 0px transparent';
-  // homepage.style.height = '100%';
-  // homepage.style.width = '100%';
-  // homepage.style.paddingTop = '0em';
-  // backgroundLayer.style.background = "url('/img/patron2.avif')";
-  // backgroundLayer.style.opacity = 0.1;
-  // backgroundLayer.style.zIndex = '-1';
-  // backgroundLayer.style.top = '0';
-  // backgroundLayer.style.left = '0';
-  // backgroundLayer.style.width = '100%';
-  // backgroundLayer.style.height = '100%';
 
   const mainPage = document.createElement('div');
-  mainPage.setAttribute('class', 'homepage');
-  mainPage.setAttribute('id', 'homepagePostes');
+  mainPage.setAttribute('class', 'homepagePosts');
   const headerPost = document.createElement('div');
   headerPost.textContent = 'Mi Plantapp';
   headerPost.setAttribute('class', 'headerPost');
@@ -41,14 +28,13 @@ export function posts(navigateTo) {
   // icono cerrar sesion
   const iconLogOut = document.createElement('img');
   iconLogOut.setAttribute('src', 'https://firebasestorage.googleapis.com/v0/b/social-network-c61c9.appspot.com/o/img%2Fsalir.png?alt=media&token=88e1e584-e158-446a-bd54-6f4da6ddf03b');
-  console.log(iconLogOut.src);
   // Contenedor de Creacion de post
   const containerPubication = document.createElement('div');
   containerPubication.setAttribute('class', 'containerPubication');
   // Imagen Post
   const imagePublication = document.createElement('img');
   imagePublication.setAttribute('src', 'https://firebasestorage.googleapis.com/v0/b/social-network-c61c9.appspot.com/o/img%2Fmujer.png?alt=media&token=701d2fdc-675b-4550-b43f-162075eb0943');
-  console.log(imagePublication.src);
+
   imagePublication.setAttribute('class', 'imagePublication');
   // Formulario para la creacion de post
   const containerPost = document.createElement('form');
@@ -56,12 +42,12 @@ export function posts(navigateTo) {
   // Input titulo
   const postTitle = document.createElement('input');
   postTitle.setAttribute('type', 'text');
-  postTitle.setAttribute('class', 'postTitle');
+  postTitle.setAttribute('class', 'inputTitle');
   postTitle.setAttribute('placeholder', 'Título de la publicación.');
   // Input descripcion
   const post = document.createElement('textarea');
   post.setAttribute('placeholder', 'Ingresa el contenido de la publicación.');
-  post.setAttribute('id', 'postText');
+  post.setAttribute('id', 'inputDescription');
   // Nuevo campo para cargar archivos (fotos)
   const imageInput = document.createElement('input');
   imageInput.setAttribute('type', 'file');
@@ -74,22 +60,17 @@ export function posts(navigateTo) {
   // contenedor post
   const viewPost = document.createElement('div');
   viewPost.setAttribute('class', 'postView');
+
   buttonSave.addEventListener('click', (e) => {
     e.preventDefault();
-    const title = postTitle.value;
-    const description = post.value;
-    const imageFile = imageInput.files[0];
-    // console.log(title, description);
-    if (title === '' || description === '') {
+    if (postTitle.value === '' || post.value === '') {
       alert('Campos vacios');
-    } else {
-      saveTask(title, description, imageFile);
-      containerPost.reset();
     }
+    saveTask(postTitle.value, post.value, imageInput.files[0]);
+    containerPost.reset();
   });
 
   function setupPost(data) {
-    // console.log('Data inside setupPost:', data);
     if (data) {
       let html = '';
       data.forEach((doc) => {
@@ -97,18 +78,23 @@ export function posts(navigateTo) {
         if (!postdata.imageUrl) {
           html += `
           <li class="ListGroupItem">
-          <div class='buttonOptions'>
-          <button class='deleteButton' data-post-id="${doc.id}"> Delete </button>
-          <button class='editButton' data-post-id="${doc.id}"> Editar </button>
-          </div>
-          <h5>${postdata.title}</h5>
-          <p>${postdata.description}</p>
-          <div class="containerLikes" data-post-id="${doc.id}">
-          <button class="likeButton" data-post-id="${doc.id}">
-          <img src="https://firebasestorage.googleapis.com/v0/b/social-network-c61c9.appspot.com/o/img%2Flike.png?alt=media&token=36cb50ad-0402-421f-ad97-ca3ba12f8a85" class='imgLike'>
-          </button>
-          <span>${postdata.likes} Likes</span>
-          </div>
+            <div class='buttonOptions'>
+              <button class='deleteButton' data-post-id="${doc.id}"> Delete </button>
+              <button class='editButton' data-post-id="${doc.id}"> Editar </button>
+            </div>
+
+            <div class='post-contain'>
+              <h1 class='postTitle'>${postdata.title}</h5>
+              <p class='postDescription'>${postdata.description}</p>
+            </div>
+        
+            <div class="containerLikes" data-post-id="${doc.id}">
+              <button class="likeButton" data-post-id="${doc.id}">
+                <img src="https://firebasestorage.googleapis.com/v0/b/social-network-c61c9.appspot.com/o/img%2Flike.png?alt=media&token=36cb50ad-0402-421f-ad97-ca3ba12f8a85" class='imgLike'>
+              </button>
+              <span>${postdata.likes} Likes</span>
+            </div>
+
           <h4 class='editPublic' data-post-id="${doc.id}" style="display: none;"> Editar publicación: </h4>
           <textarea class="editTextarea" data-post-id="${doc.id}" style="display: none;">${postdata.title}</textarea>
           <textarea class="editContentTextarea" data-post-id="${doc.id}" style="display: none;">${postdata.description}</textarea>
@@ -140,6 +126,7 @@ export function posts(navigateTo) {
         }
       });
       viewPost.innerHTML = html;
+
       // Evento Like
       const likeButtons = document.querySelectorAll('.likeButton');
       likeButtons.forEach((button) => {
@@ -162,6 +149,7 @@ export function posts(navigateTo) {
           });
         });
       });
+
       // Evento Delete
       const deleteButton = document.querySelectorAll('.deleteButton');
       deleteButton.forEach((button) => {

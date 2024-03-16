@@ -28,10 +28,6 @@ import {
 } from 'firebase/storage';
 import { initializeApp } from 'firebase/app';
 
-// import renderCreateAccount from './register.js';
-// import { posts } from './post.js';
-// import navigateTo from './main';
-
 const firebaseConfig = {
   apiKey: 'AIzaSyA_nNPVRwXqmgLlxdYL4NmJwiItX9t2D5E',
   authDomain: 'social-network-c61c9.firebaseapp.com',
@@ -59,18 +55,10 @@ export function createUser(email, password) {
   return new Promise((resolve, reject) => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        console.log('Registro exitoso', userCredential);
         const user = userCredential.user;
         resolve({ message: 'success', email: user.email });
       })
       .catch((error) => {
-        console.error(
-          'Error al registrarse:',
-          error.code,
-          error.message,
-          error.serverResponse,
-        );
-        error.email = email;
         reject(error);
       });
   });
@@ -81,18 +69,10 @@ export function login(email, password) {
   return new Promise((resolve, reject) => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        console.log('Inicio sesion exitoso', userCredential);
         const user = userCredential.user;
         resolve({ message: 'success', email: user.email });
       })
       .catch((error) => {
-        console.error(
-          'Error al iniciar sesion:',
-          error.code,
-          error.message,
-          error.serverResponse,
-        );
-        error.email = email;
         reject(error);
       });
   });
@@ -124,7 +104,6 @@ export function login(email, password) {
 // }
 
 export async function saveTask(title, description, imageFile) {
-  console.log(imageFile);
   if (!imageFile) {
     const postCollection = collection(firestore, 'post');
     // Guarda la información del post en la base de datos
@@ -144,16 +123,15 @@ export async function saveTask(title, description, imageFile) {
       // Sube la imagen al almacenamiento y obtiene la URL de descarga
       const imageUrl = await uploadBytes(storageRef, imageFile)
         .then(() => getDownloadURL(storageRef));
-      console.log('URL de la imagen:', imageUrl);
       const postCollection = collection(firestore, 'post');
+
       // Guarda la información del post en la base de datos
-      const docRef = await addDoc(postCollection, {
+      await addDoc(postCollection, {
         title,
         description,
         imageUrl,
         likes: 0,
       });
-      console.log('Documento guardado con ID:', docRef.id);
     } catch (error) {
       console.error('Error al guardar el documento:', error);
       throw error; // Puedes manejar el error según tus necesidades
@@ -164,13 +142,11 @@ export async function saveTask(title, description, imageFile) {
 // funcion para registro con google
 export function GoogleRegister(navigateTo) {
   signInWithPopup(auth, googleProvider)
-    .then((result) => {
-      const user = result.user;
-      console.log('Usuario autenticado con Google:', user);
+    .then(() => {
       navigateTo('/posts');
     })
-    .catch((error) => {
-      console.error('Error al autenticar con Google:', error.message);
+    .catch(() => {
+      navigateTo('/');
     });
 }
 
@@ -203,7 +179,7 @@ export function handleLike(postId, userId, callback) {
               // Actualiza la cantidad de likes en la publicación
               updateDoc(postRef, { likes: updatedLikes })
                 .then(() => {
-                  console.log('Like registrado con éxito.');
+                //  console.log('Like registrado con éxito.');
 
                   // Agrega un nuevo documento de like
                   addDoc(likesCollection, { postId, userId })
@@ -294,28 +270,21 @@ export function editPost(postId, updatedTitle, updatedDescription) {
 
 // funcion cerrar sesion
 export function logOut(navigateTo) {
-  signOut(auth)
-    .then(() => {
-      // Sign-out successful.
-      console.error('sesion cerrada');
-      navigateTo('/login');
-    })
-    .catch((error) => {
-      console.error('Error al cerrar sesion:', error.code, error.message);
-      // An error happened.
-    });
+  return new Promise((resolve, reject) => {
+    signOut(auth)
+      .then(() => {
+        navigateTo('/');
+        resolve();
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
 }
 
 export function initializeAuth(setupPost, navigateTo) {
   onAuthStateChanged(auth, (user) => {
     if (user) {
-      // Usuario autenticado, puedes acceder a la colección de 'post'
-      console.log(
-        'User authenticated:',
-        auth.currentUser.uid,
-        'email:',
-        user.email,
-      );
       const userPostsCollection = collection(firestore, 'post');
       onSnapshot(userPostsCollection, (snapshot) => {
         const postSnap = [];
@@ -325,13 +294,7 @@ export function initializeAuth(setupPost, navigateTo) {
         setupPost(postSnap);
       });
     } else {
-      console.log('Usuario no autenticado');
-      // logOut();
-      alert('Usuario no autenticado');
-      navigateTo('/login');
-      // navigateTo('/login');
-      // backgroundLayer.style.opacity = 0.0;
-      // Resto del código de la lógica que quieras tras un usuario no autenticado
+      navigateTo('/');
     }
   });
 }
