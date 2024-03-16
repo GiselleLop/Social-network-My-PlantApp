@@ -10,14 +10,14 @@ const routes = [
   { path: '/posts', component: posts },
 ];
 
-let mainPage = document.querySelector('.homepage');
+const mainPage = document.querySelector('.homepage');
 
-if (!mainPage) {
-  const mainChild = document.createElement('div');
-  mainChild.id = 'content';
-  document.body.appendChild(mainChild);
-  mainPage = mainChild;
-}
+// if (!mainPage) {
+//   const mainChild = document.createElement('div');
+//   mainChild.id = 'content';
+//   document.body.appendChild(mainChild);
+//   mainPage = mainChild;
+// }
 
 const defaultRoute = '/';
 

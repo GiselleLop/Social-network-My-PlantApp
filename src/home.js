@@ -64,12 +64,11 @@
 
 function home(navigateTo) {
   const mainPage = document.createElement('div');
+  mainPage.classList.add('homePageWelcome');
   mainPage.innerHTML = `
-    <div class="homePageWelcome">
+    <img src="https://firebasestorage.googleapis.com/v0/b/social-network-c61c9.appspot.com/o/img%2Fplanta-arana.png?alt=media&token=836eab90-f526-44b6-b147-076dfff7cd62" id="homeplant" alt="Imagen de plantas">
       
-        <img src="https://firebasestorage.googleapis.com/v0/b/social-network-c61c9.appspot.com/o/img%2Fplanta-arana.png?alt=media&token=836eab90-f526-44b6-b147-076dfff7cd62" id="homeplant" alt="Imagen de plantas">
-      
-      <div class="content">
+    <div class="content">
 
         <div class='homeWelcomeAndText'>
           <h3 class="homewelcome">Bienvenidos a :</h3>
@@ -84,7 +83,7 @@ function home(navigateTo) {
         </div>
 
       </div>
-    </div>
+    
   `;
 
   mainPage.querySelector('#registerButton').addEventListener('click', () => {

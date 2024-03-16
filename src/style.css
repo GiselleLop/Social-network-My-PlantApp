@@ -13,15 +13,16 @@
     margin: 0;
     padding: 0;
 }
-#homepagePostes, .homepage {
-padding-top: 0em;
-box-shadow: 0 0 0px;
+.homepagePosts, .homepage {
 display: flex;
 flex-direction: column;
 width: 100%;
 place-content: center;
 align-items: center;
 min-height: 100%;
+}
+.homepagePosts {
+gap: 10px;
 }
 
 html, body {
@@ -59,90 +60,56 @@ body {
     text-align: center;
 }
 
-.imageAndTextRegister {
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    font-size: 0.8em;
-    font-family: 'Font2', sans-serif;
-    width: 80%;
-}
-
 
 /*MOBILE FIRST VISTA REGISTRO */
 
 
-
-
-.input-container {
-    border-radius: 50px;
-    text-align: left;
+#input-container > div {
     display: flex;
     flex-direction: column;
-    width: 80%;
-    place-items: center;
+    width: 90%;
+    text-align: left;
 }
 
-.input-container h4 {
+#input-container > div label  {
     width: 100%;
-    margin: 2%;
     font-size: 20px;
 }
-.input {
+#input-container > div input {
+    font-size: 20px;
+    text-align: center;
     width: 100%;
     height: 2em;
     border-radius: 0.7em;
     box-shadow: 3px 3px 2px rgb(32, 32, 32);
 }
 
-.buttonRegister {
+#input-container > button {
     box-shadow: 3px 3px 4px black;
-    width: auto;
+    width: 90%;
     height: 2em;
     border-radius: 5px;
-    padding-left: 30px;
-    padding-right: 30px;
-    padding-top: 10px;
-    padding-bottom: 10px;
     transition: background-color 0.3s;
     background-color: #D09080;
     color: #57403A;
     font-size: 85%;
     border-color: transparent;
-    margin: 10px;
     font-family: 'Font2', sans-serif;
-    letter-spacing: 2px;
     display: flex;
     flex-direction: row;
     place-content: center;
     align-items: center;
-    gap: 4%;
+    gap:10px;
 }
-.buttonRegister#google {
+/* .buttonRegister#google {
     width: 90%;
     height: 15%;
     padding-top: 0%;
     padding-bottom: 0%;
     font-size: 60%;
-}
+} */
 .imgGoogle{
     width: 10%;
-    }
-    
-.buttonRegister:hover {
-    background-color: #57403A;
-    color: #D09080;
-}
-
-#continue {
-    margin-top: 0%;
-}
-
-#or {
-    margin-top: 0%;
-    margin-bottom: 0%;
-    font-size: 30px;
 }
 
 .googleLoginBtn{
@@ -153,26 +120,25 @@ margin-top: 1em;
 
 }
 
+.success, .error {
+font-weight: bolder;
+font-size: 20px;
+}
 .success {
 color: green;
-font-size: 20px;
-padding-top: 10px;
 }
-
 .error {
 color: red;
-font-size: 20px;
-padding-top: 10px;
 }
 
 /*MOBILE FIRST VISTA PRINCIPAL*/
 
-.homePageWelcome, .homePageRegister{
+.homePageWelcome, .homePageRegister, .homepageLogin {
     align-items: center;
     width: 100%;
     height: 100%;
 }
-.homeWelcomeAndText, .homePageWelcome, .homePageRegister {
+.homeWelcomeAndText, .homePageWelcome, .homePageRegister, .homepageLogin {
 display: flex;
 flex-direction: column;
 place-content: center;
@@ -181,13 +147,32 @@ place-content: center;
 width: 100%;
 height: auto;
 }
-.content {
+
+.imageAndTextRegister  {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+.content, #input-container {
   display: flex;
-  text-align: center;
   width: 90%;
   font-weight: bolder;
   flex-direction: column;
+ text-align: center;
+  align-items: center;
 }
+
+/* #input-container {
+    gap: 10px;
+    border-radius: 50px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    place-items: center;
+    align-items: center;
+} */
 
 #homeplant {
     display: flex;
@@ -229,7 +214,7 @@ height: auto;
     font-size: 80%;
 }
 .registrationButton:hover,
-.loginButton:hover {
+.loginButton:hover, #input-container > button:hover, .buttonSave:hover {
     background-color: #57403A;
     color: #D09080;
 }
@@ -247,13 +232,13 @@ height: auto;
     display: flex;
     gap: 5px;
 }
-.homepage {
+/* .homepage {
     padding-top: 30px;
     box-shadow: 0 0 10px rgba(156, 158, 156, 0.346), 0 0 20px rgba(135, 136, 135, 0.5), 0 0 30px rgba(0, 255, 0, 0.203);
     width: 90%;
     height: auto;
     border-radius: 10px;
-}
+} */
 
 /*MOBILEFIRST DE VISTA DE POSTS*/
 .headerPost {
@@ -291,7 +276,7 @@ width: 100%;
 height: 100%;
 }
 
-.postView {
+/* .postView {
 width: 100%;
 list-style: none;
 display: flex;
@@ -301,42 +286,63 @@ place-content: center;
 padding-top: 30px;
 margin-left: 20px;
 margin-right: 20px;
-}
+} */
 .ListGroupItem{
-border-color: #57403A;
-border-style: solid;
+border: solid #57403A;
 background-color: #7e957d;
 border-radius: 1em;
 width: 70%;
-height: auto;
-padding: 20px;
-gap: 10px;
+gap: 1%;
 display: flex;
 flex-direction: column;
 box-shadow: 3px 3px 9px black;
 
 }
-
-li h5 {
+.post-contain {
+gap: 5px;
+height: auto;
+width: 100%;
+display: flex;
+flex-direction: column;
+align-items: center;
+/* height: 63%; */
+height: 90%;
+}
+.postTitle {
 font-size: 150%;
-font-weight: bolder;
 text-align: left;
 font-family: 'Font2', sans-serif;
 color:  #382925;
 padding-left: 3%;
+width: 95%;
 }
 
-li p {
-    font-weight: bolder;
-    height: auto;
+.postDescription {
+    padding: 0 1%;
+    width: 94%;
+    /* min-height: 50%; */
+    height: 80%;
     font-size: 150%;
-    margin: 0%;
-    padding: 12px;
     background-color: aliceblue;
-    border: 2px;
-    border-color: #57403A;
-    border-style: solid;
+    border: solid #57403A 2px;
     border-radius: 0.2em;
+    /* overflow: hidden; */
+    word-wrap: break-word; 
+
+    }
+
+    .containerLikes{
+        height: 35px;
+    display: flex;
+    place-content: left;
+    align-items: center;
+    gap:10px;
+    font-weight: bolder;
+    font-size: 20px;
+    }
+    .imgLike{
+    width: auto;
+    height: 100%;
     }
 .containerPubication{
    width: 100%;
@@ -345,7 +351,6 @@ li p {
    align-self: center;
    justify-content: center;
    flex-direction: row;
-   margin-top: 2%;
    gap: 5px;
 }
 .imagePublication{
@@ -353,8 +358,7 @@ width: 70px;
 height: auto;
 align-self: flex-start;
 background-color: white;
-border-color: black;
-border-style: solid;
+border:solid black;
 border-radius: 1em;
 padding: 0.5em;
 }
@@ -369,60 +373,42 @@ width: 60%;
 height: 300px;
 display: flex;
 place-content: center;
-align-self: center;
-justify-content: center;
 flex-direction: column;
-padding: 10px;
-border-color:#57403A;
-border-style: solid;
+border:solid #57403A;
 border-radius: 1em;
-gap: 5px
+gap: 5px;
+align-items: center;
 }
-.postTitle{
-    border-radius: 0.3em;
+.inputTitle{
+    text-align: center;
     font-family: 'Font2', sans-serif;
-    height: 18%;
     font-size: 150%;
-    padding: 10px;
-    overflow: hidden;
-    white-space: nowrap; /* Evita el salto de línea del texto */
-    text-overflow: ellipsis; 
 }
-#postText{
-    border-radius: 0.3em;
+#inputDescription{
     height: 58%;
     font-size: 200%;
-    padding: 10px;
+    padding: 0 2%;
+    /* padding: 10px; */
 }
+.inputTitle, #inputDescription {
+    width: 93%;
+    border-radius: 0.3em;
+    }
 .buttonSave {
     border-radius: 0.4em;
     width: auto;
-    align-self: last baseline;
     height: 20%;
+   margin-right:2%;
+   align-self: flex-end;
     font-family: 'Font2', sans-serif;
     font-size: 1.2em;
-    padding-left: 20px;
+    padding: 0 2%;
     transition: background-color 0.3s;
-    padding-right: 20px;
     background-color: #57403A;
     color: #f5bdaf;
 }
-.buttonSave:hover {
-    background-color: #f5bdaf;
-    color: #57403A;
-}
-.containerLikes{
-display: flex;
-place-content: left;
-align-items: center;
-gap:10px;
-font-weight: bolder;
-font-size: 20px;
-}
-.imgLike{
-width: 100%;
-height: auto;
-}
+
+
 
 .editTextarea, .editContentTextarea{
     border-radius: 10px;
@@ -463,14 +449,19 @@ color: #4c594b;
 
 }
 .buttonOptions{
+height: 30px;
 display: flex;
 place-content: end;
+align-items: center;
+margin-right: 2%;
 gap: 5px;
 }
 .deleteButton, .editButton{
 width: auto;
+padding: 0 1%;
 border-radius: 10px;
 font-family: 'Font2', sans-serif;
+height: 90%;
 }
 .deleteButton:hover, .editButton:hover{
 background-color: #382925;
@@ -480,14 +471,14 @@ color: #71bd6b;
 /* Estilos para pantallas de escritorio */
 @media only screen and (min-width: 920px) {
    /*VISTA PRINCIPAL*/
-
+/* 
    .homepage {
-    flex-direction: row;
-    width: 90%;
-    height: 90%;
+    /* flex-direction: row; */
+    /* width: 90%;
+    height: 90%; 
     }
-    
-    .homePageWelcome, .homePageRegister{
+     */
+    .homePageWelcome, .homePageRegister, .homepageLogin{
         flex-direction: row;
         gap: 1%;
     }
@@ -498,66 +489,43 @@ font-size: 50px;
 
 /*ESTILO DE LA VISTA DE REGISTO*/
 #homeplant {
+   
     width: 25%;
 }
-.content, .input-container {
-width: 60%;
 
+.imageAndTextRegister  {
+    font-size: 30px;
+    width: 30%;
+    
 }
 .content {
-  gap: 15px;
+width: 60%;
+gap: 15px;
 }
 
-.imageAndTextRegister {
-       width: 40%;
-       flex-direction: column;
-       gap: 10px;
-       font-size: 30px;
-} 
-
-.input-container h4  {
+#input-container  {
+width: 50%;
+gap: 15px;
+}
+  
+#input-container > div label  {
     font-size: 1.9em;
 }
 
-    .buttonRegister {
-        width: auto;
-        height: 1.8em;
-        margin: 7px;
-        border-radius: 0.6em;
-        font-size: 1.1em;
-        padding-top: 10px;
-        padding-bottom: 10px;
-    }
-    .buttonRegister#google {
-    width: 70%;
-    padding-top: 0%;
-    padding-bottom: 0%;
-    height: 3.2em;
-    font-size: 0.75em;
-    padding-left: 0px;
-    padding-right: 0px;
-    }
-    .imgGoogle{
-    width: 2.3em;
-    }
-    
-.googleLoginBtn{
+#input-container > button {
+    width: 60%;
+    height: 2.5em;
     border-radius: 0.6em;
-    }
+    font-size: 1.1em;
+}
 
-.success {
-    /* padding-top: 0px; */
-    font-weight: bolder;
-    }
-.error {
-    /* padding-top: 0px; */
-    font-weight: bolder;
-    }
-/* .titleLogin{
-  margin-top: 0%;
-  margin-bottom: 0%;
-} */
-/*post*/
+.imgGoogle{
+  width: 1.3em;
+}
+.success, .error {
+    font-size: 25px;
+}
+
 .headerPost {
     width: 100%;
     height: 100px;
@@ -570,98 +538,52 @@ width: 60%;
     width: 60px;
     height: auto;
     }
-   #homepagePostes, .homepage {
-    padding-top: 0em;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    place-content: center;
-    align-items: center;
-    height: 100%;
-    min-width: 100%;
-    min-height: 100%;
-    }
+  
     .postView {
     width: 100%;
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(3, 30%);
+    grid-auto-rows: minmax(250px, auto);
+    grid-gap: 15px;
     place-content: center;
-    padding-top: 30px;
-    margin-bottom: 40px;
+    margin-bottom: 5%; 
     }
     
     .ListGroupItem{
-    border-radius: 1em;
-    width: 35%;
-    height: auto;
-    padding: 20px;
-    gap: 8px;
-    display: flex;
-    flex-direction: column;
+    width: 100%;
+    height: 100%;
     }
     
-    li h5 {
-    margin: 0%;
-    font-size: 200%;
-    font-weight: bolder;
-    text-align: left;
-    font-family: 'Font2', sans-serif;
-    padding-left: 3%;
+    .postTitle {
+    font-size: 25px;
     }
     
-    li p {
-        height: auto;
-        font-size: 170%;
-        padding: 12px;
-        border: 2px;
-        border-radius: 0.2em;
-        }
+  .postDescription {
+        font-size: 24px;
+    }
     .containerPubication{
-       width: 100%;
-       display: flex;
-       place-content: center;
-       align-self: center;
-       justify-content: center;
-       flex-direction: row;
-       margin-top: 2%;
        gap: 15px;
     }
     .imagePublication{
     width: 90px;
     height: 90px;
-    align-self: flex-start;
-    border-style: solid;
-    border-radius: 1em;
-    padding: 0.5em;
     }
     #task-form{
     width: 50%;
     height: 280px;
-    padding: 10px;
-    border-radius: 1em;
-    gap: 5px
     }
-    .postTitle{
-        border-radius: 0.3em;
+    .inputTitle{
         height: 12%;
-        font-size: 180%;
-        padding: 10px;
+        font-size: 25px;
     }
-    #postText{
-        border-radius: 0.3em;
+    #inputDescription{
         height: 50%;
-        font-size: 200%;
-        padding: 10px;
+        font-size: 20px;
     }
+   
     .buttonSave {
-        border-radius: 0.4em;
-        width: auto;
-        align-self: last baseline;
         height: 15%;
         font-size: 1.5em;
-        padding-left: 30px;
-        padding-right: 30px;
     }
     .logOutButton{
         width: 60px;
@@ -674,8 +596,8 @@ width: 60%;
 /* Estilo inicial del botón de "like" */
 .likeButton{
     background-color: transparent;
-    width: 40px;
-    height: 40px;
+    width: auto;
+    height: 90%;
     border-radius: 40px;
 } 
 
