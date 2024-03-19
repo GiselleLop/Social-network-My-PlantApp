@@ -30,7 +30,7 @@ export function posts(navigateTo) {
   iconLogOut.setAttribute('src', 'https://firebasestorage.googleapis.com/v0/b/social-network-c61c9.appspot.com/o/img%2Fsalir.png?alt=media&token=88e1e584-e158-446a-bd54-6f4da6ddf03b');
   // Contenedor de Creacion de post
   const containerPubication = document.createElement('div');
-  containerPubication.setAttribute('class', 'containerPubication');
+  containerPubication.setAttribute('class', 'containerPublication');
   // Imagen Post
   const imagePublication = document.createElement('img');
   imagePublication.setAttribute('src', 'https://firebasestorage.googleapis.com/v0/b/social-network-c61c9.appspot.com/o/img%2Fmujer.png?alt=media&token=701d2fdc-675b-4550-b43f-162075eb0943');

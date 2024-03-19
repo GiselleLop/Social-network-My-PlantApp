@@ -1,217 +1,200 @@
 @font-face {
-    font-family: 'Font1';
-    src: url("assets/fonts/letter1.ttf") format('truetype');
+  font-family: 'Font1';
+  src: url("assets/fonts/letter1.ttf") format('truetype');
 }
 
 @font-face {
-    font-family: 'Font2';
-    src: url("assets/fonts/KGBlankSpaceSolid.ttf") format('truetype');
+  font-family: 'Font2';
+  src: url("assets/fonts/KGBlankSpaceSolid.ttf") format('truetype');
 }
 
 * {
-    font-family: 'Font1', sans-serif;
-    margin: 0;
-    padding: 0;
+  font-family: 'Font1', sans-serif;
+  margin: 0;
+  padding: 0;
 }
 .homepagePosts, .homepage {
-display: flex;
-flex-direction: column;
-width: 100%;
-place-content: center;
-align-items: center;
-min-height: 100%;
+  width: 100%;
+  min-height: 100%;
 }
+
 .homepagePosts {
-gap: 10px;
+  gap: 20px;
 }
 
 html, body {
-    background-size: 100% 100%;
-    min-width: 100%;
-    min-height: 100%;
-    display: flex;
+  background-size: 100% 100%;
+  min-width: 100%;
+  min-height: 100%;
+  display: flex;
 }
 
 body {
-    background: linear-gradient(#f3f5ef, #c0df8d);
-    align-items: center;
-    justify-content: center;
-    margin: 0px;
-    padding-top: 0%;
-    margin-top: 0%;
+  background: linear-gradient(#f3f5ef, #c0df8d);
+  align-items: center;
+  justify-content: center;
+  margin: 0px;
+  padding-top: 0%;
+  margin-top: 0%;
 }
 
 .background-layer{
-    position: fixed;
-    pointer-events: none;
-    background: url('assets/images/patron2.avif');
-    opacity: 0.4;
-    z-index: -1;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    }
-
-.login {
-    display: flex;
-    flex-direction: column;
-    width: 80%;
-    text-align: center;
+  position: fixed;
+  pointer-events: none;
+  background: url('assets/images/patron2.avif');
+  opacity: 0.2;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
 }
 
+.login {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+}
 
 /*MOBILE FIRST VISTA REGISTRO */
-
-
 #input-container > div {
-    display: flex;
-    flex-direction: column;
-    width: 90%;
-    text-align: left;
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  text-align: left;
 }
 
 #input-container > div label  {
-    width: 100%;
-    font-size: 20px;
+  width: 100%;
+  font-size: 20px;
 }
+
 #input-container > div input {
-    font-size: 20px;
-    text-align: center;
-    width: 100%;
-    height: 2em;
-    border-radius: 0.7em;
-    box-shadow: 3px 3px 2px rgb(32, 32, 32);
+  font-size: 20px;
+  width: 100%;
+  height: 2em;
+  border-radius: 0.7em;
+  box-shadow: 3px 3px 2px rgb(32, 32, 32);
 }
 
 #input-container > button {
-    box-shadow: 3px 3px 4px black;
-    width: 90%;
-    height: 2em;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-    background-color: #D09080;
-    color: #57403A;
-    font-size: 85%;
-    border-color: transparent;
-    font-family: 'Font2', sans-serif;
-    display: flex;
-    flex-direction: row;
-    place-content: center;
-    align-items: center;
-    gap:10px;
-}
-/* .buttonRegister#google {
-    width: 90%;
-    height: 15%;
-    padding-top: 0%;
-    padding-bottom: 0%;
-    font-size: 60%;
-} */
-.imgGoogle{
-    width: 10%;
+  box-shadow: 3px 3px 4px black;
+  width: 90%;
+  height: 2em;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+  background-color: #D09080;
+  color: #57403A;
+  font-size: 85%;
+  border-color: transparent;
+  font-family: 'Font2', sans-serif;
+  display: flex;
+  flex-direction: row;
+  place-content: center;
+  align-items: center;
+  gap:10px;
 }
 
-.googleLoginBtn{
-border-radius: 5px;
-box-shadow: 3px 3px 4px black;
-border: 1px solid #000;
-margin-top: 1em;
+.imgGoogle {
+  width: 10%;
+}
 
+.googleLoginBtn {
+  border-radius: 5px;
+  box-shadow: 3px 3px 4px black;
+  border: 1px solid #000;
+  margin-top: 1em;
 }
 
 .success, .error {
-font-weight: bolder;
-font-size: 20px;
-}
-.success {
-color: green;
-}
-.error {
-color: red;
+  font-weight: bolder;
+  font-size: 20px;
 }
 
+.success {
+  color: green;
+}
+
+.error {
+  color: red;
+}
 /*MOBILE FIRST VISTA PRINCIPAL*/
 
 .homePageWelcome, .homePageRegister, .homepageLogin {
-    align-items: center;
-    width: 100%;
-    height: 100%;
-}
-.homeWelcomeAndText, .homePageWelcome, .homePageRegister, .homepageLogin {
-display: flex;
-flex-direction: column;
-place-content: center;
-}
-.homeWelcomeAndText {
-width: 100%;
-height: auto;
+  align-items: center;
+  width: 100%;
+  height: 100%;
 }
 
-.imageAndTextRegister  {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+.homeWelcomeAndText, 
+.homePageWelcome, 
+.homePageRegister, 
+.homepageLogin, 
+.imageAndTextRegister, 
+.content,
+#input-container, 
+.orderbuttons, 
+.post-contain,
+#task-form, 
+.homepagePosts, 
+.homepage 
+ {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  place-content: center;
+}
+
+.homeWelcomeAndText {
+  width: 100%;
+  height: auto;
+}
+
+.imageAndTextRegister, .login, .content, #input-container, .hometitle, .wordsHome, #input-container > div input {
+  text-align: center;
 }
 .content, #input-container {
-  display: flex;
   width: 90%;
   font-weight: bolder;
-  flex-direction: column;
- text-align: center;
-  align-items: center;
 }
-
-/* #input-container {
-    gap: 10px;
-    border-radius: 50px;
-    text-align: left;
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-    place-items: center;
-    align-items: center;
-} */
 
 #homeplant {
-    display: flex;
-    transition: transform 0.3s;
-    /* width: 25%; */
-}
-#homeplant:hover {
-    transform: rotate(10deg);
+  display: flex;  
+  transition: transform 0.3s;
 }
 
-.homewelcome{
-    font-size: 40px;
+#homeplant:hover {
+  transform: rotate(10deg);
+}
+
+.homewelcome {
+  font-size: 40px;
 }
 
 .hometitle {
-    text-align: center;
-    font-size: 300%;
-    font-family: 'Font2', sans-serif;
+  font-size: 300%;
+  font-family: 'Font2', sans-serif;
 }
 
 .registrationButton,
 .loginButton {
-    letter-spacing: 2px;
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #D09080;
-    color: #57403A;
-    text-decoration: none;
-    border: none;
-    border-radius: 5px;
-    /* Espacio entre los botones */
-    cursor: pointer;
-    transition: background-color 0.3s;
-    justify-content: space-around;
-    height: auto;
-    width: auto;
-    font-family: 'Font2', sans-serif;
-    font-weight: bolder;
-    font-size: 80%;
+  letter-spacing: 2px;
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #D09080;
+  color: #57403A;
+  text-decoration: none;
+  border: none;
+  border-radius: 5px;
+  /* Espacio entre los botones */
+  cursor: pointer;
+  transition: background-color 0.3s;
+  justify-content: space-around;
+  height: auto;
+  width: auto;
+  font-family: 'Font2', sans-serif;
+  font-weight: bolder;
+  font-size: 80%;
 }
 .registrationButton:hover,
 .loginButton:hover, #input-container > button:hover, .buttonSave:hover {
@@ -221,390 +204,367 @@ height: auto;
 
 .wordsHome {
     font-size: 150%;
-    text-align: center;
- 
 }
 .orderbuttons {
-    font-size: 25px;
-    place-content: center;
-    align-items: center;
-    flex-direction: column;
-    display: flex;
-    gap: 5px;
+  font-size: 25px;
+  gap: 5px;
 }
-/* .homepage {
-    padding-top: 30px;
-    box-shadow: 0 0 10px rgba(156, 158, 156, 0.346), 0 0 20px rgba(135, 136, 135, 0.5), 0 0 30px rgba(0, 255, 0, 0.203);
-    width: 90%;
-    height: auto;
-    border-radius: 10px;
-} */
 
 /*MOBILEFIRST DE VISTA DE POSTS*/
 .headerPost {
-width: 100%;
-height: 100px;
-background-color:#7e957d;
-font-family: 'Font2', sans-serif;
-place-content: center;
-align-items: center;
-font-size: 250%;
-display: flex;
-color:white;
--webkit-text-stroke: 2px black;
-gap: 2px;
-}
-.logoImage{
-width: 40px;
-height: auto;
-}
-.logOutButton{
-width: 45px;
-height: auto;
-display: flex;
-background-color: transparent;
-border-color: transparent;
-border-radius: 16px;
-padding: 3px;
-
-}
-.logOutButton:hover{
-    background-color: white;
-}
-.logOutButton img{
-width: 100%;
-height: 100%;
+  width: 100%;
+  height: 100px;
+  background-color:#7e957d;
+  font-family: 'Font2', sans-serif;
+  place-content: center;
+  align-items: center;
+  font-size: 250%;
+  display: flex;
+  color:white;
+  -webkit-text-stroke: 2px black;
+  gap: 2px;
 }
 
-/* .postView {
-width: 100%;
-list-style: none;
-display: flex;
-gap: 20px;
-flex-wrap: wrap;
-place-content: center;
-padding-top: 30px;
-margin-left: 20px;
-margin-right: 20px;
-} */
-.ListGroupItem{
-border: solid #57403A;
-background-color: #7e957d;
-border-radius: 1em;
-width: 70%;
-gap: 1%;
-display: flex;
-flex-direction: column;
-box-shadow: 3px 3px 9px black;
+.logoImage {
+  width: 40px;
+  height: auto;
+}
 
+.logOutButton {
+  width: 45px;
+  height: auto;
+  display: flex;
+  background-color: transparent;
+  border-color: transparent;
+  border-radius: 16px;
+  padding: 3px;
+}
+
+.logOutButton:hover {
+  background-color: white;
+}
+
+.logOutButton img {
+  width: 100%;
+  height: 100%;
+}
+
+.ListGroupItem {
+  border: solid #57403A;
+  background-color: #7e957d;
+  border-radius: 1em;
+  width: 70%;
+  gap: 1%;
+  display: flex;
+  flex-direction: column;
+  place-content: center;
+  box-shadow: 3px 3px 9px black;
 }
 .post-contain {
-gap: 5px;
-height: auto;
-width: 100%;
-display: flex;
-flex-direction: column;
-align-items: center;
-/* height: 63%; */
-height: 90%;
+  gap: 5px;
+  height: auto;
+  width: 100%;
+  height: 90%;
 }
 .postTitle {
-font-size: 150%;
-text-align: left;
-font-family: 'Font2', sans-serif;
-color:  #382925;
-padding-left: 3%;
-width: 95%;
+  font-size: 150%;
+  text-align: left;
+  font-family: 'Font2', sans-serif;
+  color:  #382925;
+  padding-left: 3%;
+  width: 95%;
 }
 
 .postDescription {
-    padding: 0 1%;
-    width: 94%;
-    /* min-height: 50%; */
-    height: 80%;
-    font-size: 150%;
-    background-color: aliceblue;
-    border: solid #57403A 2px;
-    border-radius: 0.2em;
-    /* overflow: hidden; */
-    word-wrap: break-word; 
-
-    }
-
-    .containerLikes{
-        height: 35px;
-    display: flex;
-    place-content: left;
-    align-items: center;
-    gap:10px;
-    font-weight: bolder;
-    font-size: 20px;
-    }
-    .imgLike{
-    width: auto;
-    height: 100%;
-    }
-.containerPubication{
-   width: 100%;
-   display: flex;
-   place-content: center;
-   align-self: center;
-   justify-content: center;
-   flex-direction: row;
-   gap: 5px;
+  padding: 0 1%;
+  width: 94%;
+  height: 80%;
+  font-size: 150%;
+  background-color: aliceblue;
+  border: solid #57403A 2px;
+  border-radius: 0.2em;
+  word-wrap: break-word; 
 }
-.imagePublication{
-width: 70px;
-height: auto;
-align-self: flex-start;
-background-color: white;
-border:solid black;
-border-radius: 1em;
-padding: 0.5em;
+
+.containerLikes {
+  height: 35px;
+  display: flex;
+  place-content: left;
+  align-items: center;
+  gap:10px;
+  font-weight: bolder;
+  font-size: 20px;
+  margin-bottom: 1.5%;
+}
+
+.imgLike {
+  width: auto;
+  height: 75%;
+}
+    /* Estilo inicial del botón de "like" */
+.likeButton {
+  display: flex;
+  place-content: center;
+  align-items: center;
+  background-color: transparent;
+  width: 8.5%;
+  height: 90%;
+  border-radius: 40px;
+  margin-left: 3%;
+} 
+
+/* Estilo del botón de "like" cuando se le ha dado "like" (coloreado de rojo) */
+.likeButton.liked {
+  background-color: red;
+  color: white;
+  border: 1px solid red
+}
+ 
+.containerPublication {
+  width: 100%;
+  display: flex;
+  place-content: center;
+  align-self: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 5px;
+}
+.imagePublication {
+  width: 70px;
+  height: auto;
+  align-self: flex-start;
+  background-color: white;
+  border:solid black;
+  border-radius: 1em;
+  padding: 0.5em;
 }
 .imgPostPublication {
-width: 80%;
-height: auto;
-align-self: center;
+  width: 80%;
+  height: auto;
+  align-self: center;
 }
-#task-form{
-background-color: #a38a83;
-width: 60%;
-height: 300px;
-display: flex;
-place-content: center;
-flex-direction: column;
-border:solid #57403A;
-border-radius: 1em;
-gap: 5px;
-align-items: center;
+#task-form {
+  background-color: #a38a83;
+  width: 60%;
+  height: 300px;
+  border:solid #57403A;
+  border-radius: 1em;
+  gap: 5px;
 }
-.inputTitle{
-    text-align: center;
-    font-family: 'Font2', sans-serif;
-    font-size: 150%;
+
+.inputTitle {
+  text-align: center;
+  font-family: 'Font2', sans-serif;
+  font-size: 150%;
+  width: 93%;
 }
-#inputDescription{
-    height: 58%;
-    font-size: 200%;
-    padding: 0 2%;
-    /* padding: 10px; */
+#inputDescription {
+  height: 58%;
+  font-size: 200%;
+  padding: 1% 2%;
+  width: 90%;
 }
+
 .inputTitle, #inputDescription {
-    width: 93%;
-    border-radius: 0.3em;
-    }
-.buttonSave {
-    border-radius: 0.4em;
-    width: auto;
-    height: 20%;
-   margin-right:2%;
-   align-self: flex-end;
-    font-family: 'Font2', sans-serif;
-    font-size: 1.2em;
-    padding: 0 2%;
-    transition: background-color 0.3s;
-    background-color: #57403A;
-    color: #f5bdaf;
+  border-radius: 0.3em;
 }
 
-
+.buttonSave {
+  border-radius: 0.4em;
+  width: auto;
+  height: 20%;
+  margin-right:2%;
+  align-self: flex-end;
+  font-family: 'Font2', sans-serif;
+  font-size: 1.2em;
+  padding: 0 2%;
+  transition: background-color 0.3s;
+  background-color: #57403A;
+  color: #f5bdaf;
+}
 
 .editTextarea, .editContentTextarea{
-    border-radius: 10px;
-    border-color: transparent;
-    padding: 10px;
-    height: auto;
+  border-radius: 10px;
+  border-color: transparent;
+  padding: 10px;
+  height: auto;
 }
+
 .editTextarea{
-    font-family: 'Font2', sans-serif;
-    font-size: 160%;
+  font-family: 'Font2', sans-serif;
+  font-size: 160%;
 }
 
 .editContentTextarea{
-    font-size: 190%;
-    font-weight: bolder;
+  font-size: 190%;
+  font-weight: bolder;
 }
-.editPublic{
-font-size: 180%;
-background-color: #d7ffd5;
-width: 60%;
-align-self: center;
-place-content: center;
-border-radius: 10px;
-}
-.saveEditButton{
-font-size: 100%;
-border-radius: 10px;
-place-content: center;
-font-family: 'Font2', sans-serif;
-background:#4c594b;
-width: 30%;
-align-self: center;
-color: white;
-}
-.saveEditButton:hover {
-background-color: white;
-color: #4c594b;
 
+.editPublic{
+  font-size: 180%;
+  background-color: #d7ffd5;
+  width: 60%;
+  align-self: center;
+  place-content: center;
+  border-radius: 10px;
 }
-.buttonOptions{
-height: 30px;
-display: flex;
-place-content: end;
-align-items: center;
-margin-right: 2%;
-gap: 5px;
+
+.saveEditButton {
+  font-size: 100%;
+  border-radius: 10px;
+  place-content: center;
+  font-family: 'Font2', sans-serif;
+  background:#4c594b;
+  width: 30%;
+  align-self: center;
+  color: white;
 }
-.deleteButton, .editButton{
-width: auto;
-padding: 0 1%;
-border-radius: 10px;
-font-family: 'Font2', sans-serif;
-height: 90%;
+
+.saveEditButton:hover {
+  background-color: white;
+  color: #4c594b;
 }
-.deleteButton:hover, .editButton:hover{
-background-color: #382925;
-color: #71bd6b;
+
+.buttonOptions {
+  height: 30px;
+  display: flex;
+  place-content: end;
+  align-items: center;
+  margin: 2% 2% 0 0;
+  gap: 5px;
+}
+
+.deleteButton, .editButton {
+  width: auto;
+  padding: 0 1%;
+  border-radius: 10px;
+  font-family: 'Font2', sans-serif;
+  height: 90%;
+}
+
+.deleteButton:hover, .editButton:hover {
+  background-color: #382925;
+  color: #71bd6b;
 }
 
 /* Estilos para pantallas de escritorio */
 @media only screen and (min-width: 920px) {
    /*VISTA PRINCIPAL*/
-/* 
-   .homepage {
-    /* flex-direction: row; */
-    /* width: 90%;
-    height: 90%; 
-    }
-     */
-    .homePageWelcome, .homePageRegister, .homepageLogin{
-        flex-direction: row;
-        gap: 1%;
-    }
+.homePageWelcome, .homePageRegister, .homepageLogin{
+  flex-direction: row;
+  gap: 1%;
+}
 
 .hometitle {
-font-size: 50px;
+  font-size: 50px;
 }
 
 /*ESTILO DE LA VISTA DE REGISTO*/
 #homeplant {
-   
-    width: 25%;
+  width: 25%;
 }
 
-.imageAndTextRegister  {
-    font-size: 30px;
-    width: 30%;
-    
+.imageAndTextRegister {
+  font-size: 30px;
+  width: 30%; 
 }
 .content {
-width: 60%;
-gap: 15px;
+  width: 60%;
+  gap: 15px;
 }
 
 #input-container  {
-width: 50%;
-gap: 15px;
+  width: 50%;
+  gap: 15px;
 }
   
-#input-container > div label  {
-    font-size: 1.9em;
+#input-container > div label {
+  font-size: 1.9em;
 }
 
 #input-container > button {
-    width: 60%;
-    height: 2.5em;
-    border-radius: 0.6em;
-    font-size: 1.1em;
+  width: 60%;
+  height: 2.5em;
+  border-radius: 0.6em;
+  font-size: 1.1em;
 }
 
-.imgGoogle{
+.imgGoogle {
   width: 1.3em;
 }
+
 .success, .error {
-    font-size: 25px;
+  font-size: 25px;
 }
 
 .headerPost {
-    width: 100%;
-    height: 100px;
-    margin: 0%;
-    font-size: 400%;
-    display: flex;
-    gap: 20px;
-    }
-    .logoImage{
-    width: 60px;
-    height: auto;
-    }
+  margin: 0%;
+  font-size: 400%;
+  gap: 20px;
+}
+
+.logoImage {
+  width: 60px;
+  height: auto;
+}
   
-    .postView {
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(3, 30%);
-    grid-auto-rows: minmax(250px, auto);
-    grid-gap: 15px;
-    place-content: center;
-    margin-bottom: 5%; 
-    }
+.postView {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 30%);
+  grid-auto-rows: minmax(260px, auto);
+  grid-gap: 15px;
+  place-content: center;
+  margin-bottom: 5%; 
+}
     
-    .ListGroupItem{
-    width: 100%;
-    height: 100%;
-    }
+.ListGroupItem{
+  width: 100%;
+  height: 100%;
+}
     
-    .postTitle {
-    font-size: 25px;
-    }
+.postTitle {
+  font-size: 25px;
+}
     
-  .postDescription {
-        font-size: 24px;
-    }
-    .containerPubication{
-       gap: 15px;
-    }
-    .imagePublication{
-    width: 90px;
-    height: 90px;
-    }
-    #task-form{
-    width: 50%;
-    height: 280px;
-    }
-    .inputTitle{
-        height: 12%;
-        font-size: 25px;
-    }
-    #inputDescription{
-        height: 50%;
-        font-size: 20px;
-    }
+.postDescription {
+  font-size: 24px;
+}
+
+.containerPublication{
+  gap: 15px;
+}
+.imagePublication{
+  width: 90px;
+  height: 90px;
+}
+#task-form{
+  width: 50%;
+  height: 280px;
+}
+
+.inputTitle{
+  height: 12%;
+  font-size: 25px;
+}
    
-    .buttonSave {
-        height: 15%;
-        font-size: 1.5em;
-    }
-    .logOutButton{
-        width: 60px;
-        margin-left: 85%;
-        z-index: 3;
-        position: absolute;
-    }
+#inputDescription{
+  height: 49%;
+  font-size: 20px;
+}
+   
+.buttonSave {
+  height: 15%;
+  font-size: 1.5em;
 }
 
-/* Estilo inicial del botón de "like" */
-.likeButton{
-    background-color: transparent;
-    width: auto;
-    height: 90%;
-    border-radius: 40px;
-} 
-
-/* Estilo del botón de "like" cuando se le ha dado "like" (coloreado de rojo) */
-.likeButton.liked {
-    background-color: red;
-    color: white;
-    border: 1px solid red
+.logOutButton{
+  width: 60px;
+  margin-left: 85%;
+  z-index: 3;
+  position: absolute;
 }
-  
+
+}
+
+ 
