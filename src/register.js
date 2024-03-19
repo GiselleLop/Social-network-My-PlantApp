@@ -17,6 +17,7 @@ function renderCreateAccount(navigateTo) {
           <label for="emailRegister">Correo Electrónico:</label>
           <input type="email" id="emailRegister" name="email" autocomplete="email">
         </div>
+        
         <div>
           <label for="passwordRegister">Contraseña:</label>
           <input type="password" id="passwordRegister" name="password" autocomplete="current-password">
