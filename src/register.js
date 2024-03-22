@@ -7,28 +7,33 @@ function renderCreateAccount(navigateTo) {
   
 
       <div class="imageAndTextRegister">
-        <h2>Para crear una nueva cuenta, ingresa tus datos.</h2>
+        <h2>To create a new account, enter your details.</h2>
         <img src="https://firebasestorage.googleapis.com/v0/b/social-network-c61c9.appspot.com/o/img%2Fevolucion.png?alt=media&token=2169c4ff-1063-488c-818a-e86c115b9b36" style="width: 55%; height: auto;">
       </div>
      
       <form id="input-container">
       
         <div>
-          <label for="emailRegister">Correo Electrónico:</label>
+          <label for="usernameRegister">Username:</label>
+          <input type="text" id="usernameRegister" name="username" autocomplete="username">
+        </div>
+    
+        <div>
+          <label for="emailRegister">Email:</label>
           <input type="email" id="emailRegister" name="email" autocomplete="email">
         </div>
         
         <div>
-          <label for="passwordRegister">Contraseña:</label>
+          <label for="passwordRegister">Password:</label>
           <input type="password" id="passwordRegister" name="password" autocomplete="current-password">
         </div>
         <span id="answerPass"></span>
   
-        <button id="continue">Continuar</button>
+        <button id="signUp"> Sign up </button>
     
         <button id="google">
         <img src="https://firebasestorage.googleapis.com/v0/b/social-network-c61c9.appspot.com/o/img%2Fgoogleongpng.webp?alt=media&token=0bf583ce-00aa-467b-9101-654e9fe9aabd" class="imgGoogle">
-        Registrarse con Google
+        Sign up with Google
         </button>
 
         <button id="return">Return</button>
@@ -39,10 +44,11 @@ function renderCreateAccount(navigateTo) {
     navigateTo('/');
   });
 
-  mainPage.querySelector('#continue').addEventListener('click', (e) => {
+  mainPage.querySelector('#signUp').addEventListener('click', (e) => {
     e.preventDefault();
     const signUpEmail = document.querySelector('#emailRegister').value;
     const signPassword = document.querySelector('#passwordRegister').value;
+    const signUsername = document.querySelector('#usernameRegister').value;
 
     createUser(signUpEmail, signPassword)
       .then((ok) => {
