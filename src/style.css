@@ -30,7 +30,7 @@ html, body {
 }
 
 body {
-  background: linear-gradient(#f3f5ef, #c0df8d);
+  background: linear-gradient(#f3f5ef, #b3db74);
   align-items: center;
   justify-content: center;
   margin: 0px;
@@ -54,6 +54,11 @@ body {
   display: flex;
   flex-direction: column;
   width: 80%;
+}
+ 
+#input-container > button, .editPublic, .hometitle,.registrationButton,
+.loginButton, .headerPost, .postTitle, .inputTitle, .buttonSave, .editTextarea, .saveEditButton, .deleteButton, .editButton {
+  font-family: 'Font2', sans-serif;
 }
 
 /*MOBILE FIRST VISTA REGISTRO */
@@ -87,7 +92,6 @@ body {
   color: #57403A;
   font-size: 85%;
   border-color: transparent;
-  font-family: 'Font2', sans-serif;
   display: flex;
   flex-direction: row;
   place-content: center;
@@ -150,7 +154,7 @@ body {
   height: auto;
 }
 
-.imageAndTextRegister, .login, .content, #input-container, .hometitle, .wordsHome, #input-container > div input {
+.imageAndTextRegister, .editPublic, .login, .content, #input-container, .hometitle, .wordsHome, #input-container > div input {
   text-align: center;
 }
 .content, #input-container {
@@ -173,7 +177,6 @@ body {
 
 .hometitle {
   font-size: 300%;
-  font-family: 'Font2', sans-serif;
 }
 
 .registrationButton,
@@ -192,7 +195,6 @@ body {
   justify-content: space-around;
   height: auto;
   width: auto;
-  font-family: 'Font2', sans-serif;
   font-weight: bolder;
   font-size: 80%;
 }
@@ -215,7 +217,6 @@ body {
   width: 100%;
   height: 100px;
   background-color:#7e957d;
-  font-family: 'Font2', sans-serif;
   place-content: center;
   align-items: center;
   font-size: 250%;
@@ -232,21 +233,53 @@ body {
 
 .logOutButton {
   width: 45px;
-  height: auto;
+  height: 45px;
   display: flex;
-  background-color: transparent;
+  place-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.7);
   border-color: transparent;
-  border-radius: 16px;
-  padding: 3px;
+  border-radius: 45px;
+  transition: transform 0.2s ease;
 }
 
 .logOutButton:hover {
+  transform: scale(1.1);
   background-color: white;
+  -webkit-box-shadow: 0px 0px 12px 1px rgba(255,255,255,1);
+  -moz-box-shadow: 0px 0px 12px 1px rgba(255,255,255,1);
+  box-shadow: 0px 0px 12px 1px rgba(255,255,255,1);
 }
 
 .logOutButton img {
-  width: 100%;
-  height: 100%;
+  width: 60%;
+}
+
+.publication-alert-and-input-image {
+display: flex;
+flex-direction: row;
+place-content: center;
+width: 90%;
+justify-content: space-between;
+}
+@keyframes fadeOut {
+  0% { color: red; }
+  50% { color: red; }
+  100% { color: transparent; }
+}
+@keyframes fadeOutGreen {
+  0% { color: rgb(0, 165, 19); }
+  50% { color: rgb(0, 165, 19); }
+  100% { color: transparent; }
+}
+.empty-fields, .alert-post-error {
+  display: none;
+  animation: fadeOut 1s linear forwards;
+}
+
+.alert-post-edited {
+display: none;
+animation: fadeOutGreen 1s linear forwards;
 }
 
 .ListGroupItem {
@@ -269,10 +302,10 @@ body {
 .postTitle {
   font-size: 150%;
   text-align: left;
-  font-family: 'Font2', sans-serif;
   color:  #382925;
   padding-left: 3%;
   width: 95%;
+  word-wrap: break-word;
 }
 
 .postDescription {
@@ -311,15 +344,18 @@ body {
   height: 90%;
   border-radius: 40px;
   margin-left: 3%;
+  transition: transform 0.1s ease; 
 } 
 
-/* Estilo del botón de "like" cuando se le ha dado "like" (coloreado de rojo) */
-.likeButton.liked {
-  background-color: red;
-  color: white;
-  border: 1px solid red
+.likeButton:hover {
+  transform: rotate(5deg) scale(1.1);
+  background-color: #92695f;
+  border-style: none;
 }
- 
+#likedButtonAndPostByUSer { 
+  background-color: #92695f;
+}
+
 .containerPublication {
   width: 100%;
   display: flex;
@@ -354,7 +390,6 @@ body {
 
 .inputTitle {
   text-align: center;
-  font-family: 'Font2', sans-serif;
   font-size: 150%;
   width: 93%;
 }
@@ -375,45 +410,49 @@ body {
   height: 20%;
   margin-right:2%;
   align-self: flex-end;
-  font-family: 'Font2', sans-serif;
   font-size: 1.2em;
   padding: 0 2%;
   transition: background-color 0.3s;
   background-color: #57403A;
   color: #f5bdaf;
 }
-
+.editPublicContainer {
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 3%;
+padding: 0 0 2% 0;
+}
 .editTextarea, .editContentTextarea{
   border-radius: 10px;
-  border-color: transparent;
-  padding: 10px;
-  height: auto;
+  border-style: none;
+  padding:  0 1%;
+  width: 89%;
 }
 
-.editTextarea{
-  font-family: 'Font2', sans-serif;
-  font-size: 160%;
+.editTextarea {
+  font-size: 120%;
+  height: 20%;
 }
 
 .editContentTextarea{
-  font-size: 190%;
+  font-size: 150%;
   font-weight: bolder;
+  height: 50%;
 }
 
 .editPublic{
-  font-size: 180%;
-  background-color: #d7ffd5;
-  width: 60%;
-  align-self: center;
-  place-content: center;
-  border-radius: 10px;
+  font-size: 120%;
+  width: 100%;
+  background-color: #57403A;
+  color: white;
+  letter-spacing: 2px;
 }
 
 .saveEditButton {
   font-size: 100%;
   border-radius: 10px;
   place-content: center;
-  font-family: 'Font2', sans-serif;
   background:#4c594b;
   width: 30%;
   align-self: center;
@@ -438,7 +477,6 @@ body {
   width: auto;
   padding: 0 1%;
   border-radius: 10px;
-  font-family: 'Font2', sans-serif;
   height: 90%;
 }
 
@@ -559,7 +597,6 @@ body {
 }
 
 .logOutButton{
-  width: 60px;
   margin-left: 85%;
   z-index: 3;
   position: absolute;
