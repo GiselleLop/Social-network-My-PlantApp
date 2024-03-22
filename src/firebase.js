@@ -1,13 +1,10 @@
 import {
   deleteDoc,
-  // query,
-  // where,
   getFirestore,
   collection,
-  // getDocs,
   addDoc,
   doc,
-  // getDoc,
+  getDoc,
   updateDoc,
   onSnapshot,
 } from 'firebase/firestore';
@@ -78,62 +75,24 @@ export function login(email, password) {
   });
 }
 
-// function save
-// export function saveTask(title, description, imageInput) {
-
-//   const imageName = `${Date.now()}_${imageInput.name}`;
-//   const storageRef = ref(storage, `/img/${imageName}`);
-//   uploadBytes(storageRef, imageInput).then((snapshot) => {
-//     console.log('Uploaded a blob or file!');
-//   });
-//   console.log(storageRef);
-//   let image = {};
-//   const postCollection = collection(firestore, 'post');
-//   addDoc(postCollection, {
-//     title,
-//     description,
-//     image,
-//     likes: 0,
-//   })
-//     .then((docRef) => {
-//       console.log('Documento guardado con ID:', docRef.id);
-//     })
-//     .catch((error) => {
-//       console.error('Error al guardar el documento:', error);
-//     });
-// }
-
 export async function saveTask(title, description, imageFile) {
   const postCollection = collection(firestore, 'post');
   const postCreated = {
     title,
     description,
     likes: 0,
-    //
     likedBy: [],
   };
 
   if (!imageFile) {
-    // Guarda la información del post en la base de datos
-    // try {
     await addDoc(postCollection, postCreated);
-    // } catch (e) {
-    //   console.error(e);
-    // }
   } else {
-    // try {
     const imageName = `${Date.now()}_${imageFile.name}`;
     const storageRef = ref(storage, `/img/${imageName}`);
-    // Sube la imagen al almacenamiento y obtiene la URL de descarga
     const imageUrl = await uploadBytes(storageRef, imageFile)
       .then(() => getDownloadURL(storageRef));
     postCreated.image = imageUrl;
-    // Guarda la información del post en la base de datos
-    await addDoc(postCollection, postCreated);    
-  //  } catch (error) {
-    //  console.error('Error al guardar el documento:', error);
-    //  throw error; // Puedes manejar el error según tus necesidades
-    // }
+    await addDoc(postCollection, postCreated);
   }
 }
 
@@ -148,7 +107,6 @@ export function GoogleRegister(navigateTo) {
     });
 }
 
-// // funcion para likes
 // export function handleLike(postId, userId, callback) {
 //   const likesCollection = collection(firestore, 'likes');
 //   const likeButton = document.querySelector(
@@ -243,7 +201,7 @@ export function GoogleRegister(navigateTo) {
 //     });
 // }
 
-// para eliminar post
+// delete post
 export function deletePost(postId) {
   const postCollection = collection(firestore, 'post');
   const postDocRef = doc(postCollection, postId);
@@ -256,14 +214,39 @@ export function deletePost(postId) {
     });
 }
 
-// para editar los post
+// edit post
 export function editPost(postId, updatedTitle, updatedDescription) {
-  const postRef = doc(firestore, 'post', postId);
-
-  return updateDoc(postRef, {
-    title: updatedTitle,
-    description: updatedDescription,
+  return new Promise((resolve, reject) => {
+    const postRef = doc(firestore, 'post', postId);
+    updateDoc(postRef, {
+      title: updatedTitle,
+      description: updatedDescription,
+    })
+      .then(() => {
+        resolve();
+      })
+      .catch(() => {
+        reject();
+      });
   });
+}
+
+// likes
+export async function handleLike(postId, userLikedId) {
+  const postRef = doc(firestore, 'post', postId);
+  const docSnap = await getDoc(postRef);
+  if (docSnap.exists()) {
+    let postLikesUsers = docSnap.data().likedBy;
+    if (postLikesUsers.includes(userLikedId)) {
+      postLikesUsers = postLikesUsers.filter((userId) => userId !== userLikedId);
+    } else {
+      postLikesUsers.push(userLikedId);
+    }
+    await updateDoc(postRef, {
+      likedBy: postLikesUsers,
+      likes: postLikesUsers.length,
+    });
+  }
 }
 
 // funcion cerrar sesion
@@ -280,36 +263,19 @@ export function logOut(navigateTo) {
   });
 }
 
-// export function initializeAuth(setupPost, navigateTo) {
-//   onAuthStateChanged(auth, (user) => {
-//     if (user) {
-//       const userPostsCollection = collection(firestore, 'post');
-
-//       onSnapshot(userPostsCollection, (snapshot) => {
-//         const postSnap = [];
-//         snapshot.forEach((docu) => {
-//           postSnap.push(docu);
-//         });
-//         setupPost(postSnap);
-//       });
-//     } else {
-//       navigateTo('/');
-//     }
-//   });
-export function initializeAuth() {
+export function initializeAuth(setupPost) {
   return new Promise((resolve, reject) => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    onAuthStateChanged(auth, (user) => {
       if (user) {
-        const postList = [];
         const userPostsCollection = collection(firestore, 'post');
         onSnapshot(userPostsCollection, (snapshot) => {
+          const newPostList = [];
           snapshot.forEach((post) => {
-            postList.push(post.data());
+            newPostList.push(post);
           });
-          resolve(postList);
+          resolve(setupPost(newPostList));
         });
       }
-      unsubscribe();
     });
   });
 }

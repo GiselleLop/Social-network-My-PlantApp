@@ -30,7 +30,7 @@ html, body {
 }
 
 body {
-  background: linear-gradient(#f3f5ef, #c0df8d);
+  background: linear-gradient(#f3f5ef, #b3db74);
   align-items: center;
   justify-content: center;
   margin: 0px;
@@ -56,7 +56,7 @@ body {
   width: 80%;
 }
  
-#input-container > button, .hometitle,.registrationButton,
+#input-container > button, .editPublic, .hometitle,.registrationButton,
 .loginButton, .headerPost, .postTitle, .inputTitle, .buttonSave, .editTextarea, .saveEditButton, .deleteButton, .editButton {
   font-family: 'Font2', sans-serif;
 }
@@ -154,7 +154,7 @@ body {
   height: auto;
 }
 
-.imageAndTextRegister, .login, .content, #input-container, .hometitle, .wordsHome, #input-container > div input {
+.imageAndTextRegister, .editPublic, .login, .content, #input-container, .hometitle, .wordsHome, #input-container > div input {
   text-align: center;
 }
 .content, #input-container {
@@ -255,6 +255,33 @@ body {
   width: 60%;
 }
 
+.publication-alert-and-input-image {
+display: flex;
+flex-direction: row;
+place-content: center;
+width: 90%;
+justify-content: space-between;
+}
+@keyframes fadeOut {
+  0% { color: red; }
+  50% { color: red; }
+  100% { color: transparent; }
+}
+@keyframes fadeOutGreen {
+  0% { color: rgb(0, 165, 19); }
+  50% { color: rgb(0, 165, 19); }
+  100% { color: transparent; }
+}
+.empty-fields, .alert-post-error {
+  display: none;
+  animation: fadeOut 1s linear forwards;
+}
+
+.alert-post-edited {
+display: none;
+animation: fadeOutGreen 1s linear forwards;
+}
+
 .ListGroupItem {
   border: solid #57403A;
   background-color: #7e957d;
@@ -278,6 +305,7 @@ body {
   color:  #382925;
   padding-left: 3%;
   width: 95%;
+  word-wrap: break-word;
 }
 
 .postDescription {
@@ -318,19 +346,16 @@ body {
   margin-left: 3%;
   transition: transform 0.1s ease; 
 } 
+
 .likeButton:hover {
-transform: rotate(5deg) scale(1.1);
-background-color: #92695f;
-border-style: none;
+  transform: rotate(5deg) scale(1.1);
+  background-color: #92695f;
+  border-style: none;
+}
+#likedButtonAndPostByUSer { 
+  background-color: #92695f;
 }
 
-/* Estilo del botón de "like" cuando se le ha dado "like" (coloreado de rojo) */
-.likeButton.liked {
-  background-color: red;
-  color: white;
-  border: 1px solid red
-}
- 
 .containerPublication {
   width: 100%;
   display: flex;
@@ -391,30 +416,37 @@ border-style: none;
   background-color: #57403A;
   color: #f5bdaf;
 }
-
+.editPublicContainer {
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 3%;
+padding: 0 0 2% 0;
+}
 .editTextarea, .editContentTextarea{
   border-radius: 10px;
-  border-color: transparent;
-  padding: 10px;
-  height: auto;
+  border-style: none;
+  padding:  0 1%;
+  width: 89%;
 }
 
 .editTextarea {
-  font-size: 160%;
+  font-size: 120%;
+  height: 20%;
 }
 
 .editContentTextarea{
-  font-size: 190%;
+  font-size: 150%;
   font-weight: bolder;
+  height: 50%;
 }
 
 .editPublic{
-  font-size: 180%;
-  background-color: #d7ffd5;
-  width: 60%;
-  align-self: center;
-  place-content: center;
-  border-radius: 10px;
+  font-size: 120%;
+  width: 100%;
+  background-color: #57403A;
+  color: white;
+  letter-spacing: 2px;
 }
 
 .saveEditButton {

@@ -7,15 +7,15 @@ function home(navigateTo) {
     <div class="content">
 
         <div class='homeWelcomeAndText'>
-          <h3 class="homewelcome">Bienvenidos a :</h3>
-          <h1 class="hometitle">Mi PlantApp</h1>
-          <p class="homewelcome">Una gran comunidad de amantes de las plantas y botánica.</p>
+          <h3 class="homewelcome">Welcome to</h3>
+          <h1 class="hometitle">My PlantApp</h1>
+          <p class="homewelcome">A great community of plant and botany lovers.</p>
         </div>
 
         <div class="orderbuttons">
-          <button class="registrationButton" id="registerButton">Registrarse</button>
-          <p class="wordsHome">¿Ya tienes una cuenta?</p>
-          <button class="loginButton" id="loginButton">Iniciar Sesión</button>
+          <button class="registrationButton" id="registerButton">Sign up</button>
+          <p class="wordsHome">Do you already have an account?</p>
+          <button class="loginButton" id="loginButton">Log in</button>
         </div>
 
       </div>

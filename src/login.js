@@ -6,8 +6,8 @@ function renderLogin(navigateTo) {
   mainPage.innerHTML = `
     
       <div class="imageAndTextRegister">
-        <h1 class="titleLogin">¡Nos alegra verte de nuevo!</h1>
-        <h2 class="titleLogin">Ingresa tus datos</h2>
+        <h1 class="titleLogin">We are glad to see you again!</h1>
+        <h2 class="titleLogin">Enter your details</h2>
         <img src="https://firebasestorage.googleapis.com/v0/b/social-network-c61c9.appspot.com/o/img%2Fregadera.png?alt=media&token=b6994595-5975-4a79-a110-686525ba4d5f" style="width: 55%; height: auto;">
       </div>
       
