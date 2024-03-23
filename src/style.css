@@ -13,6 +13,53 @@
   margin: 0;
   padding: 0;
 }
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
+}
+
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #ffffff;
+  border-radius: 20px ;
+  margin: 4% auto; /* 15% from the top and centered */
+  padding: 20px;
+  font-size: 25px;
+  text-align: center;
+  letter-spacing: 1px;
+  color: rgb(0, 0, 0);
+  font-weight: bolder;
+  border: 5px solid #649565;
+  width: 30%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+
 .homepagePosts, .homepage {
   width: 100%;
   min-height: 100%;
@@ -57,7 +104,7 @@ body {
 }
  
 #input-container > button, .editPublic, .hometitle,.registrationButton,
-.loginButton, .headerPost, .postTitle, .inputTitle, .buttonSave, .editTextarea, .saveEditButton, .deleteButton, .editButton {
+.loginButton, .headerPost, .postTitle, .inputTitle, .buttonSave, .editTextarea, .saveEditButton, .deleteButton, .editButton, .username {
   font-family: 'Font2', sans-serif;
 }
 
@@ -141,7 +188,8 @@ body {
 .post-contain,
 #task-form, 
 .homepagePosts, 
-.homepage 
+.homepage,
+.pictureAndUsername 
  {
   align-items: center;
   display: flex;
@@ -154,7 +202,7 @@ body {
   height: auto;
 }
 
-.imageAndTextRegister, .editPublic, .login, .content, #input-container, .hometitle, .wordsHome, #input-container > div input {
+.imageAndTextRegister, .editPublic, .login, .content, #input-container, .hometitle, .wordsHome, #input-container > div input, .pictureAndUsername {
   text-align: center;
 }
 .content, #input-container {
@@ -231,6 +279,7 @@ body {
   height: auto;
 }
 
+
 .logOutButton {
   width: 45px;
   height: 45px;
@@ -281,7 +330,45 @@ justify-content: space-between;
 display: none;
 animation: fadeOutGreen 1s linear forwards;
 }
-
+.containerPublication {
+  width: 100%;
+  display: flex;
+  place-content: center;
+  align-self: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 5px;
+}
+.imagePublication {
+  width: 70px;
+  height: auto;
+  background-color: white;
+  border:solid black;
+  border-radius: 1em;
+  padding: 0.5em;
+}
+.pictureAndUsername {
+  gap: 2px;
+  background-color: #d8bbb3;
+  width: fit-content;
+  font-weight: bolder;
+  border-radius: 1em;
+  height: fit-content;
+  padding: 1% 1% ;
+}
+.editProfileButton {
+  border-radius: 0.5em;
+background-color: #57403A;
+border: none;
+color: white;
+padding: 3px 10px;
+font-size: 15px;
+font-weight: bolder;
+letter-spacing: 1px;
+}
+.editProfileButton:hover {
+  transform: scale(1.1);
+}
 .ListGroupItem {
   border: solid #57403A;
   background-color: #7e957d;
@@ -356,24 +443,7 @@ animation: fadeOutGreen 1s linear forwards;
   background-color: #92695f;
 }
 
-.containerPublication {
-  width: 100%;
-  display: flex;
-  place-content: center;
-  align-self: center;
-  justify-content: center;
-  flex-direction: row;
-  gap: 5px;
-}
-.imagePublication {
-  width: 70px;
-  height: auto;
-  align-self: flex-start;
-  background-color: white;
-  border:solid black;
-  border-radius: 1em;
-  padding: 0.5em;
-}
+
 .imgPostPublication {
   width: 80%;
   height: auto;
