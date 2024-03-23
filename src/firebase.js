@@ -205,13 +205,13 @@ export function GoogleRegister(navigateTo) {
 export function deletePost(postId) {
   const postCollection = collection(firestore, 'post');
   const postDocRef = doc(postCollection, postId);
-  deleteDoc(postDocRef)
-    .then(() => {
-      console.log('Post eliminado con éxito.');
-    })
-    .catch((error) => {
-      console.error('Error al borrar post:', error);
-    });
+  deleteDoc(postDocRef);
+    // .then(() => {
+    //   console.log('Post eliminado con éxito.');
+    // })
+    // .catch((error) => {
+    //   console.error('Error al borrar post:', error);
+    // });
 }
 
 // edit post
@@ -263,7 +263,7 @@ export function logOut(navigateTo) {
   });
 }
 
-export function initializeAuth(setupPost) {
+export function initializeAuth(setupPost, navigateTo) {
   return new Promise((resolve, reject) => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -275,6 +275,9 @@ export function initializeAuth(setupPost) {
           });
           resolve(setupPost(newPostList));
         });
+      } else {
+        navigateTo('/');
+        alert('Please Log in or Sign up');
       }
     });
   });
