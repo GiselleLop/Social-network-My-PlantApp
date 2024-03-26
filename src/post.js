@@ -6,6 +6,7 @@ import {
   editPost,
   logOut,
   initializeAuth,
+  editUserProfile,
 } from './firebase.js';
 
 export function posts(navigateTo) {
@@ -15,7 +16,9 @@ export function posts(navigateTo) {
   function renderPost(postList) {
     const userId = auth.currentUser;
     let displayName = userId ? userId.displayName : null;
-    displayName = displayName || 'No name';
+    displayName = displayName || 'No_name';
+    let imageProfile = userId.photoURL ? userId.photoURL : null;
+    imageProfile = imageProfile || 'https://firebasestorage.googleapis.com/v0/b/social-network-c61c9.appspot.com/o/img%2Fmujer.png?alt=media&token=701d2fdc-675b-4550-b43f-162075eb0943';
 
     mainPage.innerHTML = `
       <div class="headerPost">My Plantapp
@@ -29,7 +32,7 @@ export function posts(navigateTo) {
     
       <div class="containerPublication">
         <div class='pictureAndUsername'>
-        <img src="https://firebasestorage.googleapis.com/v0/b/social-network-c61c9.appspot.com/o/img%2Fmujer.png?alt=media&token=701d2fdc-675b-4550-b43f-162075eb0943" class="imagePublication" alt="Imagen de publicación">
+        <img src=${imageProfile} class="imagePublication" alt="Imagen de publicación">
         <div class='username'>${displayName}</div>
         <div class='email'>${userId.email}</div>
         <button class='editProfileButton'>Edit profile</button>
@@ -50,9 +53,8 @@ export function posts(navigateTo) {
   
       <div id="myModal" class="modal">
         <div class="modal-content">
-        <span class="close">&times;</span>
+          <span class="close">&times;</span>
           <p class='textOfModal'></p>
-        
         </div>
       </div>
 
@@ -63,33 +65,35 @@ export function posts(navigateTo) {
     postList.forEach((doc) => {
       const postCard = document.createElement('div');
       postCard.classList.add('ListGroupItem');
+      console.log(doc.data());
       postCard.innerHTML = `    
-              <div class='buttonOptions'> 
-                <button class='deleteButton' data-post-id="${doc.id}"> Delete </button>
-                <button class='editButton' data-post-id="${doc.id}"> Edit </button>
-              </div>
-      
-              <div class='post-contain'>
-                <h1 class='postTitle' data-post-id="${doc.id}">${doc.data().title}</h1>
-                <p class='postDescription' data-post-id="${doc.id}">${doc.data().description}</p>
-              </div>
-              
-              <div class="containerLikes" data-post-id="${doc.id}">
-                <button class="likeButton" data-post-id="${doc.id}">
-                  <img src="https://firebasestorage.googleapis.com/v0/b/social-network-c61c9.appspot.com/o/img%2Flike.png?alt=media&token=36cb50ad-0402-421f-ad97-ca3ba12f8a85" class='imgLike'>
-                </button>
-                <span>${doc.data().likes} Likes</span>
-                <h4 class='alert-post-edited' data-post-id="${doc.id}">Post edited successfully</h4>
-                <h4 class='alert-post-error' data-post-id="${doc.id}">Error editing the post, complete all fields </h4>
-       
-              </div>
-              <div class='editPublicContainer' data-post-id="${doc.id}" style="display: none;"></div>
-      `;
-      if (doc.data().imageUrl) {
+        <div class='buttonOptions'> 
+          <button class='deleteButton' data-post-id="${doc.id}"> Delete </button>
+          <button class='editButton' data-post-id="${doc.id}"> Edit </button>
+        </div>
+
+        <div class='post-contain'>
+        <h2 class='userNameOfPost'>${doc.data().userWritterID}"</h2>
+          <h1 class='postTitle' data-post-id="${doc.id}">${doc.data().title}</h1>
+          <p class='postDescription' data-post-id="${doc.id}">${doc.data().description}</p>
+        </div>
+        
+        <div class="containerLikes" data-post-id="${doc.id}">
+          <button class="likeButton" data-post-id="${doc.id}">
+            <img src="https://firebasestorage.googleapis.com/v0/b/social-network-c61c9.appspot.com/o/img%2Flike.png?alt=media&token=36cb50ad-0402-421f-ad97-ca3ba12f8a85" class='imgLike'>
+          </button>
+          <span>${doc.data().likes} Likes</span>
+          <h4 class='alert-post-edited' data-post-id="${doc.id}">Post edited successfully</h4>
+          <h4 class='alert-post-error' data-post-id="${doc.id}">Error editing the post, complete all fields </h4>
+ 
+        </div>
+        <div class='editPublicContainer' data-post-id="${doc.id}" style="display: none;"></div>
+`;
+      if (doc.data().image) {
         postCard.querySelector('.post-contain').innerHTML = `
         <h1 class='postTitle'>${doc.data().title}</h5>
         <p class='postDescription'>${doc.data().description}</p>
-        <img src="${doc.data().imageUrl}" alt="Imagen del post" data-post-id="${doc.id}" class="imgPostPublication">
+        <img src="${doc.data().image}" alt="Imagen del post" data-post-id="${doc.id}" class="imgPostPublication">
         `;
       }
       const likedBy = doc.data().likedBy;
@@ -106,7 +110,27 @@ export function posts(navigateTo) {
     const modal = document.getElementById('myModal');
     const span = document.getElementsByClassName('close')[0];
     const textModal = document.querySelector('.textOfModal');
+    const modalContent = document.querySelector('.modal-content');
 
+    const contentModalEditProfile = document.createElement('div');
+    contentModalEditProfile.classList = 'contentEditForm';
+    contentModalEditProfile.innerHTML = `
+    <h1 class='TitleEditProfile'> Edit Profile </h1>
+    <form id="profileForm">
+      <div>
+        <label for="profileUserName">Change username:</label>
+        <input type="text" id="profileUserName" placeholder="Username" value="${displayName}">
+      </div>
+
+      <div>
+        <label for="profileImage">Change profile photo:</label>
+        <input type="file" id="profileImage" accept="image/*">
+      </div>
+
+      <button type="submit" class="saveEditProfileButton">Save Info</button>
+    </form>
+   
+    `;
     const deleteButton = document.querySelectorAll('.deleteButton');
     deleteButton.forEach((button) => {
       button.addEventListener('click', (e) => {
@@ -192,22 +216,26 @@ export function posts(navigateTo) {
         }, 1000);
         return;
       }
-      saveTask(postTitle.value, postDescription.value, imageInput.files[0]);
+      saveTask(userId.uid, postTitle.value, postDescription.value, imageInput.files[0]);
       containerPost.reset();
     });
 
-    // evento cerrar sesion
-    mainPage.querySelector('.logOutButton').addEventListener('click', () => {
-    // eslint-disable-next-line
-    const alertlogOut = confirm('¿Está segur@ que desea salir de su cuenta?');
-    if (alertlogOut === true) {
-      logOut(navigateTo);
-    } else {
-      const modal = document.getElementById('myModal');
-      const span = document.getElementsByClassName('close')[0];
-      const textModal = document.querySelector('.textOfModal');
+    // edit profile
+    mainPage.querySelector('.editProfileButton').addEventListener('click', (e) => {
+      e.preventDefault();
       modal.style.display = 'block';
-      textModal.textContent = 'Process canceled';
+      textModal.style.display = 'none';
+      modalContent.append(contentModalEditProfile);
+      const saveProfile = document.querySelector('.saveEditProfileButton');
+
+      saveProfile.addEventListener('click', (f) => {
+        f.preventDefault();
+        modal.style.display = 'none';
+        const fileInput = document.getElementById('profileImage');
+        const file = fileInput.files[0] ? fileInput.files[0] : imageProfile;
+        const nameuser = document.querySelector('#profileUserName').value;
+        editUserProfile(nameuser, file);
+      });
       span.onclick = function () {
         modal.style.display = 'none';
       };
@@ -216,7 +244,26 @@ export function posts(navigateTo) {
           modal.style.display = 'none';
         }
       };
-    }
+    });
+
+    // evento cerrar sesion
+    mainPage.querySelector('.logOutButton').addEventListener('click', () => {
+    // eslint-disable-next-line
+    const alertlogOut = confirm('¿Está segur@ que desea salir de su cuenta?');
+      if (alertlogOut === true) {
+        logOut(navigateTo);
+      } else {
+        modal.style.display = 'block';
+        textModal.textContent = 'Process canceled';
+        span.onclick = function () {
+          modal.style.display = 'none';
+        };
+        window.onclick = function (event) {
+          if (event.target === modal) {
+            modal.style.display = 'none';
+          }
+        };
+      }
     });
   }
   initializeAuth(renderPost, navigateTo);
