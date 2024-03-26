@@ -30,17 +30,16 @@
 
 /* Modal Content/Box */
 .modal-content {
-  background-color: #ffffff;
+  background-color: #cfddcc;
   border-radius: 20px ;
-  margin: 4% auto; /* 15% from the top and centered */
+  margin: 4% auto;
   padding: 20px;
   font-size: 25px;
-  text-align: center;
   letter-spacing: 1px;
   color: rgb(0, 0, 0);
   font-weight: bolder;
   border: 5px solid #649565;
-  width: 30%; /* Could be more or less, depending on screen size */
+  width: 30%;
 }
 
 /* The Close Button */
@@ -58,7 +57,30 @@
   cursor: pointer;
 }
 
+#profileForm, #profileForm > div {
+display: flex;
+flex-direction: column;
+}
+#profileForm{
+gap: 20px;
+width: 80%;
+margin-bottom: 15%;
+}
+#profileForm > div,  .contentEditForm {
+  gap: 5px;
+}
+.contentEditForm {
+width: 100%;
+}
+.TitleEditProfile {
+  font-size: 30px;
+}
+#profileForm > div > input {
 
+font-size: 20px;
+width: 96%;
+padding: 0 2%;
+}
 
 .homepagePosts, .homepage {
   width: 100%;
@@ -103,7 +125,7 @@ body {
   width: 80%;
 }
  
-#input-container > button, .editPublic, .hometitle,.registrationButton,
+#input-container > button, .saveEditProfileButton, .TitleEditProfile,  .editPublic, .hometitle,.registrationButton,
 .loginButton, .headerPost, .postTitle, .inputTitle, .buttonSave, .editTextarea, .saveEditButton, .deleteButton, .editButton, .username {
   font-family: 'Font2', sans-serif;
 }
@@ -189,8 +211,9 @@ body {
 #task-form, 
 .homepagePosts, 
 .homepage,
-.pictureAndUsername 
- {
+.pictureAndUsername,
+.contentEditForm
+{
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -202,7 +225,7 @@ body {
   height: auto;
 }
 
-.imageAndTextRegister, .editPublic, .login, .content, #input-container, .hometitle, .wordsHome, #input-container > div input, .pictureAndUsername {
+.imageAndTextRegister, .TitleEditProfile, .editPublic, .login, .content, #input-container, .hometitle, .wordsHome, #input-container > div input, .pictureAndUsername {
   text-align: center;
 }
 .content, #input-container {
@@ -215,7 +238,7 @@ body {
   transition: transform 0.3s;
 }
 
-#homeplant:hover {
+#homeplant:hover, .logoImage:hover {
   transform: rotate(10deg);
 }
 
@@ -305,11 +328,11 @@ body {
 }
 
 .publication-alert-and-input-image {
-display: flex;
-flex-direction: row;
-place-content: center;
-width: 90%;
-justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  place-content: center;
+  width: 90%;
+  justify-content: space-between;
 }
 @keyframes fadeOut {
   0% { color: red; }
@@ -327,8 +350,8 @@ justify-content: space-between;
 }
 
 .alert-post-edited {
-display: none;
-animation: fadeOutGreen 1s linear forwards;
+  display: none;
+  animation: fadeOutGreen 1s linear forwards;
 }
 .containerPublication {
   width: 100%;
@@ -356,17 +379,17 @@ animation: fadeOutGreen 1s linear forwards;
   height: fit-content;
   padding: 1% 1% ;
 }
-.editProfileButton {
+.editProfileButton, .saveEditProfileButton {
   border-radius: 0.5em;
-background-color: #57403A;
-border: none;
-color: white;
-padding: 3px 10px;
-font-size: 15px;
-font-weight: bolder;
-letter-spacing: 1px;
+  background-color: #57403A;
+  border: none;
+  color: white;
+  padding: 3px 10px;
+  font-size: 15px;
+  font-weight: bolder;
+  letter-spacing: 1px;
 }
-.editProfileButton:hover {
+.editProfileButton:hover, .saveEditProfileButton:hover {
   transform: scale(1.1);
 }
 .ListGroupItem {
@@ -427,8 +450,8 @@ letter-spacing: 1px;
   place-content: center;
   align-items: center;
   background-color: transparent;
-  width: 8.5%;
-  height: 90%;
+  width: 30px;
+  height: 30px;
   border-radius: 40px;
   margin-left: 3%;
   transition: transform 0.1s ease; 
@@ -443,9 +466,8 @@ letter-spacing: 1px;
   background-color: #92695f;
 }
 
-
 .imgPostPublication {
-  width: 80%;
+  width: 60%;
   height: auto;
   align-self: center;
 }
@@ -470,7 +492,7 @@ letter-spacing: 1px;
   width: 90%;
 }
 
-.inputTitle, #inputDescription {
+.inputTitle, #inputDescription, #profileForm > div > input {
   border-radius: 0.3em;
 }
 
@@ -614,6 +636,7 @@ padding: 0 0 2% 0;
 .logoImage {
   width: 60px;
   height: auto;
+  transition: transform 0.3s;
 }
   
 .postView {
@@ -644,7 +667,7 @@ padding: 0 0 2% 0;
 }
 .imagePublication{
   width: 90px;
-  height: 90px;
+  height: auto;
 }
 #task-form{
   width: 50%;

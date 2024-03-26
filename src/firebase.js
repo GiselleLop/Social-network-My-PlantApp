@@ -16,6 +16,7 @@ import {
   createUserWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
+  updateProfile,
 } from 'firebase/auth';
 import {
   ref,
@@ -75,9 +76,10 @@ export function login(email, password) {
   });
 }
 
-export async function saveTask(title, description, imageFile) {
+export async function saveTask(userWritterID, title, description, imageFile) {
   const postCollection = collection(firestore, 'post');
   const postCreated = {
+    userWritterID,
     title,
     description,
     likes: 0,
@@ -87,8 +89,8 @@ export async function saveTask(title, description, imageFile) {
   if (!imageFile) {
     await addDoc(postCollection, postCreated);
   } else {
-    const imageName = `${Date.now()}_${imageFile.name}`;
-    const storageRef = ref(storage, `/img/${imageName}`);
+    const fileName = `${Date.now()}_${imageFile.name}`;
+    const storageRef = ref(storage, `/img/${fileName}`);
     const imageUrl = await uploadBytes(storageRef, imageFile)
       .then(() => getDownloadURL(storageRef));
     postCreated.image = imageUrl;
@@ -206,12 +208,6 @@ export function deletePost(postId) {
   const postCollection = collection(firestore, 'post');
   const postDocRef = doc(postCollection, postId);
   deleteDoc(postDocRef);
-    // .then(() => {
-    //   console.log('Post eliminado con éxito.');
-    // })
-    // .catch((error) => {
-    //   console.error('Error al borrar post:', error);
-    // });
 }
 
 // edit post
@@ -280,5 +276,24 @@ export function initializeAuth(setupPost, navigateTo) {
         alert('Please Log in or Sign up');
       }
     });
+  });
+}
+
+// actualizar perfil
+export async function editUserProfile(userName, userPhotoProfile) {
+  const urlPattern = /^(ftp|http|https):\/\/[^ "]+$/;
+  if (urlPattern.test(userPhotoProfile)) {
+    updateProfile(auth.currentUser, {
+      displayName: userName,
+      photoURL: userPhotoProfile,
+    });
+    return;
+  }
+  const fileName = `${Date.now()}_${userPhotoProfile.name}`;
+  const storageRef = ref(storage, `/profilePhotos/${fileName}`);
+  const imageUrl = await uploadBytes(storageRef, userPhotoProfile)
+    .then(() => getDownloadURL(storageRef));
+  updateProfile(auth.currentUser, {
+    displayName: userName, photoURL: imageUrl,
   });
 }
