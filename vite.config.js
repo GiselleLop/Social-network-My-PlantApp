@@ -1,14 +1,19 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import { defineConfig } from 'vite';
+import { defineConfig, loadEnv } from 'vite';
 
 // additional config to direct the vite build to src directory
 // https://vitejs.dev/config/#conditional-config
 // https://vitejs.dev/config/shared-options.html#root
 
-export default defineConfig(({ command }) => {
+export default defineConfig(({ command, mode }) => {
+  const env = loadEnv(mode, process.cwd());  // Asegúrate de que 'mode' está pasando correctamente
+
   const commonConfig = {
     server: {
       cors: true,
+    },
+    define: {
+      'process.env': env,
     },
   };
 
@@ -27,9 +32,18 @@ export default defineConfig(({ command }) => {
           output: {
             dir: './dist',
           },
+          input: './src/index.html',
         },
       },
     };
   }
-  return {};
+   // Configuración para desarrollo
+   return {
+    ...commonConfig,
+    root: 'src', // El root apunta a 'src' en modo dev
+    server: {
+      cors: true,
+      historyApiFallback: true,
+    },
+  };
 });
