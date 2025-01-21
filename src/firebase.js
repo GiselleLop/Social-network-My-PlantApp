@@ -27,13 +27,13 @@ import {
 import { initializeApp } from 'firebase/app';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyA_nNPVRwXqmgLlxdYL4NmJwiItX9t2D5E',
-  authDomain: 'social-network-c61c9.firebaseapp.com',
-  projectId: 'social-network-c61c9',
-  storageBucket: 'social-network-c61c9.appspot.com',
-  messagingSenderId: '496904934051',
-  appId: '1:496904934051:web:349b4f181faf09491c2516',
-  measurementId: 'G-9MSK8FV9VP',
+  apiKey: process.env.VITE_FIREBASE_API_KEY,
+  authDomain: process.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.VITE_FIREBASE_APP_ID,
+  measurementId: process.env.VITE_FIREBASE_MEASUREMENT_ID
 };
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
